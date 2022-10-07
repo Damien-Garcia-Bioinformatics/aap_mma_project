@@ -5,9 +5,10 @@
 struct input_parse 
 {
 	// to explain what this does, let's take an input example :" E1<(2-5)+E3|E4>E2" 
-	
+	// either += as in python to concatenate or make a table
+
 	// this extracts the anchors, main components driving the genes, here E1,E2
-	std::string element_anchors;
+	std::string element_anchors[tableau?];
 
 	// this extracts intervals of entities to repeat motifs
 	std::string query_intervals;
