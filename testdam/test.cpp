@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <ctime>
+#include <cstdlib>
 
 /*
 Some explications about the ideas behing the code :
@@ -9,14 +11,34 @@ Anchors are special events that are systematicaly found in a sequence. These eve
 Generatives regions are located in between '(' and ')'. Parameters about the generative regions can be added on the right side of the ')' character.
 */
 
-bool end_of_anchor(char c) {
-	if (c == ' ' || c == '(' || c == '<'){
-		return true;
-	}
-	return false ;
+// void extract_anchor(std::string anchor, &std::vector<std::string> *anchors) {
+// 	anchors.push_back(anchor) ;
+// 	anchor.clear() ;
+// }
+
+
+int sequence_length(int maxLen) {
+	srand(time(0)) ;
+	int seqLen {rand()%maxLen+1} ;
+	return seqLen ;
+}
+
+// Generates a string of '.' characters 
+std::string simple_gen(int min, int max) {
+	int seqLen {sequence_length(20)} ; 
+	std::string sequence(seqLen, '.') ;
+	return sequence ;
+}
+
+std::string complex_gen() {
+	std::string sequence ;
+	return sequence ;
 }
 
 int main() {
+	std::string sequence {simple_gen(2,10)} ;
+	std::cout << sequence << std::endl ;
+
 	std::string tabEvent[10] {"E1","E2","E3","E4","E5","E6","E7","E8","E9","E10"} ;
 
 	// Example of expression passed in program parameters by user
@@ -62,13 +84,11 @@ int main() {
 				anchor.clear() ;
 			}
 		}
-
-		// Extractions of anchor values and creation of bool arrays
 	}
 
-	// std::cout << anchors.size() << std::endl ;
-	// std::cout << anchors.at(0) << "  " << anchors.at(1) << std::endl ;
+	// Affichage des ancres
 	for (int i=0 ; i<anchors.size() ; i++) {
-		std::cout << anchors.at(i) << std::endl ;
+		std::cout << anchors.at(i) << " " ;
 	}
+	std:: cout << std::endl ;
 }
