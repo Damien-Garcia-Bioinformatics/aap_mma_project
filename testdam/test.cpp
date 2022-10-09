@@ -20,38 +20,50 @@ int main() {
 	std::string tabEvent[10] {"E1","E2","E3","E4","E5","E6","E7","E8","E9","E10"} ;
 
 	// Example of expression passed in program parameters by user
-	std::string expression2 {"E4 <(2-5)E2|E8> E6"} ;
-	std::string expression1 {"E4 (10-12) E11 E12 (12-13) E8"} ;
+	std::string expression {"E4<(2-5)E2|E8>E6"} ;
+	// std::string expression {"E4(10-12)E11 E12(12-13)E8"} ;
 
 	// Default booleen values
 	bool isAnchor {true} ; 
 	bool isComplexGen {false} ; 
+	bool isAnchorNext {false} ;
 
 	std::string anchor ;
 	std::vector<std::string> anchors ;
 
-	// Loop checking each character in expression
-	for (int i=0 ; i<expression1.length() ; i++) {
-		// Checks throughout the expression1 if we are in or out of generative regions
-		if (expression1[i] == '(' || expression1[i] == '<') {
-			isAnchor = false ;
-			if (expression1[i] == '<') {
-				isComplexGen = true ;
-			}
-		} else if ((expression1[i] == ')' && isComplexGen == false) || expression1[i] == '>') {
+	// Loop checking each character in expression to define what section it is part.
+	// The values returned will be formated as boolean and will define what genarative function to be used.
+	for (int i=0 ; i<expression.length() ; i++) {
+		if (isAnchorNext) {
 			isAnchor = true ;
-			isComplexGen = false ;
+			isAnchorNext = false ;
 		}
-		std::cout << i << "\t" << expression1[i] << "\t" << isAnchor << "\t"  << isComplexGen << "\n" ;
+		if (isAnchor) {
+			if (expression[i] == '(') {
+				isAnchor = false ;
+				isComplexGen = false ;
+			} else if (expression[i] == '<') {
+				isAnchor = false ;
+				isComplexGen = true ;
+			} else if (expression[i] == ' ') {
+				anchors.push_back(anchor) ;
+				anchor.clear() ;
+			} else if (expression.length() == i+1) {
+				anchor += expression[i] ;
+				anchors.push_back(anchor) ;
+				anchor.clear() ;
+			} else {
+				anchor += expression[i] ;
+			}
+		} else { // isAnchor is false
+			if ((isComplexGen && expression[i] == '>') || (!isComplexGen && expression[i] == ')')) {
+				isAnchorNext = true ;
+				anchors.push_back(anchor) ;
+				anchor.clear() ;
+			}
+		}
 
-		// Extracts values of anchors
-		if (isAnchor && !end_of_anchor(expression1[i])) {
-			anchor += expression1[i] ;
-		} else if ((!isAnchor && !anchor.empty()) ||
-				   (isAnchor && end_of_anchor(expression1[i]))) {
-			anchors.push_back(anchor) ;
-			anchor.clear() ;
-		}
+		// Extractions of anchor values and creation of bool arrays
 	}
 
 	// std::cout << anchors.size() << std::endl ;
