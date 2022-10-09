@@ -25,3 +25,21 @@ struct input_parse
 
 // the struct might not be the best choice for this task, as internal methods will be called
 // directly on the data. An object might make it easier
+//
+
+
+// Let's try an object
+//
+
+class Generator
+{
+	private :
+		std::string query;
+		bool profile_anchor[100];
+		bool profile_lv2_exp[100];
+		bool profile_lv1_exp[100];
+		bool profile_anchor[100];
+	
+	public :
+		
+}
