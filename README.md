@@ -10,3 +10,17 @@ Mutualised project between "Advanced Algorithmic and Programming" and "Models, M
 
 # Questions
 - How does the complexity of the sequences impact the complexity of the alignment, the execution time (...)?
+
+## Main goals
+
+Three objectives :
+
+1. Alignment algorithm
+
+2. Scoring/test function
+
+3. Data generation
+
+These may not be developed in this order, as generated data will be needed for running the algorithm, with a specific grammar.
+
+The scoring function can be developed once the generated data is implemented, and at the same time as the alignment algorithm.
