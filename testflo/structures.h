@@ -73,5 +73,28 @@ class Generator
 // (one if no <>)
 class Expansion : Generator
 {
-	
+	private :
+		// the two numbers encapsualting top generation
+		int generation_interval[2];	
+		// this request's two aanchors
+		std::string anchors[2];
+		// random explicited events
+		vect<std::string> non_anchors;
+		
+		// this part should be in conflict, if there is one the other should be empty
+		//
+		// expansion character * or +
+		char special_expansion_character;
+		// %p explicited
+		vect<int> proportion; // verification that the sum is 100
+		// Xk times explicited
+		vect<int> k_times; // verification sum(k) < lenght top generated
+
+
+	public :
+		get_generation_interval(string exp_child[1]); // renvoie vers generation_interval
+		get_special_exp_character(string exp_child[2]); 
+		get_non_anchors(string exp_child[2]);
+		get_proportion(string exp_child[2]);
+		get_k_times(string exp_child[2]);
 }
