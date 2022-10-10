@@ -16,30 +16,63 @@ Generatives regions are located in between '(' and ')'. Parameters about the gen
 // 	anchor.clear() ;
 // }
 
+// --------------------------------Functions--------------------------------//
 
+// Returns int between 0 and nb
+int random_int(int nb) {
+	int proba {rand()%nb} ;
+	return proba ;
+}
+
+// Returns maxLen of sequence
 int sequence_length(int maxLen) {
-	srand(time(0)) ;
 	int seqLen {rand()%maxLen+1} ;
 	return seqLen ;
 }
 
-// Generates a string of '.' characters 
+// Toy function to generate a simple sequence 
 std::string simple_gen(int min, int max) {
 	int seqLen {sequence_length(20)} ; 
 	std::string sequence(seqLen, '.') ;
 	return sequence ;
 }
 
-std::string complex_gen() {
+// Toy function to generated a complex sequence
+std::string complex_gen(std::string tabEvent[]) {
 	std::string sequence ;
+	std::string event ;
+	bool isValid {false} ;
+	for (int i=0 ; i<20 ; i++) {
+		if (random_int(10)< 8) {
+			sequence += "." ;
+		} else {
+			do {
+				event = tabEvent[random_int(10)] ;
+				for (int j=0 ; j<(sizeof(tabEvent) ; i++){
+					if (tabEvent[j] != event) {
+						isValid = true ;
+					}
+				}
+			} while (isValid) ;
+			sequence += event ;
+			isValid = false ;
+		}
+	}
 	return sequence ;
 }
 
-int main() {
-	std::string sequence {simple_gen(2,10)} ;
-	std::cout << sequence << std::endl ;
+// -----------------------------------Main----------------------------------//
 
+int main() {
+	// Initialization of seed for random_int() function
+	srand(time(NULL));
+
+	// Definition of events that can occur in sequence
 	std::string tabEvent[10] {"E1","E2","E3","E4","E5","E6","E7","E8","E9","E10"} ;
+	
+
+	std::string sequence{complex_gen(tabEvent)};
+	std::cout << sequence << std::endl;
 
 	// Example of expression passed in program parameters by user
 	std::string expression {"E4<(2-5)E2|E8>E6"} ;
