@@ -3,6 +3,7 @@
 #include <vector>
 #include <ctime>
 #include <cstdlib>
+// #include <array>
 
 /*
 Some explications about the ideas behing the code :
@@ -38,7 +39,7 @@ std::string simple_gen(int min, int max) {
 }
 
 // Toy function to generated a complex sequence
-std::string complex_gen(std::string tabEvent[]) {
+std::string complex_gen(std::vector<std::string> tabEvent) {
 	std::string sequence ;
 	std::string event ;
 	bool isValid {false} ;
@@ -48,7 +49,7 @@ std::string complex_gen(std::string tabEvent[]) {
 		} else {
 			do {
 				event = tabEvent[random_int(10)] ;
-				for (int j=0 ; j<(sizeof(tabEvent) ; i++){
+				for (int j=0 ; j<tabEvent.size() ; i++){
 					if (tabEvent[j] != event) {
 						isValid = true ;
 					}
@@ -61,6 +62,7 @@ std::string complex_gen(std::string tabEvent[]) {
 	return sequence ;
 }
 
+
 // -----------------------------------Main----------------------------------//
 
 int main() {
@@ -68,8 +70,8 @@ int main() {
 	srand(time(NULL));
 
 	// Definition of events that can occur in sequence
-	std::string tabEvent[10] {"E1","E2","E3","E4","E5","E6","E7","E8","E9","E10"} ;
-	
+	std::vector<std::string> tabEvent {"E1","E2","E3","E4","E5","E6","E7","E8","E9","E10"} ;
+	std::cout << tabEvent.size() << std::endl ;
 
 	std::string sequence{complex_gen(tabEvent)};
 	std::cout << sequence << std::endl;
