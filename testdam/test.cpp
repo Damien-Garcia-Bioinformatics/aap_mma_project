@@ -38,30 +38,62 @@ std::string simple_gen(int min, int max) {
 	return sequence ;
 }
 
+// Returns a valid event (not in anchor)
+std::string add_event(std::vector<std::string> tabEvent, std::vector<std::string> anchors) {
+	size_t countInvalid ;
+	std::string event ;
+	do {
+		countInvalid = 0 ;
+		event = tabEvent.at(random_int(tabEvent.size())) ;
+		for (int i=0 ; i<anchors.size() ; i++) {
+			if (event == anchors.at(i)) {
+				countInvalid++ ;
+			}
+		}
+	} while (countInvalid != 0) ;
+	return event ;
+}
+
 // Toy function to generated a complex sequence
-std::string complex_gen(std::vector<std::string> tabEvent) {
+std::string complex_gen(std::vector<std::string> tabEvent, std::vector<std::string> anchors) {
 	std::string sequence ;
 	std::string event ;
 	bool isValid {false} ;
 	for (int i=0 ; i<20 ; i++) {
-		if (random_int(10)< 8) {
-			sequence += "." ;
+		int value {random_int(4)} ;
+		std::cout << value << std::endl ;
+		if (value == 0) {
+			sequence += add_event(tabEvent, anchors) ;
 		} else {
-			do {
-				event = tabEvent[random_int(10)] ;
-				for (int j=0 ; j<tabEvent.size() ; i++){
-					if (tabEvent[j] != event) {
-						isValid = true ;
-					}
-				}
-			} while (isValid) ;
-			sequence += event ;
-			isValid = false ;
+			sequence += '.' ;
 		}
+		sequence += ' ' ;
 	}
+	std::cout << sequence << std::endl ;
+
 	return sequence ;
 }
 
+// Returns a sequence with a given length and proportion of an event
+std::string proportion_gen(std::vector<std::string> tabEvent, int length, int percentage, std::string event) {
+	std::string sequence ;
+	int proportion {percentage*length} ;
+	int value ;
+	int iter {0} ;
+	for (int i=0 ; i<length ; i++) {
+		sequence += '.' ; // Sequence here needs to be something else than string to add events ("." and "En" not the same size though not working)
+	}
+	for (int i=0 ; i<proportion ; i++){
+		do {
+			value = random_int(sequence.size()) ;
+			if (sequence[value] == '.') {
+				sequence[value] = event ;
+				iter++ ;
+			}
+		} while (iter != proportion) ;
+	}
+	return sequence ;
+}
 
 // -----------------------------------Main----------------------------------//
 
@@ -71,10 +103,6 @@ int main() {
 
 	// Definition of events that can occur in sequence
 	std::vector<std::string> tabEvent {"E1","E2","E3","E4","E5","E6","E7","E8","E9","E10"} ;
-	std::cout << tabEvent.size() << std::endl ;
-
-	std::string sequence{complex_gen(tabEvent)};
-	std::cout << sequence << std::endl;
 
 	// Example of expression passed in program parameters by user
 	std::string expression {"E4<(2-5)E2|E8>E6"} ;
@@ -126,4 +154,8 @@ int main() {
 		std::cout << anchors.at(i) << " " ;
 	}
 	std:: cout << std::endl ;
+
+	// Génération complexe
+	std::string sequence{complex_gen(tabEvent, anchors)};
+	std::cout << sequence << std::endl;
 }
