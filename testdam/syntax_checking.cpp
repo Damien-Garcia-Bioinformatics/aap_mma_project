@@ -17,8 +17,8 @@ bool syntax_check(std::string sequence) {
 	bool isValid {true} ;
 	for (int i=0 ; i<sequence.size() ; i++){
 		if (sequence[i] == ')') {
-			if (sequence[i+1] != '*' || sequence[i+1] != '+' || sequence[i+1] != 'E' {
-				isValid == false ;
+			if (sequence[i+1] != '*' || sequence[i+1] != '+') {
+				isValid = false ;
 				break ;
 			} else if () {
 				// Condition where possible events are all in anchors
@@ -26,5 +26,11 @@ bool syntax_check(std::string sequence) {
 		}
 	}
 
+	return isValid ;
+}
+
+bool check_simple_gen() {
+	bool isValid ;
+	
 	return isValid ;
 }

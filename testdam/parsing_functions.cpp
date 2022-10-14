@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 
+/*
 std::vector<std::string> parse_anchors(std::string sequence) {
 	// Default booleen values
 	bool isAnchor {true} ; 
@@ -45,19 +46,67 @@ std::vector<std::string> parse_anchors(std::string sequence) {
 	}
 	return (anchors) ;
 }
+*/
+int extract_generative_region(std::string expression, int pos) {
+	bool isMin {true} ;
+	std::string strMin ;
+	std::string strMax ;
 
-// Extracts parameters of generative region
-void extract_generative_region(std::string sequence, bool isComplexGen) {
-	bool test {true} ;
-	std::string value ;
-	size_t min ;
-	size_t max ;
-	size_t typeGen ; // '+' is 1, '*' is 2, '%' is 3 and 'ki' is '4' for example
-	if (isComplexGen) {
-		for (int i=0 ; i<sequence.size() ; i++) {
-			if (sequence[i] == '(' || sequence[i] == ' '){
-				continue ;
+	while (expression[pos] != ')') {
+		if (expression[pos] == '-') {
+			isMin = false ;
+		}
+		if (isMin) {
+			strMin += expression[pos] ;
+		} else {
+			strMax += expression[pos] ;
+		}
+		pos++ ;
+	}
+	return int length[2] {(int)strMin, (int)strMax} ;
+}
+
+// Second version of parser
+std::vector<std::string> expression_parser(std::string expression) {
+	// Default boolean values
+	bool isAnchor {true} ;
+	bool isAnchorNext {false} ;
+	bool isComplexGen {false} ;
+
+	size_t regionPos {0} ; // To position the different generation in the right order
+
+	std::string anchor ;
+	std::vector<std::string> anchors ;
+
+	for (int i=0 ; i<expression.size() ; i++) {
+		if (isAnchorNext) {
+			isAnchor = true ;
+			isAnchorNext = false ;
+		}
+		if (isAnchor) {
+			if (expression[i] == '(') {
+				isAnchor = false ;
+				isComplexGen = false ;
+				extract_generative_region(expression, i) ;
+			} else if (expression[i] == '<') {
+				isAnchor = false ;
+				isComplexGen = true ;
+				extract_generative_region(expression, i) ;
+				extract_generation_parameters(expression, i) ;
+			} else if (expression[i] == ' ') {
+				anchors.push_back(anchor) ;
+				anchor.clear() ;
+			} else if (expression.size() == i+1) {
+				anchor += expression [i] ;
+				anchors.push_back(anchor) ;
+				anchor.clear() ;
+			} else {
+				anchor += expression[i] ;
 			}
+		} else { // isAnchor is false
+			isAnchorNext = true ;
+			anchors.push_back(anchor) ;
+			anchor.clear() ;
 		}
 	}
 }
