@@ -66,6 +66,22 @@ int extract_generative_region(std::string expression, int pos) {
 	return int length[2] {(int)strMin, (int)strMax} ;
 }
 
+void extract_parameters(std::string expression, int pos) {
+	switch (expression[pos]) {
+		case '+' :
+			// At least one event should appear on generation
+			break ;
+		case '*' :
+			// 0 or more event should appear on generation
+			break ;
+
+		default :
+			//code
+	}
+	while (expression[pos] != '>') {
+	}
+}
+
 // Second version of parser
 std::vector<std::string> expression_parser(std::string expression) {
 	// Default boolean values
