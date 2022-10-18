@@ -2,51 +2,13 @@
 #include <string>
 #include <vector>
 
-/*
-std::vector<std::string> parse_anchors(std::string sequence) {
-	// Default booleen values
-	bool isAnchor {true} ; 
-	bool isComplexGen {false} ; 
-	bool isAnchorNext {false} ;
+struct compGen {
+	char typeGen ;
+	std::vector<std::string> events ;
+	std::vector<int> prob ;
+} ;
 
-	std::string anchor ;
-	std::vector<std::string> anchors ;
 
-	// Loop checking each character in expression to define what section it is part.
-	// The values returned will be formated as boolean and will define what genarative function to be used.
-	for (int i=0 ; i<expression.length() ; i++) {
-		if (isAnchorNext) {
-			isAnchor = true ;
-			isAnchorNext = false ;
-		}
-		if (isAnchor) {
-			if (expression[i] == '(') {
-				isAnchor = false ;
-				isComplexGen = false ;
-			} else if (expression[i] == '<') {
-				isAnchor = false ;
-				isComplexGen = true ;
-			} else if (expression[i] == ' ') {
-				anchors.push_back(anchor) ;
-				anchor.clear() ;
-			} else if (expression.length() == i+1) {
-				anchor += expression[i] ;
-				anchors.push_back(anchor) ;
-				anchor.clear() ;
-			} else {
-				anchor += expression[i] ;
-			}
-		} else { // isAnchor is false
-			if ((isComplexGen && expression[i] == '>') || (!isComplexGen && expression[i] == ')')) {
-				isAnchorNext = true ;
-				anchors.push_back(anchor) ;
-				anchor.clear() ;
-			}
-		}
-	}
-	return (anchors) ;
-}
-*/
 int extract_generative_region(std::string expression, int pos) {
 	bool isMin {true} ;
 	std::string strMin ;
@@ -64,6 +26,58 @@ int extract_generative_region(std::string expression, int pos) {
 		pos++ ;
 	}
 	return int length[2] {(int)strMin, (int)strMax} ;
+}
+
+// Extracts possible events and probabilities linked in complex generative expression
+void extract_event(std::string expression, int pos) {
+	std::string event ;
+	std::vector<std::string> events ;
+	std::string strProb ;
+	std::vector<int> intProb ;
+	bool isProb {false} ;
+	
+	// Extraction of first character to see if 
+	if (expression[pos] == '+') {
+		//Code
+		pos++ ;
+	} else if (expression[pos] == '*') {
+		//Code
+		pos++ ;
+	} else if (expression[pos] == 'X')
+
+	while (expression[pos] != '>') {
+		if (!isProb) {
+			if (expression[pos] == ' ') {
+				continue ;
+			} else if (expression[pos] == '|') {
+				events.push_back(event) ;
+				event.clear() ;
+				intProb.push_back(100) ; // Case where no stat is specified
+			} else if (expression[pos] == '%') {
+				isProb = true ;
+			} else {
+				event += expression[pos] ;
+			}
+		} else {
+			if (expression[pos] == '|') {
+				intProb.push_back((int)strProb) ;
+				strProb.clear() ;
+				isProb = false ;
+			} else {
+				strProb += expression[pos] ;
+			}
+		}
+		pos ++ ;
+	}
+	// Pushing back in vector last value of generative expression when detecting '>' symbol
+	if (isProb) {
+		intProb.push_back((int)strProb) ;
+		strProb.clear() ;
+	} else {
+		events.push_back(event) ;
+		event.clear() ;
+		intPorb.push_back(100) ;
+	}
 }
 
 void extract_parameters(std::string expression, int pos) {
@@ -119,7 +133,7 @@ std::vector<std::string> expression_parser(std::string expression) {
 			} else {
 				anchor += expression[i] ;
 			}
-		} else { // isAnchor is false
+		} else { // Entering generative region
 			isAnchorNext = true ;
 			anchors.push_back(anchor) ;
 			anchor.clear() ;
