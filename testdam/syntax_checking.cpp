@@ -28,9 +28,3 @@ bool syntax_check(std::string sequence) {
 
 	return isValid ;
 }
-
-bool check_simple_gen() {
-	bool isValid ;
-	
-	return isValid ;
-}

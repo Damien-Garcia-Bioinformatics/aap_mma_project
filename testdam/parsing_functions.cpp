@@ -2,10 +2,16 @@
 #include <string>
 #include <vector>
 
-struct compGen {
+// Structure definition should go on main
+struct generation {
+	int minSize ;
+	int maxSize ;
 	char typeGen ;
 	std::vector<std::string> events ;
-	std::vector<int> prob ;
+	union attribute {
+		std::vector<float> prob ;
+		std::vector<int> number ;
+	} att ;
 } ;
 
 
@@ -29,72 +35,63 @@ int extract_generative_region(std::string expression, int pos) {
 }
 
 // Extracts possible events and probabilities linked in complex generative expression
-void extract_event(std::string expression, int pos) {
+generation extract_parameters(std::string expression, int pos) {
 	std::string event ;
-	std::vector<std::string> events ;
-	std::string strProb ;
-	std::vector<int> intProb ;
+	std::string attribute ;
 	bool isProb {false} ;
-	
-	// Extraction of first character to see if 
-	if (expression[pos] == '+') {
-		//Code
-		pos++ ;
-	} else if (expression[pos] == '*') {
-		//Code
-		pos++ ;
-	} else if (expression[pos] == 'X')
+	bool isXtimes {false} ;
+	bool isAttribute {false} ;
 
+	generation genParam ;
+
+	// Extraction of first character to see if 
+	if (expression[pos] == '+' || expression[pos] == '*') {
+		genParam.type = expression[pos] ;
+		pos++ ;
+	} else {
+		genParam.type = '-' ;
+		pos++ ;
+	}
 	while (expression[pos] != '>') {
-		if (!isProb) {
-			if (expression[pos] == ' ') {
-				continue ;
-			} else if (expression[pos] == '|') {
-				events.push_back(event) ;
+		if (!isProb && !isXtimes) {
+			if (expression[pos] == '|') {
+				genParam.events.push_back(event) ;
 				event.clear() ;
-				intProb.push_back(100) ; // Case where no stat is specified
 			} else if (expression[pos] == '%') {
 				isProb = true ;
+			} else if (expression[pos] == 'X') {
+				isXtimes = true ;
 			} else {
 				event += expression[pos] ;
 			}
 		} else {
-			if (expression[pos] == '|') {
-				intProb.push_back((int)strProb) ;
-				strProb.clear() ;
+			if (isProb && expression[pos] == '|') {
+				genParam.prob.push_back((float)attribute) ;
+				attribute.clear() ;
 				isProb = false ;
+			} else if (isXtimes && expression[pos] == '|') {
+				genParam.number.push_back((int)attribute) ;
+				attribute.clear() ;			
+				isXtimes = false ;
 			} else {
-				strProb += expression[pos] ;
+				attribute += expression[pos] ;
 			}
 		}
-		pos ++ ;
+		pos++ ;
 	}
 	// Pushing back in vector last value of generative expression when detecting '>' symbol
 	if (isProb) {
-		intProb.push_back((int)strProb) ;
-		strProb.clear() ;
+		genParam.prob.push_back((float)attribute) ;
+		attribute.clear() ;
+	} else if (isXtimes) {
+		genParam.number.push_back((int)attribute) ;
+		attribute.clear() ;
 	} else {
-		events.push_back(event) ;
+		genParam.events.push_back(event) ;
 		event.clear() ;
-		intPorb.push_back(100) ;
 	}
 }
 
-void extract_parameters(std::string expression, int pos) {
-	switch (expression[pos]) {
-		case '+' :
-			// At least one event should appear on generation
-			break ;
-		case '*' :
-			// 0 or more event should appear on generation
-			break ;
-
-		default :
-			//code
-	}
-	while (expression[pos] != '>') {
-	}
-}
 
 // Second version of parser
 std::vector<std::string> expression_parser(std::string expression) {

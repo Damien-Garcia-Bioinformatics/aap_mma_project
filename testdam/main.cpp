@@ -3,7 +3,6 @@
 #include <vector>
 #include <ctime>
 #include <cstdlib>
-// #include <array>
 
 /*
 Some explications about the ideas behing the code :
@@ -25,11 +24,13 @@ int random_int(int nb) {
 	return proba ;
 }
 
+
 // Returns maxLen of sequence
 int sequence_length(int maxLen) {
 	int seqLen {rand()%maxLen+1} ;
 	return seqLen ;
 }
+
 
 // Toy function to generate a simple sequence 
 std::string simple_gen(int min, int max) {
@@ -37,6 +38,7 @@ std::string simple_gen(int min, int max) {
 	std::string sequence(seqLen, '.') ;
 	return sequence ;
 }
+
 
 // Returns a valid event (not in anchor)
 std::string add_event(std::vector<std::string> tabEvent, std::vector<std::string> anchors) {
@@ -53,6 +55,7 @@ std::string add_event(std::vector<std::string> tabEvent, std::vector<std::string
 	} while (countInvalid != 0) ;
 	return event ;
 }
+
 
 // Toy function to generated a complex sequence
 std::string complex_gen(std::vector<std::string> tabEvent, std::vector<std::string> anchors) {
@@ -74,26 +77,6 @@ std::string complex_gen(std::vector<std::string> tabEvent, std::vector<std::stri
 	return sequence ;
 }
 
-// Returns a sequence with a given length and proportion of an event
-std::string proportion_gen(std::vector<std::string> tabEvent, int length, int percentage, std::string event) {
-	std::string sequence ;
-	int proportion {percentage*length} ;
-	int value ;
-	int iter {0} ;
-	for (int i=0 ; i<length ; i++) {
-		sequence += '.' ; // Sequence here needs to be something else than string to add events ("." and "En" not the same size though not working)
-	}
-	for (int i=0 ; i<proportion ; i++){
-		do {
-			value = random_int(sequence.size()) ;
-			if (sequence[value] == '.') {
-				sequence[value] = event ;
-				iter++ ;
-			}
-		} while (iter != proportion) ;
-	}
-	return sequence ;
-}
 
 // -----------------------------------Main----------------------------------//
 
@@ -148,12 +131,6 @@ int main() {
 			}
 		}
 	}
-
-	// Affichage des ancres
-	for (int i=0 ; i<anchors.size() ; i++) {
-		std::cout << anchors.at(i) << " " ;
-	}
-	std:: cout << std::endl ;
 
 	// Génération complexe
 	std::string sequence{complex_gen(tabEvent, anchors)};
