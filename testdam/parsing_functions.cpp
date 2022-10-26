@@ -174,8 +174,6 @@ int main() {
 				generation[i].minSize = 1 ;
 				generation[i].maxSize = 1 ;
 				generation[i].typeGen = '-' ;
-				// generation[i].events.push_back('none') ;
-				// generation[i].attributes = 0 ;
 				break ;
 			case 1 :
 				generation[i].isAnchor = false ;
