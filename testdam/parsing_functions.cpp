@@ -2,155 +2,258 @@
 #include <string>
 #include <vector>
 
-// Structure definition should go on main
-struct generation {
+////////////////////////////////////////////////////////////////////
+//                           Data types                           //
+////////////////////////////////////////////////////////////////////
+
+struct genParam {
+	bool isAnchor ;
+	std::string anchor ;
 	int minSize ;
 	int maxSize ;
 	char typeGen ;
+	std::vector<bool> isXtimes ;
 	std::vector<std::string> events ;
-	// union attribute {
-	// 	std::vector<float> prob ;
-	// 	std::vector<int> number ;
-	// } att ;
-	std::vector<float> prob ;
-	std::vector<int> number ;
+	std::vector<int> attributes ;
 } ;
 
-//--------------------------------------------------------------------------//
+struct data {
+	std::vector<int> type ;
+	std::vector<std::string> value ;
+} ;
 
-int extract_generative_region(std::string expression, int pos) {
-	// Extraction of substring from expression
-	size_t separator {expression.find(')')} ;
-	std::string substring {expression.substr(0, separator)} ;
-	
+////////////////////////////////////////////////////////////////////
+//                           Functions                            //
+////////////////////////////////////////////////////////////////////
+
+void extract_simple_region_parameters(std::string &expression, genParam &generation) {
 	// Extraction of min and max interval values
-	int interval[2] ;
-	separator = substring.find('-') ;
-	interval[0] = std::stoi(substring.substr(0, separator)) ; //Extraction of min length
-	interval[1] = std::stoi(substring.substr(separator)) ; //Extraction of max length
-	std::cout<<interval[0]<<' '<<interval[1]<<std::endl ;
-
-	return interval ;
+	size_t separator {expression.find('-')} ;
+	generation.minSize = std::stoi(expression.substr(0,separator)) ; //Extraction of min length
+	generation.maxSize = std::stoi(expression.substr(separator+1)) ;  //Extraction of max length
 }
 
 //--------------------------------------------------------------------------//
 
-// Extracts possible events and probabilities linked in complex generative expression
-generation extract_parameters(std::string expression, int pos) {
+void extract_type_gen(std::string &expression, genParam &generation) {
+	if (expression[0] == '+' || expression[0] == '*') {
+		generation.typeGen = expression[0] ;
+	} else {
+		generation.typeGen = '-' ;
+	}
+}
+
+//--------------------------------------------------------------------------//
+
+void extract_events_and_attributes(std::string &expression, genParam &generation) {
+	bool isEvent {true} ;
+	bool isXtimes {false} ;
 	std::string event ;
 	std::string attribute ;
-	bool isProb {false} ;
-	bool isXtimes {false} ;
-	bool isAttribute {false} ;
-
-	generation genParam ;
-
-	// Extraction of first character to see if 
-	if (expression[pos] == '+' || expression[pos] == '*') {
-		genParam.typeGen = expression[pos] ;
-		pos++ ;
-	} else {
-		genParam.typeGen = '-' ;
-		pos++ ;
-	}
-	while (expression[pos] != '>') {
-		if (!isProb && !isXtimes) {
-			if (expression[pos] == '|') {
-				genParam.events.push_back(event) ;
-				event.clear() ;
-			} else if (expression[pos] == '%') {
-				isProb = true ;
-			} else if (expression[pos] == 'X') {
-				isXtimes = true ;
-			} else {
-				event += expression[pos] ;
-			}
-		} else {
-			if (isProb && expression[pos] == '|') {
-				genParam.prob.push_back(std::stof(attribute)) ;
+	for (int i=0 ; i<expression.size() ; i++) {
+		if (expression[i] == '|' || i == expression.size()-1) {
+			isEvent = true ;
+			generation.events.push_back(event) ;
+			event.clear() ;
+			if (isXtimes) {
+				generation.isXtimes.push_back(true) ;
+				generation.attributes.push_back(std::stoi(attribute)) ;
 				attribute.clear() ;
-				isProb = false ;
-			} else if (isXtimes && expression[pos] == '|') {
-				genParam.number.push_back(std::stoi(attribute)) ;
-				attribute.clear() ;			
-				isXtimes = false ;
 			} else {
-				attribute += expression[pos] ;
+				generation.isXtimes.push_back(false) ;
+				if (attribute.empty()) {
+					generation.attributes.push_back(100) ;
+				} else {
+					generation.attributes.push_back(std::stoi(attribute)) ;
+					attribute.clear() ;
+				}
+			}
+		} else if (expression[i] == '%') {
+			isEvent = false ;
+			isXtimes = false ;
+		} else if (expression[i] == 'X') {
+			isEvent = false ;
+			isXtimes = true ;
+		} else {
+			if (isEvent) {
+				event += expression[i] ;
+			} else {
+				attribute += expression[i] ;
 			}
 		}
-		pos++ ;
 	}
-	// Pushing back in vector last value of generative expression when detecting '>' symbol
-	if (isProb) {
-		genParam.prob.push_back(std::stof(attribute)) ;
-		attribute.clear() ;
-	} else if (isXtimes) {
-		genParam.number.push_back(std::stoi(attribute)) ;
-		attribute.clear() ;
-	} else {
-		genParam.events.push_back(event) ;
-		event.clear() ;
-	}
+}
 
-	return genParam ;
+void extract_events_and_attributes_v2(std::string &expression, genParam &generation) {
+	bool isEvent {true} ;
+	bool isXtimes {false} ;
+	std::string event ;
+	std::string attribute ;
+	for (int i=0 ; i<expression.size() ; i++) {
+		if (expression[i] == '%') {
+			isEvent = false ;
+			isXtimes = false ;
+		} else if (expression[i] == 'X') {
+			isEvent = false ;
+			isXtimes = true ;
+		} else {
+			if (isEvent) {
+				event += expression[i] ;
+			} else {
+				attribute += expression[i] ;
+			}
+		}
+		if (expression[i] == '|' || i == expression.size()-1) {
+			isEvent = true ;
+			generation.events.push_back(event) ;
+			event.clear() ;
+			if (isXtimes) {
+				generation.isXtimes.push_back(true) ;
+				generation.attributes.push_back(std::stoi(attribute)) ;
+				attribute.clear() ;
+			} else {
+				generation.isXtimes.push_back(false) ;
+				if (attribute.empty()) {
+					generation.attributes.push_back(100) ;
+				} else {
+					generation.attributes.push_back(std::stoi(attribute)) ;
+					attribute.clear() ;
+				}
+			}
+		}
+	}
 }
 
 //--------------------------------------------------------------------------//
 
-// Second version of parser
-void expression_parser(std::string expression) {
-	// Default boolean values
-	bool isAnchor {true} ;
-	bool isAnchorNext {false} ;
-	bool isComplexGen {false} ;
+void parse_complex_region(std::string &expression, genParam &generation) {
+	// Extraction of min and max interval values
+	std::string interval {expression.substr(1,(expression.find(')')-1))} ;
+	extract_simple_region_parameters(interval, generation) ;
+	
+	std::string substring {expression.substr(expression.find(')')+1)} ;
+	extract_type_gen(substring, generation) ;
+	
+	// Extraction of potential events and probabilities/number associated
+	if (substring[0] == '+' || substring[0] == '*'){
+		substring = substring.substr(1) ;
+	}
+	extract_events_and_attributes_v2(substring, generation) ;
+}
 
-	size_t regionPos {0} ; // To position the different generation in the right order
+//--------------------------------------------------------------------------//
 
-	std::string anchor ;
-	std::vector<std::string> anchors ;
+void expression_parser(std::string &expression, data &sections) {
+	bool isAnchor ;
+	bool isSimpleGen ;
+	std::string section ;
 
 	for (int i=0 ; i<expression.size() ; i++) {
-		if (isAnchorNext) {
+		if (expression[i] == '<') {
+			isAnchor = false ;
+			isSimpleGen = false ;
+			sections.value.push_back(section) ;
+			sections.type.push_back(0) ;
+			section.clear() ;
+		} else if (expression[i] == '(' && isAnchor) {
+			isAnchor = false ;
+			isSimpleGen = true ;
+			sections.value.push_back(section) ;
+			sections.type.push_back(0) ;
+			section.clear() ;
+		} else if (expression[i] == ')' && isSimpleGen) {
 			isAnchor = true ;
-			isAnchorNext = false ;
-		}
-		if (isAnchor) {
-			if (expression[i] == '(') {
-				isAnchor = false ;
-				isComplexGen = false ;
-				extract_generative_region(expression, i) ;
-			} else if (expression[i] == '<') {
-				isAnchor = false ;
-				isComplexGen = true ;
-				extract_generative_region(expression, i) ;
-				extract_parameters(expression, i) ;
-			} else if (expression[i] == ' ') {
-				anchors.push_back(anchor) ;
-				anchor.clear() ;
-			} else if (expression.size() == i+1) {
-				anchor += expression [i] ;
-				anchors.push_back(anchor) ;
-				anchor.clear() ;
-			} else {
-				anchor += expression[i] ;
-			}
-		} else { // Entering generative region
-			isAnchorNext = true ;
-			anchors.push_back(anchor) ;
-			anchor.clear() ;
+			sections.value.push_back(section) ;
+			sections.type.push_back(1) ;
+			section.clear() ;
+		} else if (expression[i] == '>') {
+			isAnchor = true ;
+			sections.value.push_back(section) ;
+			sections.type.push_back(2) ;
+			section.clear() ;
+		} else {
+			section += expression[i] ;
 		}
 	}
+	// Last section push back
+	if (isAnchor) {
+		sections.type.push_back(0) ;
+	} else if (!isAnchor && isSimpleGen) {
+		sections.type.push_back(1) ;
+	} else {
+		sections.type.push_back(2) ;
+	}
+	sections.value.push_back(section) ;
 }
 
 
-
-
-// -----------------------------------Main----------------------------------//
+////////////////////////////////////////////////////////////////////
+//                             Main                               //
+////////////////////////////////////////////////////////////////////
 
 int main() {
 	// Example of expression passed in program parameters by user
-	std::string expression {"E4<(2-5)E2|E8>E6"} ;
+	// std::string expression {"E1<(2-6)E8%20|E7X3>E11(2-4)SP95E10"} ;
+	std::string expression {"E1<(2-6)+E8|E7|E9>E11(2-4)SP95E10"} ;
 
+	// Separation and categorisation of different regions in expression
+	data sections ;
+	expression_parser(expression, sections) ;
+	
+	// // Debugging 
+	// for (int i=0 ; i<sections.type.size() ; i++) {
+	// 	std::cout << sections.value.at(i) << "\t\t\t" << sections.type.at(i) << std::endl ;
+	// }
+
+	// Extraction of generation parameters
+	genParam generation[sections.type.size()] ;
+	for (int i=0 ; i<sections.type.size() ; i++) {
+		switch (sections.type.at(i)) {
+			case 0 :
+				generation[i].isAnchor = true ;
+				generation[i].anchor = sections.value.at(i) ;
+				generation[i].minSize = 1 ;
+				generation[i].maxSize = 1 ;
+				break ;
+			case 1 :
+				generation[i].isAnchor = false ;
+				extract_simple_region_parameters(sections.value.at(i), generation[i]) ;
+				break ;
+			case 2 :
+				generation[i].isAnchor = false ;
+				parse_complex_region(sections.value.at(i), generation[i]) ;
+				break ;
+			default :
+				std::cout << "error" << std::endl ;
+				break ;
+		}
+	}
+
+	// Debugging
+	std::cout << sections.type.size() << std::endl ;
+	std::cout << generation[1].events.at(0) << std::endl ;
+	std::cout << generation[1].events.at(1) << std::endl ;
+	
+	for (int i=0 ; i<sections.type.size() ; i++) {
+		std::cout << "---------------------------" << std::endl ;
+		std::cout << "isAnchor   : " << generation[i].isAnchor << std::endl ;
+		// std::cout << "isXtimes   : " << generation[i].isXtimes << std::endl ;
+		std::cout << "typeGen    : " << generation[i].typeGen  << std::endl ;
+		std::cout << "Anchor     : " << generation[i].anchor   << std::endl ;
+		std::cout << "minSize    : " << generation[i].minSize  << std::endl ;
+		std::cout << "maxSize    : " << generation[i].maxSize  << std::endl ;
+		std::cout << "events     : " ;
+		for (int j=0 ; j<generation[i].events.size() ; j++) {
+			std::cout << generation[i].events.at(j) << " " ;
+		}
+		std::cout << std::endl ;
+		std::cout << "attributes : " ;
+		for (int j=0 ; j<generation[i].attributes.size() ; j++) {
+			std::cout << generation[i].attributes.at(j) << " " ;
+		}
+		std::cout << std::endl ;
+		std::cout << "---------------------------" << std::endl ;
+	}
 	
 
 	return 0 ;
