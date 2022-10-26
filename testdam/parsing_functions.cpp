@@ -12,7 +12,7 @@ struct genParam {
 	int minSize ;
 	int maxSize ;
 	char typeGen ;
-	std::vector<bool> isXtimes ;
+	// std::vector<bool> isXtimes ;
 	std::vector<std::string> events ;
 	std::vector<int> attributes ;
 } ;
@@ -45,45 +45,6 @@ void extract_type_gen(std::string &expression, genParam &generation) {
 
 //--------------------------------------------------------------------------//
 
-void extract_events_and_attributes(std::string &expression, genParam &generation) {
-	bool isEvent {true} ;
-	bool isXtimes {false} ;
-	std::string event ;
-	std::string attribute ;
-	for (int i=0 ; i<expression.size() ; i++) {
-		if (expression[i] == '|' || i == expression.size()-1) {
-			isEvent = true ;
-			generation.events.push_back(event) ;
-			event.clear() ;
-			if (isXtimes) {
-				generation.isXtimes.push_back(true) ;
-				generation.attributes.push_back(std::stoi(attribute)) ;
-				attribute.clear() ;
-			} else {
-				generation.isXtimes.push_back(false) ;
-				if (attribute.empty()) {
-					generation.attributes.push_back(100) ;
-				} else {
-					generation.attributes.push_back(std::stoi(attribute)) ;
-					attribute.clear() ;
-				}
-			}
-		} else if (expression[i] == '%') {
-			isEvent = false ;
-			isXtimes = false ;
-		} else if (expression[i] == 'X') {
-			isEvent = false ;
-			isXtimes = true ;
-		} else {
-			if (isEvent) {
-				event += expression[i] ;
-			} else {
-				attribute += expression[i] ;
-			}
-		}
-	}
-}
-
 void extract_events_and_attributes_v2(std::string &expression, genParam &generation) {
 	bool isEvent {true} ;
 	bool isXtimes {false} ;
@@ -97,22 +58,24 @@ void extract_events_and_attributes_v2(std::string &expression, genParam &generat
 			isEvent = false ;
 			isXtimes = true ;
 		} else {
-			if (isEvent) {
-				event += expression[i] ;
-			} else {
-				attribute += expression[i] ;
+			if (expression[i] != '|') {
+				if (isEvent) {
+					event += expression[i] ;
+				} else {
+					attribute += expression[i] ;
+				}
 			}
 		}
-		if (expression[i] == '|' || i == expression.size()-1) {
+		if (expression[i] == '|' || i==expression.size()-1) {
 			isEvent = true ;
 			generation.events.push_back(event) ;
 			event.clear() ;
 			if (isXtimes) {
-				generation.isXtimes.push_back(true) ;
-				generation.attributes.push_back(std::stoi(attribute)) ;
+				// generation.isXtimes.push_back(true) ;
+				generation.attributes.push_back(std::stoi(attribute)*100) ;
 				attribute.clear() ;
 			} else {
-				generation.isXtimes.push_back(false) ;
+				// generation.isXtimes.push_back(false) ;
 				if (attribute.empty()) {
 					generation.attributes.push_back(100) ;
 				} else {
@@ -131,19 +94,20 @@ void parse_complex_region(std::string &expression, genParam &generation) {
 	std::string interval {expression.substr(1,(expression.find(')')-1))} ;
 	extract_simple_region_parameters(interval, generation) ;
 	
+	// Extraction of typeGen parameter
 	std::string substring {expression.substr(expression.find(')')+1)} ;
 	extract_type_gen(substring, generation) ;
-	
-	// Extraction of potential events and probabilities/number associated
+	// Reformating of the substring 
 	if (substring[0] == '+' || substring[0] == '*'){
-		substring = substring.substr(1) ;
+		substring = substring.substr(1) ; //Deleting first character
 	}
+	// Extraction of potential events and probabilities/number associated
 	extract_events_and_attributes_v2(substring, generation) ;
 }
 
 //--------------------------------------------------------------------------//
 
-void expression_parser(std::string &expression, data &sections) {
+void expression_divider(std::string &expression, data &sections) {
 	bool isAnchor ;
 	bool isSimpleGen ;
 	std::string section ;
@@ -193,17 +157,12 @@ void expression_parser(std::string &expression, data &sections) {
 
 int main() {
 	// Example of expression passed in program parameters by user
-	// std::string expression {"E1<(2-6)E8%20|E7X3>E11(2-4)SP95E10"} ;
-	std::string expression {"E1<(2-6)+E8|E7|E9>E11(2-4)SP95E10"} ;
+	std::string expression {"E1<(2-6)E8%20|E7X3>E11(2-4)SP95E10"} ;
+	// std::string expression {"E1<(2-6)+E8|E7|E9>E11(2-4)SP95E10"} ;
 
 	// Separation and categorisation of different regions in expression
 	data sections ;
-	expression_parser(expression, sections) ;
-	
-	// // Debugging 
-	// for (int i=0 ; i<sections.type.size() ; i++) {
-	// 	std::cout << sections.value.at(i) << "\t\t\t" << sections.type.at(i) << std::endl ;
-	// }
+	expression_divider(expression, sections) ;
 
 	// Extraction of generation parameters
 	genParam generation[sections.type.size()] ;
@@ -214,9 +173,13 @@ int main() {
 				generation[i].anchor = sections.value.at(i) ;
 				generation[i].minSize = 1 ;
 				generation[i].maxSize = 1 ;
+				generation[i].typeGen = '-' ;
+				// generation[i].events.push_back('none') ;
+				// generation[i].attributes = 0 ;
 				break ;
 			case 1 :
 				generation[i].isAnchor = false ;
+				generation[i].typeGen = '-' ;
 				extract_simple_region_parameters(sections.value.at(i), generation[i]) ;
 				break ;
 			case 2 :
@@ -224,20 +187,15 @@ int main() {
 				parse_complex_region(sections.value.at(i), generation[i]) ;
 				break ;
 			default :
-				std::cout << "error" << std::endl ;
+				std::cout << "Mistakes were made..." << std::endl ;
 				break ;
 		}
 	}
 
 	// Debugging
-	std::cout << sections.type.size() << std::endl ;
-	std::cout << generation[1].events.at(0) << std::endl ;
-	std::cout << generation[1].events.at(1) << std::endl ;
-	
 	for (int i=0 ; i<sections.type.size() ; i++) {
 		std::cout << "---------------------------" << std::endl ;
 		std::cout << "isAnchor   : " << generation[i].isAnchor << std::endl ;
-		// std::cout << "isXtimes   : " << generation[i].isXtimes << std::endl ;
 		std::cout << "typeGen    : " << generation[i].typeGen  << std::endl ;
 		std::cout << "Anchor     : " << generation[i].anchor   << std::endl ;
 		std::cout << "minSize    : " << generation[i].minSize  << std::endl ;
@@ -252,7 +210,6 @@ int main() {
 			std::cout << generation[i].attributes.at(j) << " " ;
 		}
 		std::cout << std::endl ;
-		std::cout << "---------------------------" << std::endl ;
 	}
 	
 
