@@ -1,5 +1,5 @@
 #include <iostream>
-#include "parsing_functions.hpp"
+#include "parser/parsing_functions.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 //                                     Main                                   //
@@ -19,7 +19,7 @@ int main() {
 	expression_parser(sections, generation) ;
 
 	// Debugging
-	for (int i=0 ; i<sections.type.size() ; i++) {
+	for (size_t i=0 ; i<sections.type.size() ; i++) {
 		std::cout << "---------------------------" << std::endl ;
 		std::cout << "isAnchor   : " << generation[i].isAnchor << std::endl ;
 		std::cout << "typeGen    : " << generation[i].typeGen  << std::endl ;
@@ -27,12 +27,12 @@ int main() {
 		std::cout << "minSize    : " << generation[i].minSize  << std::endl ;
 		std::cout << "maxSize    : " << generation[i].maxSize  << std::endl ;
 		std::cout << "events     : " ;
-		for (int j=0 ; j<generation[i].events.size() ; j++) {
+		for (size_t j=0 ; j<generation[i].events.size() ; j++) {
 			std::cout << generation[i].events.at(j) << " " ;
 		}
 		std::cout << std::endl ;
 		std::cout << "attributes : " ;
-		for (int j=0 ; j<generation[i].attributes.size() ; j++) {
+		for (size_t j=0 ; j<generation[i].attributes.size() ; j++) {
 			std::cout << generation[i].attributes.at(j) << " " ;
 		}
 		std::cout << std::endl ;

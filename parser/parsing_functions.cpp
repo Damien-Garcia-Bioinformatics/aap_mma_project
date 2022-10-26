@@ -86,63 +86,6 @@ void extract_events_and_attributes_v2(const std::string &expression, genParam &g
 
 ////////////////////////////////////////////////////////////////////////////////
 
-
-/*
-Procedure used to parse each segment, extract generation parameters and store
-them in a structure.
-*/
-void expression_parser(data &sections, std::vector<genParam> &generation) {
-	std::string section ;
-	for (int i=0 ; i<sections.type.size() ; i++) {
-		section = sections.value.at(i) ;
-		switch (sections.type.at(i)) {
-			case 0 : { //If the section is an anchor
-				generation[i].isAnchor = true ;
-				generation[i].anchor = section ;
-				generation[i].minSize = 1 ;
-				generation[i].maxSize = 1 ;
-				generation[i].typeGen = '-' ;
-				break ;
-			}
-
-			case 1 : { //If the section is a simple generation
-				generation[i].isAnchor = false ;
-				generation[i].typeGen = '-' ;
-				extract_interval(section, generation[i]) ;
-				break ;
-			}
-
-			case 2 : { //If the section is a complex generation
-				generation[i].isAnchor = false ;;
-				// Extraction of min and max interval values
-				std::string interval {section.substr(1,(section.find(')')-1))} ;
-				extract_interval(interval, generation[i]) ;
-				
-				// Extraction of typeGen parameter
-				std::string substring {section.substr(section.find(')')+1)} ;
-				extract_type_gen(substring, generation[i]) ;
-				// Reformating of the substring 
-				if (substring[0] == '+' || substring[0] == '*'){
-					substring = substring.substr(1) ; //Deleting first character
-				}
-				
-				// Extraction of potential events and probabilities/number associated
-				extract_events_and_attributes_v2(substring, generation[i]) ;
-				break ;
-			}
-
-			default : {
-				exit(1) ;
-				break ;
-			}
-		}
-	}	
-}
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-
 /*
 Procedure used to create segments of the expression passed in parameter.
 3 types of segments are created with respective type identifier :
@@ -195,4 +138,60 @@ void expression_divider(std::string &expression, data &sections) {
 		sections.type.push_back(2) ;
 	}
 	sections.value.push_back(section) ;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/*
+Procedure used to parse each segment, extract generation parameters and store
+them in a structure.
+*/
+void expression_parser(data &sections, std::vector<genParam> &generation) {
+	std::string section ;
+	for (int i=0 ; i<sections.type.size() ; i++) {
+		section = sections.value.at(i) ;
+		switch (sections.type.at(i)) {
+			case 0 : { //If the section is an anchor
+				generation[i].isAnchor = true ;
+				generation[i].anchor = section ;
+				generation[i].minSize = 1 ;
+				generation[i].maxSize = 1 ;
+				generation[i].typeGen = '-' ;
+				break ;
+			}
+
+			case 1 : { //If the section is a simple generation
+				generation[i].isAnchor = false ;
+				generation[i].typeGen = '-' ;
+				extract_interval(section, generation[i]) ;
+				break ;
+			}
+
+			case 2 : { //If the section is a complex generation
+				generation[i].isAnchor = false ;;
+				// Extraction of min and max interval values
+				std::string interval {section.substr(1,(section.find(')')-1))} ;
+				extract_interval(interval, generation[i]) ;
+				
+				// Extraction of typeGen parameter
+				std::string substring {section.substr(section.find(')')+1)} ;
+				extract_type_gen(substring, generation[i]) ;
+				// Reformating of the substring 
+				if (substring[0] == '+' || substring[0] == '*'){
+					substring = substring.substr(1) ; //Deleting first character
+				}
+				
+				// Extraction of potential events and probabilities/number associated
+				extract_events_and_attributes_v2(substring, generation[i]) ;
+				break ;
+			}
+
+			default : {
+				exit(1) ;
+				break ;
+			}
+		}
+	}	
 }

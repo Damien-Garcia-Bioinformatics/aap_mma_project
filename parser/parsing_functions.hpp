@@ -43,12 +43,6 @@ regions and stores them in generation structure.
 void extract_events_and_attributes_v2(const std::string &expression, genParam &generation) ;
 
 /*
-Procedure used to parse each segment, extract generation parameters and store
-them in a structure.
-*/
-void expression_parser(data &sections, std::vector<genParam> &generation) ;
-
-/*
 Procedure used to create segments of the expression passed in parameter.
 3 types of segments are created with respective type identifier :
 	- Anchor sections are outside of generative regions.
@@ -60,3 +54,9 @@ Procedure used to create segments of the expression passed in parameter.
 	  The type identifier is '2'.
 */
 void expression_divider(std::string &expression, data &sections) ;
+
+/*
+Procedure used to parse each segment, extract generation parameters and store
+them in a structure.
+*/
+void expression_parser(data &sections, std::vector<genParam> &generation) ;
