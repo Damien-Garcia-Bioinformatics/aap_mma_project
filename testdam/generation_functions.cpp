@@ -39,10 +39,31 @@ std::vector<std::string> generate_tops(size_t minSize, size_t maxSize) {
 
 int main() {
 	srand(time(NULL)) ;
-	std::vector<std::string> result {generate_tops(10,20)} ;
-	for (int i=0 ; i<result.size() ; i++) {
-		std::cout << result.at(i) ;
+	size_t n ; //Number of traces to generate
+
+	std::vector<std::vector<int>> traces ;
+	std::vector<int> trace ;
+	int count = 0 ;
+
+	for (int i=0 ; i<10 ; i++) {
+		for (int j=0 ; j<10 ; j++) {
+			trace.push_back(count) ;
+			count ++ ;
+			std::cout << count << std::endl ;
+		}
+		traces.push_back(trace) ;
 	}
-	std::cout << std::endl ;
+	for (int i=0 ; i<10 ; i++) {
+		for (int j=0 ; j<10 ; j++) {
+			std::cout << traces[i][j] << std::endl ;
+		}
+	}
+
+	// std::vector<std::string> result {generate_tops(10,20)} ;
+	// for (int i=0 ; i<result.size() ; i++) {
+	// 	std::cout << result.at(i) ;
+	// }
+	// std::cout << std::endl ;
+
 	return 0 ;
 }
