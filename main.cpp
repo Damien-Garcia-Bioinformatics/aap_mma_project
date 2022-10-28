@@ -22,7 +22,7 @@ int main() {
 	std::vector<genParam> generation(sections.type.size()) ;
 	expression_parser(sections, generation) ;
 
-	// Debugging
+	// Begin debugging
 	for (size_t i=0 ; i<sections.type.size() ; i++) {
 		std::cout << "---------------------------" << std::endl ;
 		std::cout << "typeSection : " << generation[i].typeSection 	<< std::endl ;
@@ -41,24 +41,21 @@ int main() {
 		}
 		std::cout << std::endl ;
 	}
+	// End debuggin
 
+	// Generation of traces
 	size_t nbTraces {10} ; //Number of traces to generate
 	std::vector<std::vector<std::string>> traces(generation.size()) ;
 	generate_traces(generation, traces, nbTraces) ;
 
+	// Begin debugging
 	for (size_t i=0 ; i<nbTraces ; i++) {
 		for (size_t j=0 ; j<traces.size() ; j++) {
-			std::cout << traces[i][j] << "  " ;
+			std::cout << traces[j][i] << "  " ;
 		}
 		std::cout << std::endl ;
 	}
-
-	// for (size_t i=0 ; i<traces.size() ; i++) {
-	// 	for (size_t j=0 ; j<traces.at(i).size() ; j++) {
-	// 		std::cout << traces[i][j] << "  " ;
-	// 	}
-	// 	std::cout << std::endl ;
-	// }
+	// End debugging
 	
 	return 0 ;
 }

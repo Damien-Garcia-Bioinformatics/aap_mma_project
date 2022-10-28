@@ -5,7 +5,7 @@ EXE = main
 MAIN = main.cpp
 CXX = g++
 CXXFLAGS = -Wall -O2
-OBJECTS = parsing_functions.o generation_functions.o
+OBJECTS = parsing_functions.o generation_functions.o miscellaneous.o
 
 # To create the executable file, we need the object files
 all: $(OBJECTS)
@@ -19,6 +19,8 @@ parsing_functions.o:
 generation_functions.o: 
 	$(CXX) $(CXXFLAGS) -c data_generation/generation_functions.cpp
 
+miscellaneous.o:
+	$(CXX) $(CXXFLAGS) -c data_generation/miscellaneous.cpp
 
 
 # --- Shortcuts (use : "main [shortcut]") --- #
