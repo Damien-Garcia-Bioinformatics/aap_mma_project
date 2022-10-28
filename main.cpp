@@ -51,7 +51,7 @@ int main() {
 	// Begin debugging
 	for (size_t i=0 ; i<nbTraces ; i++) {
 		for (size_t j=0 ; j<traces.size() ; j++) {
-			std::cout << traces[j][i] << "  " ;
+			std::cout << traces[j][i] ;
 		}
 		std::cout << std::endl ;
 	}
