@@ -1,20 +1,33 @@
-# ---  Makefile for compiling the encoder program  --- #
-.PHONY: clean
+ # ---  Makefile for compiling the encoder program  --- #
+.PHONY: clean parser generator
 
 EXE = main
 MAIN = main.cpp
 CXX = g++
-CXXFLAGS = #-Wall -O2 -std=c++17
-OBJECTS = parsing_functions.o
+CXXFLAGS = -Wall -O2
+OBJECTS = parsing_functions.o generation_functions.o
 
-#To create the executable file, we need the object files
-main: $(OBJECTS)
+# To create the executable file, we need the object files
+all: $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $(EXE) $(MAIN) $(OBJECTS)
 
-#To create the object file read_pdb.o, we need the source
+# To create the object file parsing_functions.o, we need the source
 parsing_functions.o:
-	$(CXX) $(CXXFLAGS) -c parser/parsing_functions.cpp
+	$(CXX) $(CXXFLAGS) -c data_generation/parsing_functions.cpp
 
-#To start over from scratch, use 'make clean'
+# To create the object file generation_functions.o, we need the source
+generation_functions.o: 
+	$(CXX) $(CXXFLAGS) -c data_generation/generation_functions.cpp
+
+
+
+# Shortcuts (use : "main [shortcut]")
+parser:
+	$(CXX) $(CXXFLAGS) -c data_generation/parsing_functions.cpp
+generator: 
+	$(CXX) $(CXXFLAGS) -c data_generation/generation_functions.cpp
+rebuild:
+	$(MAKE) clean
+	$(MAKE) all
 clean:
 	-rm -f *.o *.gch $(EXE)

@@ -14,7 +14,7 @@ void extract_interval(const std::string &expression, genParam &generation) {
 	// Extraction of min and max interval values
 	size_t separator {expression.find('-')} ;
 	generation.minSize = std::stoi(expression.substr(0,separator)) ; //Extraction of min length
-	generation.maxSize = std::stoi(expression.substr(separator+1)) ;  //Extraction of max length
+	generation.maxSize = std::stoi(expression.substr(separator+1)) ; //Extraction of max length
 }
 
 
@@ -46,7 +46,7 @@ void extract_events_and_attributes_v2(const std::string &expression, genParam &g
 	bool isXtimes {false} ;
 	std::string event ;
 	std::string attribute ;
-	for (int i=0 ; i<expression.size() ; i++) {
+	for (size_t i=0 ; i<expression.size() ; i++) {
 		if (expression[i] == '%') {
 			isEvent = false ;
 			isXtimes = false ;
@@ -98,11 +98,11 @@ Procedure used to create segments of the expression passed in parameter.
 	  The type identifier is '2'.
 */
 void expression_divider(std::string &expression, data &sections) {
-	bool isAnchor ;
-	bool isSimpleGen ;
+	bool isAnchor {false} ;
+	bool isSimpleGen {false} ;
 	std::string section ;
 
-	for (int i=0 ; i<expression.size() ; i++) {
+	for (size_t i=0 ; i<expression.size() ; i++) {
 		if (expression[i] == '<') {
 			isAnchor = false ;
 			isSimpleGen = false ;
@@ -150,11 +150,11 @@ them in a structure.
 */
 void expression_parser(data &sections, std::vector<genParam> &generation) {
 	std::string section ;
-	for (int i=0 ; i<sections.type.size() ; i++) {
+	for (size_t i=0 ; i<sections.type.size() ; i++) {
 		section = sections.value.at(i) ;
 		switch (sections.type.at(i)) {
 			case 0 : { //If the section is an anchor
-				generation[i].isAnchor = true ;
+				generation[i].typeSection = 0 ;
 				generation[i].anchor = section ;
 				generation[i].minSize = 1 ;
 				generation[i].maxSize = 1 ;
@@ -163,14 +163,14 @@ void expression_parser(data &sections, std::vector<genParam> &generation) {
 			}
 
 			case 1 : { //If the section is a simple generation
-				generation[i].isAnchor = false ;
+				generation[i].typeSection = 1 ;
 				generation[i].typeGen = '-' ;
 				extract_interval(section, generation[i]) ;
 				break ;
 			}
 
 			case 2 : { //If the section is a complex generation
-				generation[i].isAnchor = false ;;
+				generation[i].typeSection = 2 ;;
 				// Extraction of min and max interval values
 				std::string interval {section.substr(1,(section.find(')')-1))} ;
 				extract_interval(interval, generation[i]) ;

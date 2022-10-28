@@ -1,24 +1,6 @@
 #include <string>
 #include <vector>
-
-////////////////////////////////////////////////////////////////////////////////
-//                                 Data types                                 //
-////////////////////////////////////////////////////////////////////////////////
-
-struct genParam {
-	int minSize ;
-	int maxSize ;
-	bool isAnchor ;
-	std::string anchor ;
-	char typeGen ;
-	std::vector<std::string> events ;
-	std::vector<int> attributes ;
-} ;
-
-struct data {
-	std::vector<int> type ;
-	std::vector<std::string> value ;
-} ;
+#include "structures.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 //                           Functions declaration                            //
@@ -28,19 +10,19 @@ struct data {
 Procedure that extracts minimum and maximum values from interval and stores
 these values in generation structure.
 */
-void extract_interval(const std::string &expression, genParam &generation) ;
+void extract_interval(const std::string&, genParam&) ;
 
 /*
 Procedure that extracts the generation type and stores it in generation
 structure.
 */
-void extract_type_gen(const std::string &expression, genParam &generation) ;
+void extract_type_gen(const std::string&, genParam&) ;
 
 /*
 Procedure that extracts potential events and attributes from complex generative
 regions and stores them in generation structure.
 */
-void extract_events_and_attributes_v2(const std::string &expression, genParam &generation) ;
+void extract_events_and_attributes_v2(const std::string&, genParam&) ;
 
 /*
 Procedure used to create segments of the expression passed in parameter.
@@ -53,10 +35,10 @@ Procedure used to create segments of the expression passed in parameter.
 	  with a generation type, events and attributes.
 	  The type identifier is '2'.
 */
-void expression_divider(std::string &expression, data &sections) ;
+void expression_divider(std::string&, data&) ;
 
 /*
 Procedure used to parse each segment, extract generation parameters and store
 them in a structure.
 */
-void expression_parser(data &sections, std::vector<genParam> &generation) ;
+void expression_parser(data&, std::vector<genParam>&) ;
