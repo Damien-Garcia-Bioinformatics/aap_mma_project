@@ -42,11 +42,17 @@ void generate_tops(genParam &generation, std::vector<std::string> &traces, size_
 
 // Returns list of traces with between 0 and n events on each trace.
 void number_of_event(genParam &generation, vectors &traces, size_t nbTraces, size_t eventChoice) {
-	size_t random ;
 	size_t size {randint(generation.minSize, generation.maxSize)} ;
+	size_t random ;
+	size_t min {0} ;
+	if (generation.typeGen == '+') {
+		size_t min {1} ;
+	}
+
+
 	std::vector<std::string> subtrace ;
 	for (size_t i=0 ; i<nbTraces ; i++) {
-		random = randint(0, generation.attributes[eventChoice]/100) ;
+		random = randint(min, generation.attributes[eventChoice]/100) ;
 		for (size_t j=0 ; j<random ; j++) {
 			subtrace[i].push_back(generation.attributes[eventChoice]) ;
 		}
@@ -86,18 +92,5 @@ void generate_traces(std::vector<genParam> &generation, vectors &traces, size_t 
 			default :
 				std::cout << "Error" << std::endl ;
 		}
-
-		// if (generation[i].typeGen == '-') {
-		// 	if (generation[i].attributes[eventChoice] <= 100) {
-		// 		//Percentage of traces
-		// 		continue ;
-		// 	}
-		// 	//number_of_events
-		// 	continue ;
-		// }
-		// if (generation[i].typeGen == '*') {
-		// 	continue ;
-		// }
-		// //If typeGen == '+'
 	}
 }

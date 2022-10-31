@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 #include <string>
 #include "miscellaneous.hpp"
@@ -13,8 +14,8 @@ void shuffle(std::vector<std::string> &trace) {
     size_t pos1, pos2 ;
     std::string temp ;
     for (size_t i=0 ; i<nbShuffle ; i++) {
-        pos1 = randint(0, trace.size()-1) ;
-        pos2 = randint(0, trace.size()-1) ;
+        pos1 = randint(0, trace.size()) ;
+        pos2 = randint(0, trace.size()) ;
         if (pos1 != pos2) {
             temp = trace[pos1] ;
             trace[pos1] = trace[pos2] ;

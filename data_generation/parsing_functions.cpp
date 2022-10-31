@@ -86,6 +86,7 @@ void extract_events_and_attributes_v2(const std::string &expression, genParam &g
 
 ////////////////////////////////////////////////////////////////////////////////
 
+
 /*
 Procedure used to create segments of the expression passed in parameter.
 3 types of segments are created with respective type identifier :
@@ -161,16 +162,14 @@ void expression_parser(data &sections, std::vector<genParam> &generation) {
 				generation[i].typeGen = '-' ;
 				break ;
 			}
-
 			case 1 : { //If the section is a simple generation
 				generation[i].typeSection = 1 ;
 				generation[i].typeGen = '-' ;
 				extract_interval(section, generation[i]) ;
 				break ;
 			}
-
 			case 2 : { //If the section is a complex generation
-				generation[i].typeSection = 2 ;;
+				generation[i].typeSection = 2 ;
 				// Extraction of min and max interval values
 				std::string interval {section.substr(1,(section.find(')')-1))} ;
 				extract_interval(interval, generation[i]) ;
@@ -187,7 +186,6 @@ void expression_parser(data &sections, std::vector<genParam> &generation) {
 				extract_events_and_attributes_v2(substring, generation[i]) ;
 				break ;
 			}
-
 			default : {
 				exit(1) ;
 				break ;
