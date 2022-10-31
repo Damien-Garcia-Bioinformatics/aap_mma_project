@@ -2,6 +2,7 @@
 #include "data_generation/generation_functions.hpp"
 
 
+
 ////////////////////////////////////////////////////////////////////////////////
 //                                     Main                                   //
 ////////////////////////////////////////////////////////////////////////////////
@@ -11,7 +12,7 @@ int main() {
 	srand(time(NULL)) ;
 
 	// Example of expression passed in program parameters by user
-	std::string expression {"E1<(2-6)E8%20|E7X3>E11(2-4)SP95E10"} ;
+	std::string expression {"E1<(2-6)e4X2|e5X3>E2(2-4)E3"} ;
 	// std::string expression {"E1<(2-6)+E8|E7|E9>E11(2-4)SP95E10"} ;
 
 	// Separation and categorisation of different regions in expression
