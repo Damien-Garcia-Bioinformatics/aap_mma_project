@@ -40,7 +40,6 @@ void generate_tops(genParam &generation, std::vector<std::string> &subtraces, si
 ////////////////////////////////////////////////////////////////////////////////
 
 
-// Returns list of traces with between 0 and n events on each trace.
 void number_of_event(genParam &generation, std::vector<std::string> &subtraces, size_t nbTraces, size_t eventChoice) {
 	size_t min = (generation.typeGen == '+') ? 1 : 0 ;
 	size_t max = (generation.attributes[eventChoice] == 0) ? generation.attributes[eventChoice]/100 : generation.maxSize ;
