@@ -6,68 +6,104 @@
 #include "generation_functions.hpp"
 #include "miscellaneous.hpp"
 
-// typeSection : 2
-// typeGen     : -
-// Anchor      : 
-// minSize     : 2
-// maxSize     : 6
-// events      : E8 E7 
-// attributes  : 20 300 
-
 
 ////////////////////////////////////////////////////////////////////////////////
-//                                 Functions                                  //
+//                           Functions definition                             //
 ////////////////////////////////////////////////////////////////////////////////
 
-//DONE
-void generate_events(genParam &generation, std::vector<std::string> &traces, size_t nbTraces) {
+
+void generate_events(genParam &generation, std::vector<std::string> &subtraces, size_t nbTraces) {
 	for (size_t i=0 ; i<nbTraces ; i++) {
-		traces.push_back(generation.anchor) ;
+		std::string subtrace {generation.anchor + " "} ;
+		subtraces.push_back(subtrace) ;
 	}
 }
 
-//DONE
-void generate_tops(genParam &generation, std::vector<std::string> &traces, size_t nbTraces) {
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+void generate_tops(genParam &generation, std::vector<std::string> &subtraces, size_t nbTraces) {
 	size_t size ;
 	std::string subtrace ;
 	for (size_t i=0 ; i<nbTraces ; i++) {
 		size = randint(generation.minSize, generation.maxSize) ;
 		for (size_t j=0 ; j<size ; j++) {
-			subtrace += "." ;
+			subtrace += ". " ;
 		}
-		traces.push_back(subtrace) ;
+		subtraces.push_back(subtrace) ;
 		subtrace.clear() ;
 	}
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+
 
 // Returns list of traces with between 0 and n events on each trace.
-void number_of_event(genParam &generation, vectors &traces, size_t nbTraces, size_t eventChoice) {
-	size_t size {randint(generation.minSize, generation.maxSize)} ;
-	size_t random ;
-	size_t min {0} ;
-	if (generation.typeGen == '+') {
-		size_t min {1} ;
-	}
-
-
+void number_of_event(genParam &generation, std::vector<std::string> &subtraces, size_t nbTraces, size_t eventChoice) {
+	size_t min = (generation.typeGen == '+') ? 1 : 0 ;
+	size_t max = (generation.attributes[eventChoice] == 0) ? generation.attributes[eventChoice]/100 : generation.maxSize ;
 	std::vector<std::string> subtrace ;
 	for (size_t i=0 ; i<nbTraces ; i++) {
-		random = randint(min, generation.attributes[eventChoice]/100) ;
+		size_t size {randint(generation.minSize, generation.maxSize)} ;
+		size_t random {randint(min, max)} ;
 		for (size_t j=0 ; j<random ; j++) {
-			subtrace[i].push_back(generation.attributes[eventChoice]) ;
+			subtrace.push_back(generation.events[eventChoice]) ;	
 		}
 		for (size_t j=0 ; j<(size-random) ; j++) {
-			subtrace[i].push_back('.') ;
+			subtrace.push_back(".") ;
 		}
-		shuffle(subtrace) ;
+		shuffle(subtrace) ; // Randomisation of event position in section
+		std::string trace ;
+		for (size_t i=0 ; i<subtrace.size() ; i++) {
+			trace += subtrace[i] + " " ;
+		}
+		subtraces.push_back(trace) ;
 		subtrace.clear() ;
+		trace.clear() ;
 	}
 }
 
-// Returns list of traces which n% of those contain the selected event
-void percentage_of_event() {
 
+////////////////////////////////////////////////////////////////////////////////
+
+
+// Returns list of traces which n% of those contain the selected event
+void percentage_of_event(genParam &generation, std::vector<std::string> &subtraces, size_t nbTraces, size_t eventChoice) {
+	// Defines the number of traces that will contain the selected event
+	size_t containsEvent {generation.attributes[eventChoice]*nbTraces/100} ;
+	std::vector<std::string> subtrace ;
+	for (size_t i=0 ; i<nbTraces ; i++) {
+		size_t size {randint(generation.minSize, generation.maxSize)} ;
+		if (i < containsEvent) {
+			size_t random {randint(1, size)} ;
+			std::cout << size << "  " << random << std::endl ;
+			for (size_t j=0 ; j<random ; j++) {
+				subtrace.push_back(generation.events[eventChoice]) ;
+			}
+			for (size_t j=0 ; j<(size-random) ; j++) {
+				subtrace.push_back(".") ;
+			}
+		} else {
+			std::cout << "test" << std::endl ;
+			for (size_t j=0 ; j<size ; j++) {
+				subtrace.push_back(".") ;
+			}
+		}
+		std::string trace ;
+		for (size_t j=0 ; j<subtrace.size() ; j++) {
+			trace += subtrace[i] + " " ;
+		}
+		subtraces.push_back(trace) ;
+		subtrace.clear() ;
+		trace.clear() ;
+	}
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+
 
 // Traces generator
 void generate_traces(std::vector<genParam> &generation, vectors &traces, size_t nbTraces) {
@@ -81,16 +117,16 @@ void generate_traces(std::vector<genParam> &generation, vectors &traces, size_t 
 				generate_tops(generation[i], traces[i], nbTraces) ;
 				break ;
 			case 2 : {
-				size_t eventChoice  {randint(1, generation[i].events.size())} ;
+				size_t eventChoice {randint(0, generation[i].events.size())} ;
 				if (generation[i].attributes[eventChoice] <= 100) {
-					//Percentage of traces
+					percentage_of_event(generation[i], traces[i], nbTraces, eventChoice) ;
 				} else {
-					number_of_event(generation[i], traces, nbTraces, eventChoice) ;
+					number_of_event(generation[i], traces[i], nbTraces, eventChoice) ;
 				}
 				break ;
 			}
 			default :
-				std::cout << "Error" << std::endl ;
+				exit(2) ;
 		}
 	}
 }

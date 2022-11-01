@@ -73,7 +73,7 @@ void extract_events_and_attributes_v2(const std::string &expression, genParam &g
 			} else {
 				// generation.isXtimes.push_back(false) ;
 				if (attribute.empty()) {
-					generation.attributes.push_back(100) ;
+					generation.attributes.push_back(0) ;
 				} else {
 					generation.attributes.push_back(std::stoi(attribute)) ;
 					attribute.clear() ;

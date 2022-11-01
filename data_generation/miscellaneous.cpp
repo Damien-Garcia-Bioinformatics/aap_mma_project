@@ -10,7 +10,8 @@ size_t randint(size_t min, size_t max) {
 
 // Shuffles a vector 
 void shuffle(std::vector<std::string> &trace) {
-    size_t nbShuffle {(trace.size())/2 + 1} ; //Number of shuffle turns
+    // size_t nbShuffle {(trace.size())/2 + 1} ; //Number of shuffle turns
+    size_t nbShuffle {trace.size()} ; //Number of shuffle turns
     size_t pos1, pos2 ;
     std::string temp ;
     for (size_t i=0 ; i<nbShuffle ; i++) {

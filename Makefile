@@ -1,5 +1,5 @@
  # ---  Makefile for compiling the encoder program  --- #
-.PHONY: clean parser generator rebuild
+.PHONY: clean parser generator miscellaneous rebuild
 
 EXE = main
 MAIN = main.cpp
@@ -32,6 +32,10 @@ parser:
 # Compilation of generation functions
 generator: 
 	$(CXX) $(CXXFLAGS) -c data_generation/generation_functions.cpp
+
+# Compilation of miscellaneous functions
+miscellaneous:
+	$(CXX) $(CXXFLAGS) -c data_generation/miscellaneous.cpp
 
 # Removes all generated files by previous compilations
 clean:
