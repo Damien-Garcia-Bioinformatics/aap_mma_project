@@ -82,16 +82,21 @@ void percentage_of_event(genParam &generation, std::vector<std::string> &subtrac
 		size_t size {randint(generation.minSize, generation.maxSize)} ;
 		
 		// Creation of n% of traces containing events
+		std::cout << size << std::endl ;
 		if (i < containsEvent) {
 			size_t random {randint(1, size)} ;
-			std::cout << size << "  " << random << std::endl ;
+			std::cout << random << std::endl ;
 			for (size_t j=0 ; j<random ; j++) {
 				subtrace.push_back(generation.events[eventChoice]) ;
 			}
+			std::cout << size-random << std::endl ;
 			for (size_t j=0 ; j<(size-random) ; j++) {
 				subtrace.push_back(".") ;
-				std::cout << "test" << std::endl ;
 			}
+			std::cout << "Current substrace is : " << std::endl ;
+			for (size_t k=0 ; k<subtrace.size() ; k++) {
+				std::cout << subtrace.at(k) ;
+			} std::cout << std::endl ;
 		
 		// Creation of 1-n% traces not containing events
 		} else {
@@ -120,18 +125,15 @@ void generate_traces(std::vector<genParam> &generation, vectors &traces, size_t 
 	std::vector<std::string> trace ;
 	for (size_t i=0 ; i<generation.size() ; i++) {
 		switch (generation[i].typeSection) {
-			// Generation of type 0 sections (anchors)
-			case 0 :
+			case 0 : { // Generation of type 0 sections (anchors)
 				generate_events(generation[i] , traces[i], nbTraces) ;
 				break ;
-			
-			// Generation of type 1 sections (simple generative regions)
-			case 1 :
+			}
+			case 1 : { // Generation of type 1 sections (simple generative regions)
 				generate_tops(generation[i], traces[i], nbTraces) ;
 				break ;
-
-			// Generation of type 2 sections (complex generative regions)
-			case 2 : {
+			}
+			case 2 : { // Generation of type 2 sections (complex generative regions)
 				size_t eventChoice {randint(0, generation[i].events.size())} ;
 				if (generation[i].attributes[eventChoice] <= 100) {
 					percentage_of_event(generation[i], traces[i], nbTraces, eventChoice) ;
@@ -140,10 +142,9 @@ void generate_traces(std::vector<genParam> &generation, vectors &traces, size_t 
 				}
 				break ;
 			}
-
-			// Error case (shouldn't happen at this point of execution because of previous syntax/semantic checking)
-			default :
+			default : { // Error case (shouldn't happen at this point because of syntax/semantic checking)
 				exit(2) ;
+			}
 		}
 	}
 }
