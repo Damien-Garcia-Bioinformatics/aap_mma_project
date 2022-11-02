@@ -24,9 +24,7 @@ void extract_type_gen(const std::string &, genParam &) ;
 /// @param  genParam_structure : Contains generative parameters extracted from expression section
 void extract_events_and_attributes_v2(const std::string &, genParam &) ;
 
-/*
 
-*/
 /// @brief 	Procedure used to create segments of the expression passed in parameter.
 ///			3 types of segments are created with respective type identifier :
 ///				- Anchor sections are outside of generative regions.
@@ -40,10 +38,7 @@ void extract_events_and_attributes_v2(const std::string &, genParam &) ;
 /// @param  data_structure : Contains sections and type of sections of expression
 void expression_divider(std::string &, data &) ;
 
-/*
-Procedure used to parse each segment, extract generation parameters and store
-them in a structure.
-*/
+
 /// @brief Procedure used to parse each segment, extract generation parameters and store them in a structure.
 /// @param  data_structure : Contains sections and type of sections of expression
 /// @param  vector_genParam_structure : Contains generative parameters extracted from expression sections

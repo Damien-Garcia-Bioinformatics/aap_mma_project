@@ -1,12 +1,19 @@
-#include <iostream>
-#include <vector>
-#include <string>
 #include "miscellaneous.hpp"
+
+
+////////////////////////////////////////////////////////////////////////////////
+//                           Functions definition                             //
+////////////////////////////////////////////////////////////////////////////////
+
 
 // Returns a positive integer between min and max
 size_t randint(size_t min, size_t max) {
     return rand()%(max)+min ;
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+
 
 // Shuffles a vector 
 void shuffle(std::vector<std::string> &trace) {

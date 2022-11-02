@@ -1,9 +1,11 @@
 #include <string>
 #include <vector>
 
+
 ////////////////////////////////////////////////////////////////////////////////
 //                                 Data types                                 //
 ////////////////////////////////////////////////////////////////////////////////
+
 
 /// @brief Structure containing generative parameters extracted from expression sections
 struct genParam {
@@ -18,6 +20,7 @@ struct genParam {
 
 
 ////////////////////////////////////////////////////////////////////////////////
+
 
 /// @brief Structure containing sections and type of sections of expression
 struct data {

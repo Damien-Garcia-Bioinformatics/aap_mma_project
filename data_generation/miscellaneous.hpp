@@ -1,4 +1,6 @@
 #include <cstdlib>
+#include <vector>
+#include <string>
 
 ////////////////////////////////////////////////////////////////////////////////
 //                           Functions declaration                            //

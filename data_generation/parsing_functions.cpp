@@ -55,11 +55,7 @@ void extract_events_and_attributes_v2(const std::string &expression, genParam &g
 			isXtimes = true ;
 		} else {
 			if (expression[i] != '|') {
-				if (isEvent) {
-					event += expression[i] ;
-				} else {
-					attribute += expression[i] ;
-				}
+				(isEvent) ? event += expression[i] : attribute += expression[i] ;
 			}
 		}
 		if (expression[i] == '|' || i==expression.size()-1) {
@@ -67,11 +63,9 @@ void extract_events_and_attributes_v2(const std::string &expression, genParam &g
 			generation.events.push_back(event) ;
 			event.clear() ;
 			if (isXtimes) {
-				// generation.isXtimes.push_back(true) ;
 				generation.attributes.push_back(std::stoi(attribute)*100) ;
 				attribute.clear() ;
 			} else {
-				// generation.isXtimes.push_back(false) ;
 				if (attribute.empty()) {
 					generation.attributes.push_back(0) ;
 				} else {
@@ -150,9 +144,8 @@ Procedure used to parse each segment, extract generation parameters and store
 them in a structure.
 */
 void expression_parser(data &sections, std::vector<genParam> &generation) {
-	std::string section ;
 	for (size_t i=0 ; i<sections.type.size() ; i++) {
-		section = sections.value.at(i) ;
+		std::string section {sections.value.at(i)} ;
 		switch (sections.type.at(i)) {
 			case 0 : { //If the section is an anchor
 				generation[i].typeSection = 0 ;
@@ -178,7 +171,7 @@ void expression_parser(data &sections, std::vector<genParam> &generation) {
 				std::string substring {section.substr(section.find(')')+1)} ;
 				extract_type_gen(substring, generation[i]) ;
 				// Reformating of the substring 
-				if (substring[0] == '+' || substring[0] == '*'){
+				if (substring[0] == '+' || substring[0] == '*') {
 					substring = substring.substr(1) ; //Deleting first character
 				}
 				
