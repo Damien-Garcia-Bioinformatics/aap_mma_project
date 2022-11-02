@@ -58,8 +58,8 @@ void number_of_event(genParam &generation, std::vector<std::string> &subtraces, 
 
 		// Creation of single string section format 
 		std::string trace ;
-		for (size_t i=0 ; i<subtrace.size() ; i++) {
-			trace += subtrace[i] + " " ;
+		for (size_t j=0 ; j<subtrace.size() ; j++) {
+			trace += subtrace[j] + " " ;
 		}
 		subtraces.push_back(trace) ;
 		subtrace.clear() ;
@@ -80,35 +80,29 @@ void percentage_of_event(genParam &generation, std::vector<std::string> &subtrac
 	std::vector<std::string> subtrace ;
 	for (size_t i=0 ; i<nbTraces ; i++) {
 		size_t size {randint(generation.minSize, generation.maxSize)} ;
-		
+		size_t random {randint(1, size)} ;
+
 		// Creation of n% of traces containing events
-		std::cout << size << std::endl ;
-		if (i < containsEvent) {
-			size_t random {randint(1, size)} ;
-			std::cout << random << std::endl ;
+		if (i < containsEvent) {	
 			for (size_t j=0 ; j<random ; j++) {
 				subtrace.push_back(generation.events[eventChoice]) ;
 			}
-			std::cout << size-random << std::endl ;
-			for (size_t j=0 ; j<(size-random) ; j++) {
+			for (size_t j=0 ; j<(size_t(size-random)) ; j++) {
 				subtrace.push_back(".") ;
 			}
-			std::cout << "Current substrace is : " << std::endl ;
-			for (size_t k=0 ; k<subtrace.size() ; k++) {
-				std::cout << subtrace.at(k) ;
-			} std::cout << std::endl ;
+			shuffle(subtrace) ;
 		
-		// Creation of 1-n% traces not containing events
+		// Creation of 100-n% traces not containing events
 		} else {
 			for (size_t j=0 ; j<size ; j++) {
 				subtrace.push_back(".") ;
 			}
 		}
-
+		
 		// Creation of single string section format 
 		std::string trace ;
 		for (size_t j=0 ; j<subtrace.size() ; j++) {
-			trace += subtrace[i] + " " ;
+			trace += subtrace[j] + " " ;
 		}
 		subtraces.push_back(trace) ;
 		subtrace.clear() ;
