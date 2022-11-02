@@ -1,11 +1,16 @@
-#include <iostream>
-#include "data_generation/generation_functions.hpp"
-#include "data_generation/miscellaneous.hpp"
+// Advanced Algorithmics and Programming & Models, Methods and Programming Project
+// Damien GARCIA, Florian ECHELARD
+// M2BB
 
 
 ////////////////////////////////////////////////////////////////////////////////
 //                                     Main                                   //
 ////////////////////////////////////////////////////////////////////////////////
+
+
+#include <iostream>
+#include "data_generation/generation_functions.hpp"
+#include "data_generation/miscellaneous.hpp"
 
 
 int main() {

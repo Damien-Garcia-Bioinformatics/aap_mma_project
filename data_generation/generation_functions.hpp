@@ -1,13 +1,18 @@
-#include <vector>
-#include <string>
-#include "parsing_functions.hpp"
-
-using vectors = std::vector<std::vector<std::string>> ;
+// Advanced Algorithmics and Programming & Models, Methods and Programming Project
+// Damien GARCIA, Florian ECHELARD
+// M2BB
 
 
 ////////////////////////////////////////////////////////////////////////////////
 //                           Functions declaration                            //
 ////////////////////////////////////////////////////////////////////////////////
+
+
+#include <vector>
+#include <string>
+#include "parsing_functions.hpp"
+
+using vectors = std::vector<std::vector<std::string>> ;
 
 
 /// @brief Procedure that generates anchors subtraces of n traces (type 0 sections).
@@ -40,7 +45,7 @@ void number_of_event(genParam &, std::vector<std::string> &, size_t, size_t) ;
 void percentage_of_event(genParam &, std::vector<std::string> &, size_t, size_t) ;
 
 
-/// @brief General procedure that generates traces
+/// @brief General procedure that generates traces.
 /// @param  genParam_structure : Contains data extracted from expression used for traces generation
 /// @param  vector_of_strings : Stores traces in sections
 /// @param  unsigned_int : number of subtraces to generate

@@ -1,10 +1,16 @@
-#include <cstdlib>
-#include <vector>
-#include <string>
+// Advanced Algorithmics and Programming & Models, Methods and Programming Project
+// Damien GARCIA, Florian ECHELARD
+// M2BB
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //                           Functions declaration                            //
 ////////////////////////////////////////////////////////////////////////////////
+
+
+#include <cstdlib>
+#include <vector>
+#include <string>
 
 
 /// @brief Function that returns a positive random integer between min and max.

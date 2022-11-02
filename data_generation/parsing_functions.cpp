@@ -1,4 +1,6 @@
-#include "parsing_functions.hpp"
+// Advanced Algorithmics and Programming & Models, Methods and Programming Project
+// Damien GARCIA, Florian ECHELARD
+// M2BB
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -6,10 +8,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-/*
-Procedure that extracts minimum and maximum values from interval and stores
-these values in generation structure.
-*/
+#include "parsing_functions.hpp"
+
+
+// Procedure that extracts minimum and maximum values from interval and stores these values in generation structure.
 void extract_interval(const std::string &expression, genParam &generation) {
 	// Extraction of min and max interval values
 	size_t separator {expression.find('-')} ;
@@ -18,13 +20,10 @@ void extract_interval(const std::string &expression, genParam &generation) {
 }
 
 
-////////////////////////////////////////////////////////////////////////////////
+//----------------------------------------------------------------------------//
 
 
-/*
-Procedure that extracts the generation type and stores it in generation
-structure.
-*/
+// Procedure that extracts the generation type and stores it in generation structure.
 void extract_type_gen(const std::string &expression, genParam &generation) {
 	if (expression[0] == '+' || expression[0] == '*') {
 		generation.typeGen = expression[0] ;
@@ -34,14 +33,11 @@ void extract_type_gen(const std::string &expression, genParam &generation) {
 }
 
 
-////////////////////////////////////////////////////////////////////////////////
+//----------------------------------------------------------------------------//
 
 
-/*
-Procedure that extracts potential events and attributes from complex generative
-regions and stores them in generation structure.
-*/
-void extract_events_and_attributes_v2(const std::string &expression, genParam &generation) {
+// Procedure that extracts potential events and attributes from complex generative regions and stores them in generation structure.
+void extract_events_and_attributes(const std::string &expression, genParam &generation) {
 	bool isEvent {true} ;
 	bool isXtimes {false} ;
 	std::string event ;
@@ -78,25 +74,17 @@ void extract_events_and_attributes_v2(const std::string &expression, genParam &g
 }
 
 
-////////////////////////////////////////////////////////////////////////////////
+//----------------------------------------------------------------------------//
 
 
-/*
-Procedure used to create segments of the expression passed in parameter.
-3 types of segments are created with respective type identifier :
-	- Anchor sections are outside of generative regions.
-	  The type identifier is '0'.
-	- Simple generative sections are formed by an interval only.
-	  The type identifier is '1'.
-	- Complex generative sections are formed by an interval, and are supplemented
-	  with a generation type, events and attributes.
-	  The type identifier is '2'.
-*/
+// Procedure used to create segments of the expression passed in parameter.
 void expression_divider(std::string &expression, data &sections) {
 	bool isAnchor {false} ;
 	bool isSimpleGen {false} ;
 	std::string section ;
 
+	// Checking of position in string and section and setting of boolean variables.
+	// Depending on boolean states, sections of expression will be pushed in different containers.
 	for (size_t i=0 ; i<expression.size() ; i++) {
 		if (expression[i] == '<') {
 			isAnchor = false ;
@@ -136,13 +124,10 @@ void expression_divider(std::string &expression, data &sections) {
 }
 
 
-////////////////////////////////////////////////////////////////////////////////
+//----------------------------------------------------------------------------//
 
 
-/*
-Procedure used to parse each segment, extract generation parameters and store
-them in a structure.
-*/
+//Procedure used to parse each segment, extract generation parameters and store them in a structure.
 void expression_parser(data &sections, std::vector<genParam> &generation) {
 	for (size_t i=0 ; i<sections.type.size() ; i++) {
 		std::string section {sections.value.at(i)} ;
@@ -176,7 +161,7 @@ void expression_parser(data &sections, std::vector<genParam> &generation) {
 				}
 				
 				// Extraction of potential events and probabilities/number associated
-				extract_events_and_attributes_v2(substring, generation[i]) ;
+				extract_events_and_attributes(substring, generation[i]) ;
 				break ;
 			}
 			default : {

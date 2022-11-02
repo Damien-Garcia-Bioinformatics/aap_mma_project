@@ -1,3 +1,8 @@
+# Advanced Algorithmics and Programming & Models, Methods and Programming Project
+# Damien GARCIA, Florian ECHELARD
+# M2BB
+ 
+ 
  # ---  Makefile for compiling the encoder program  --- #
 .PHONY: clean parser generator miscellaneous rebuild
 

@@ -1,10 +1,15 @@
-#include <string>
-#include <vector>
+// Advanced Algorithmics and Programming & Models, Methods and Programming Project
+// Damien GARCIA, Florian ECHELARD
+// M2BB
 
 
 ////////////////////////////////////////////////////////////////////////////////
 //                                 Data types                                 //
 ////////////////////////////////////////////////////////////////////////////////
+
+
+#include <string>
+#include <vector>
 
 
 /// @brief Structure containing generative parameters extracted from expression sections

@@ -1,10 +1,16 @@
-#include <string>
-#include <vector>
-#include "structures.hpp"
+// Advanced Algorithmics and Programming & Models, Methods and Programming Project
+// Damien GARCIA, Florian ECHELARD
+// M2BB
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //                           Functions declaration                            //
 ////////////////////////////////////////////////////////////////////////////////
+
+
+#include <string>
+#include <vector>
+#include "structures.hpp"
 
 
 /// @brief Procedure that extracts minimum and maximum values from interval and stores these values in generation structure.
@@ -22,7 +28,7 @@ void extract_type_gen(const std::string &, genParam &) ;
 /// @brief Procedure that extracts potential events and attributes from complex generative regions and stores them in generation structure.
 /// @param  string : Section of expression
 /// @param  genParam_structure : Contains generative parameters extracted from expression section
-void extract_events_and_attributes_v2(const std::string &, genParam &) ;
+void extract_events_and_attributes(const std::string &, genParam &) ;
 
 
 /// @brief 	Procedure used to create segments of the expression passed in parameter.
