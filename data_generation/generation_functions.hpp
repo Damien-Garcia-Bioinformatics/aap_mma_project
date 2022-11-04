@@ -8,6 +8,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
+#ifndef __GENERATION_FUNCTIONS__
+#define __GENERATION_FUNCTIONS__
+
+
 #include <vector>
 #include <string>
 #include "parsing_functions.hpp"
@@ -50,3 +54,6 @@ void percentage_of_event(genParam &, std::vector<std::string> &, size_t, size_t)
 /// @param  vector_of_strings : Stores traces in sections
 /// @param  unsigned_int : number of subtraces to generate
 void generate_traces(std::vector<genParam> &, vectors &, size_t) ;
+
+
+#endif

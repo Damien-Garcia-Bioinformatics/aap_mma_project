@@ -8,6 +8,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
+#ifndef __PARSING_FUNCTIONS__
+#define __PARSING_FUNCTIONS__
+
+
 #include <string>
 #include <vector>
 #include "structures.hpp"
@@ -49,3 +53,6 @@ void expression_divider(std::string &, data &) ;
 /// @param  data_structure : Contains sections and type of sections of expression
 /// @param  vector_genParam_structure : Contains generative parameters extracted from expression sections
 void expression_parser(data &, std::vector<genParam> &) ;
+
+
+#endif

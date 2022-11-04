@@ -8,6 +8,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
+#ifndef __MISCELLANEOUS__
+#define __MISCELLANEOUS__
+
+
 #include <cstdlib>
 #include <vector>
 #include <string>
@@ -23,3 +27,6 @@ size_t randint(size_t, size_t) ;
 /// @brief Procedure to shuffle values in a vector of strings.
 /// @param  vector_string : Vector which values are shuffled
 void shuffle(std::vector<std::string> &) ;
+
+
+#endif

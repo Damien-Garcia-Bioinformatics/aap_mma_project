@@ -9,17 +9,20 @@
 
 
 #include <iostream>
+#include "data_generation/semantic_check_functions.hpp"
 #include "data_generation/generation_functions.hpp"
 #include "data_generation/miscellaneous.hpp"
 
 
 int main() {
-	//Initialisation of random function with time seed
+	// Initialisation of random function with time seed
 	srand(time(NULL)) ;
 
+	// Initialisation of maximum length
+	size_t maxLen {30} ;
+
 	// Example of expression passed in program parameters by user
-	std::string expression {"E1<(6-12)e4%50|e5%25>E2(2-4)E3"} ;
-	// std::string expression {"E1<(2-6)+E8|E7|E9>E11(2-4)SP95E10"} ;
+	std::string expression {"E1<(6-11)e2%50|e3%25>E2(2-4)E3"} ;
 
 	// Separation and categorisation of different regions in expression
 	data sections ;
@@ -28,6 +31,9 @@ int main() {
 	// Extraction of generation parameters
 	std::vector<genParam> generation(sections.type.size()) ;
 	expression_parser(sections, generation) ;
+
+	// Semantic check of generation parameters
+	execute_semantic_check(generation, maxLen) ;
 
 	// // Begin debugging
 	// for (size_t i=0 ; i<sections.type.size() ; i++) {

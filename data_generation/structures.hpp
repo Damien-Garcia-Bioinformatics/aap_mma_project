@@ -8,6 +8,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
+#ifndef __STRUCTURES__
+#define __STRUCTURES__
+
+
 #include <string>
 #include <vector>
 
@@ -32,3 +36,6 @@ struct data {
 	std::vector<int> type ;				// '0', '1' or '2' depending on the section type
 	std::vector<std::string> value ;	// Value of the expression by section
 } ;
+
+
+#endif
