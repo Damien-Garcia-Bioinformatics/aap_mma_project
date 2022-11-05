@@ -14,8 +14,7 @@
 
 // Function checking if interval of generation is contained in maximum of length of traces to generate.
 void check_length(std::vector<genParam> &generation, size_t maxLen) {
-    size_t theoMin {0} ;
-    size_t theoMax {0} ;
+    size_t theoMin {0}, theoMax {0} ;
     for (size_t i=0 ; i< generation.size() ; i++) {
         theoMin += generation[i].minSize ;
         theoMax += generation[i].maxSize ;

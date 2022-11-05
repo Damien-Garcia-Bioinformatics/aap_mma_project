@@ -8,7 +8,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-#include <iostream>
 #include "parsing_functions.hpp"
 
 
@@ -16,8 +15,6 @@
 void extract_interval(const std::string &expression, genParam &generation) {
 	// Extraction of min and max interval values
 	size_t separator {expression.find('-')} ;
-	std::cout << expression.substr(0,separator) << std::endl ;
-	std::cout << expression.substr(separator+1) << std::endl ;
 	generation.minSize = std::stoi(expression.substr(0,separator)) ; //Extraction of min length
 	generation.maxSize = std::stoi(expression.substr(separator+1)) ; //Extraction of max length
 }

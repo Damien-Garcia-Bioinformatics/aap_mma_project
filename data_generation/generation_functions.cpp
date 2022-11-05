@@ -53,6 +53,9 @@ void number_of_event(genParam &generation, std::vector<std::string> &subtraces, 
 	std::vector<std::string> subtrace ;
 	for (size_t i=0 ; i<nbTraces ; i++) {
 		size_t size {randint(generation.minSize, generation.maxSize)} ;
+		if (size < max) {
+			max = size ;
+		}
 		size_t random {randint(min, max)} ;
 		for (size_t j=0 ; j<random ; j++) {
 			subtrace.push_back(generation.events[eventChoice]) ;	
