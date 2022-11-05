@@ -97,8 +97,6 @@ void add_section(data &sections, std::string &section, size_t type) {
 void expression_divider(std::string &expression, data &sections) {
 	bool isAnchor {true} ;
 	bool isSimpleGen {false} ;
-	// bool isAnchor {(expression[0] == '<' || expression[0] == '(') ? false : true} ;
-	// bool isSimpleGen {(expression[0] == '(') ? true : false} ;
 
 	std::string section ;
 
