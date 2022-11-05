@@ -21,29 +21,23 @@
 void check_length(std::vector<genParam> &, size_t) ;
 
 
-/// @brief 
-/// @param  
-/// @param  
-/// @return 
-bool is_identical_anchors(const std::vector<std::string> &, std::string &) ;
+/// @brief Function checking if an element exists in a vector.
+/// @param  vector_string
+/// @param  string
+/// @return Boolean value transcribing existence of string in vector.
+bool exists_in_vector(const std::vector<std::string> &, std::string &) ;
 
 
-/// @brief 
-/// @param  
-/// @param  
-/// @return 
+/// @brief Function cheking availability of events or if it's already used as anchor.
+/// @param genParam_structure : Contains data extracted from expression used for traces generation.
+/// @param  vector_string :
+/// @return Boolean value transcribing existence of element in vector of element.
 bool is_available_event(genParam &, std::vector<std::string> &) ;
 
 
-/// @brief 
-/// @param  
+/// @brief Procedure cheking uniqueness of anchors and disponibility of events in generative regions.
+/// @param  genParam_structure : Contains data extracted from expression used for traces generation.
 void check_anchors_and_events(std::vector<genParam> &) ;
-
-
-/// @brief 
-/// @param  
-/// @param  
-void execute_semantic_check(std::vector<genParam> &, size_t) ;
 
 
 #endif

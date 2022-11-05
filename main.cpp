@@ -22,7 +22,7 @@ int main() {
 	size_t maxLen {30} ;
 
 	// Example of expression passed in program parameters by user
-	std::string expression {"E1<(6-11)e2%50|E2%25>E2(2-4)E3"} ;
+	std::string expression {"(2-9)E1<(6-11)e2%50|E2%25>E2(2-4)E3"} ;
 
 	// Separation and categorisation of different regions in expression
 	data sections ;
@@ -33,7 +33,8 @@ int main() {
 	expression_parser(sections, generation) ;
 
 	// Semantic check of generation parameters
-	execute_semantic_check(generation, maxLen) ;
+	check_length(generation, maxLen) ;
+	check_anchors_and_events(generation) ;
 
 	// // Begin debugging
 	// for (size_t i=0 ; i<sections.type.size() ; i++) {

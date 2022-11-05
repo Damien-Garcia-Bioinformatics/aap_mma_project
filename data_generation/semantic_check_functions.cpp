@@ -31,10 +31,10 @@ void check_length(std::vector<genParam> &generation, size_t maxLen) {
 //----------------------------------------------------------------------------//
 
 
-//
-bool is_identical_anchors(const std::vector<std::string> &anchors, std::string &anchor) {
-    for (size_t i=0 ; i<anchors.size() ; i++) {
-        if (anchor == anchors[i]) {
+// Function checking if an element exists in a vector.
+bool exists_in_vector(const std::vector<std::string> &vector, std::string &element) {
+    for (size_t i=0 ; i<vector.size() ; i++) {
+        if (element == vector.at(i)) {
             return true ;
         }
     }
@@ -45,11 +45,11 @@ bool is_identical_anchors(const std::vector<std::string> &anchors, std::string &
 //----------------------------------------------------------------------------//
 
 
-//
-bool is_available_event(genParam &generation, std::vector<std::string> &anchors) {
+// Function cheking availability of events or if it's already used as anchor.
+bool is_available_event(genParam &generation, std::vector<std::string> &elements) {
     for (size_t i=0 ; i<generation.events.size() ; i++) {
         // Deletion of unavailable event and attribute from generation structure
-        if (is_identical_anchors(anchors, generation.events[i])) {
+        if (exists_in_vector(elements, generation.events[i])) {
             generation.events.erase(generation.events.begin()+i) ;
             generation.attributes.erase(generation.attributes.begin()+i) ;
         }
@@ -65,14 +65,14 @@ bool is_available_event(genParam &generation, std::vector<std::string> &anchors)
 //----------------------------------------------------------------------------//
 
 
-//
+// Procedure cheking uniqueness of anchors and disponibility of events in generative regions.
 void check_anchors_and_events(std::vector<genParam> &generation) {
     std::vector<std::string> anchors ; //Vector containing all anchors in expression
 
     // Checking anchors
     for (size_t i=0 ; i<generation.size() ; i++) {
         if (generation[i].typeSection == 0) {
-            if (is_identical_anchors(anchors, generation[i].anchor)) {
+            if (exists_in_vector(anchors, generation[i].anchor)) {
                 std::cout << "[semantic_check] Error code 3 :" << std::endl ;
                 std::cout << "[semantic_check] Multiple occurance of the same anchor : " << generation[i].anchor << std::endl ;
                 exit(3) ;
@@ -91,14 +91,4 @@ void check_anchors_and_events(std::vector<genParam> &generation) {
             }
         }
     }
-}
-
-
-//----------------------------------------------------------------------------//
-
-
-//
-void execute_semantic_check(std::vector<genParam> &generation, size_t maxLen) {
-    check_length(generation, maxLen) ;
-	check_anchors_and_events(generation) ;
 }
