@@ -2,8 +2,11 @@
 # Damien GARCIA, Florian ECHELARD
 # M2BB
  
- 
- # ---  Makefile for compiling the encoder program  --- #
+
+##############################################################################
+#                Makefile for compiling the encoder program                  #
+##############################################################################
+
 .PHONY: clean parser semantic generator miscellaneous rebuild
 
 EXE = main
@@ -11,6 +14,7 @@ MAIN = main.cpp
 CXX = g++
 CXXFLAGS = -Wall -O2
 OBJECTS = parsing_functions.o generation_functions.o miscellaneous.o semantic_check_functions.o
+
 
 # To create the executable file, we need the object files
 all: $(OBJECTS)
@@ -32,7 +36,9 @@ miscellaneous.o:
 	$(CXX) $(CXXFLAGS) -c data_generation/miscellaneous.cpp
 
 
-# --- Shortcuts (use : "main [shortcut]") --- #
+##############################################################################
+#                    Shortcuts (use : "main [shortcut]")                     #
+##############################################################################
 
 # Compilation of parsing functions
 parser: 

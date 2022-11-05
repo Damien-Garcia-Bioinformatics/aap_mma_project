@@ -8,6 +8,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
+#include <iostream>
 #include "parsing_functions.hpp"
 
 
@@ -15,6 +16,8 @@
 void extract_interval(const std::string &expression, genParam &generation) {
 	// Extraction of min and max interval values
 	size_t separator {expression.find('-')} ;
+	std::cout << expression.substr(0,separator) << std::endl ;
+	std::cout << expression.substr(separator+1) << std::endl ;
 	generation.minSize = std::stoi(expression.substr(0,separator)) ; //Extraction of min length
 	generation.maxSize = std::stoi(expression.substr(separator+1)) ; //Extraction of max length
 }
@@ -77,10 +80,26 @@ void extract_events_and_attributes(const std::string &expression, genParam &gene
 //----------------------------------------------------------------------------//
 
 
+// 
+void add_section(data &sections, std::string &section, size_t type) {
+	if (!section.empty()) {
+		sections.value.push_back(section) ;
+		sections.type.push_back(type) ;
+		section.clear() ;
+	}
+}
+
+
+//----------------------------------------------------------------------------//
+
+
 // Procedure used to create segments of the expression passed in parameter.
 void expression_divider(std::string &expression, data &sections) {
-	bool isAnchor {false} ;
+	bool isAnchor {true} ;
 	bool isSimpleGen {false} ;
+	// bool isAnchor {(expression[0] == '<' || expression[0] == '(') ? false : true} ;
+	// bool isSimpleGen {(expression[0] == '(') ? true : false} ;
+
 	std::string section ;
 
 	// Checking of position in string and section and setting of boolean variables.
@@ -89,38 +108,29 @@ void expression_divider(std::string &expression, data &sections) {
 		if (expression[i] == '<') {
 			isAnchor = false ;
 			isSimpleGen = false ;
-			sections.value.push_back(section) ;
-			sections.type.push_back(0) ;
-			section.clear() ;
+			add_section(sections, section, 0) ;
 		} else if (expression[i] == '(' && isAnchor) {
 			isAnchor = false ;
 			isSimpleGen = true ;
-			sections.value.push_back(section) ;
-			sections.type.push_back(0) ;
-			section.clear() ;
+			add_section(sections, section, 0) ;
 		} else if (expression[i] == ')' && isSimpleGen) {
 			isAnchor = true ;
-			sections.value.push_back(section) ;
-			sections.type.push_back(1) ;
-			section.clear() ;
+			add_section(sections, section, 1) ;
 		} else if (expression[i] == '>') {
 			isAnchor = true ;
-			sections.value.push_back(section) ;
-			sections.type.push_back(2) ;
-			section.clear() ;
+			add_section(sections, section, 2) ;
 		} else {
 			section += expression[i] ;
 		}
 	}
 	// Last section push back
 	if (isAnchor) {
-		sections.type.push_back(0) ;
+		add_section(sections, section, 0) ;
 	} else if (!isAnchor && isSimpleGen) {
-		sections.type.push_back(1) ;
+		add_section(sections, section, 1) ;
 	} else {
-		sections.type.push_back(2) ;
+		add_section(sections, section, 2) ;
 	}
-	sections.value.push_back(section) ;
 }
 
 
@@ -133,9 +143,11 @@ void expression_parser(data &sections, std::vector<genParam> &generation) {
 		std::string section {sections.value.at(i)} ;
 		switch (sections.type.at(i)) {
 			case 0 : { //If the section is an anchor
-				generation[i].typeSection = 0 ;				generation[i].typeGen = '-' ;
-				generation[i].minSize     = 1 ;				generation[i].maxSize = 1 ;
-				generation[i].anchor      = section ;
+				generation[i].typeSection = 0 ;	
+				generation[i].typeGen = '-' ;
+				generation[i].minSize = 1 ;	
+				generation[i].maxSize = 1 ;
+				generation[i].anchor = section ;
 				break ;
 			}
 			case 1 : { //If the section is a simple generation

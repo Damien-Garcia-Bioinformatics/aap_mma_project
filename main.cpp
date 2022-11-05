@@ -9,6 +9,7 @@
 
 
 #include <iostream>
+#include "data_generation/parsing_functions.hpp"
 #include "data_generation/semantic_check_functions.hpp"
 #include "data_generation/generation_functions.hpp"
 #include "data_generation/miscellaneous.hpp"
@@ -22,7 +23,7 @@ int main() {
 	size_t maxLen {30} ;
 
 	// Example of expression passed in program parameters by user
-	std::string expression {"(2-9)E1<(6-11)e2%50|E2%25>E2(2-4)E3"} ;
+	std::string expression {"(2-3)E1<(4-8)e2%50|E2%25>E2(2-4)E3<(2-5)e1%40>"} ;
 
 	// Separation and categorisation of different regions in expression
 	data sections ;

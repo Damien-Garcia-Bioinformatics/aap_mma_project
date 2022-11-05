@@ -16,7 +16,9 @@
 #include <vector>
 
 
-/// @brief Structure containing generative parameters extracted from expression sections
+/**
+ * @brief Structure containing generative parameters extracted from expression sections
+ */
 struct genParam {
 	size_t minSize ;					// Minimum in interval
 	size_t maxSize ;					// Maximum in interval
@@ -28,10 +30,9 @@ struct genParam {
 } ;
 
 
-////////////////////////////////////////////////////////////////////////////////
-
-
-/// @brief Structure containing sections and type of sections of expression
+/**
+ * @brief Structure containing sections and type of sections of expression
+ */
 struct data {
 	std::vector<int> type ;				// '0', '1' or '2' depending on the section type
 	std::vector<std::string> value ;	// Value of the expression by section
