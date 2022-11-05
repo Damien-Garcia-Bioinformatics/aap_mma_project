@@ -133,21 +133,20 @@ void expression_parser(data &sections, std::vector<genParam> &generation) {
 		std::string section {sections.value.at(i)} ;
 		switch (sections.type.at(i)) {
 			case 0 : { //If the section is an anchor
-				generation[i].typeSection = 0 ;
-				generation[i].anchor = section ;
-				generation[i].minSize = 1 ;
-				generation[i].maxSize = 1 ;
-				generation[i].typeGen = '-' ;
+				generation[i].typeSection = 0 ;				generation[i].typeGen = '-' ;
+				generation[i].minSize     = 1 ;				generation[i].maxSize = 1 ;
+				generation[i].anchor      = section ;
 				break ;
 			}
 			case 1 : { //If the section is a simple generation
 				generation[i].typeSection = 1 ;
-				generation[i].typeGen = '-' ;
+				generation[i].typeGen     = '-' ;
 				extract_interval(section, generation[i]) ;
 				break ;
 			}
 			case 2 : { //If the section is a complex generation
 				generation[i].typeSection = 2 ;
+
 				// Extraction of min and max interval values
 				std::string interval {section.substr(1,(section.find(')')-1))} ;
 				extract_interval(interval, generation[i]) ;
@@ -155,6 +154,7 @@ void expression_parser(data &sections, std::vector<genParam> &generation) {
 				// Extraction of typeGen parameter
 				std::string substring {section.substr(section.find(')')+1)} ;
 				extract_type_gen(substring, generation[i]) ;
+
 				// Reformating of the substring 
 				if (substring[0] == '+' || substring[0] == '*') {
 					substring = substring.substr(1) ; //Deleting first character

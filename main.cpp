@@ -22,7 +22,7 @@ int main() {
 	size_t maxLen {30} ;
 
 	// Example of expression passed in program parameters by user
-	std::string expression {"E1<(6-11)e2%50|e3%25>E2(2-4)E3"} ;
+	std::string expression {"E1<(6-11)e2%50|E2%25>E2(2-4)E3"} ;
 
 	// Separation and categorisation of different regions in expression
 	data sections ;
@@ -57,7 +57,7 @@ int main() {
 	// // End debuggin
 
 	// Generation of traces
-	size_t nbTraces {10} ; //Number of traces to generate
+	size_t nbTraces {20} ; //Number of traces to generate
 	std::vector<std::vector<std::string>> traces(generation.size()) ;
 	generate_traces(generation, traces, nbTraces) ;
 	

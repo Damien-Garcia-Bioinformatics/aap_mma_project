@@ -51,7 +51,7 @@ bool is_available_event(genParam &generation, std::vector<std::string> &anchors)
         // Deletion of unavailable event and attribute from generation structure
         if (is_identical_anchors(anchors, generation.events[i])) {
             generation.events.erase(generation.events.begin()+i) ;
-            generation.events.erase(generation.events.begin()+i) ;
+            generation.attributes.erase(generation.attributes.begin()+i) ;
         }
     }
     // Check if there are still available events for generation
