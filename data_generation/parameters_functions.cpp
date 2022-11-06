@@ -19,26 +19,21 @@
 // Extraction of parameters from generation_parameters.txt and creation of parameters structure.
 void read_parameters_file(parameters &param) {
 	std::ofstream file ;
-	file.open("genertion_parameters.txt",ios::out) ;
+	file.open("genertion_parameters.txt") ;
 	if (file.is_open()) {
-		while (get_line(file, line) {
-			if (line[0] == '#') {
-				continue ;
-			}
-			// Extraction of expression.
+		std::string line ;
+		while (getline(file, line)) {
 			if (line.substr(0, line.find('=') == "expression") {
+				// Extraction of expression.
 				param.expression = line.substr(line.find('=')) ;
-				continue ;
-			}
-			// Extraction of number of traces to generate.
-			if (line.substr(0, line.find('=') == "expression") {
+			} else if (line.substr(0, line.find('=') == "expression") {
+				// Extraction of number of traces to generate.
 				param.nbTraces = line.substr(line.find('=')) ;
-				continue ;
-			}
-			// Extraction of number of traces to generate.
-			if (line.substr(0, line.find('=') == "expression") {
+			} else if (line.substr(0, line.find('=') == "expression") {
+				// Extraction of maximum length of traces.
 				param.maxLen = line.substr(line.find('=')) ;
-				continue ;
 			}
+		}
 	}
+	file.close() ;
 }
