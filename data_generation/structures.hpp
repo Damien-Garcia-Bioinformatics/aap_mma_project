@@ -15,6 +15,15 @@
 #include <string>
 #include <vector>
 
+/**
+ * @brief Structure containing data extracted from parameter file. Used for traces generation.
+ */
+struct parameters {
+	std::string expression ;			// Expression used for traces generation
+	size_t nbTraces ;					// Number of traces to generate
+	size_t maxLen ;						// Maximum length of traces
+} ;
+
 
 /**
  * @brief Structure containing generative parameters extracted from expression sections
