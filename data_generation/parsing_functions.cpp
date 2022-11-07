@@ -11,6 +11,9 @@
 #include "parsing_functions.hpp"
 
 
+//----------------------------------------------------------------------------//
+
+
 // Procedure that extracts minimum and maximum values from interval and stores these values in generation structure.
 void extract_interval(const std::string &expression, genParam &generation) {
 	// Extraction of min and max interval values

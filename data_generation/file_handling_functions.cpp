@@ -8,12 +8,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-#include "parameters_functions.hpp"
-
+#include "structures.hpp"
+#include "file_handling_functions.hpp"
 #include <iostream>
 #include <fstream>
-#include <string>
-#include <vector>
+
+
+//----------------------------------------------------------------------------//
 
 
 std::string clean_values(std::string line) {
@@ -28,6 +29,9 @@ std::string clean_values(std::string line) {
 	}
 	return cleanedLine ;
 }
+
+
+//----------------------------------------------------------------------------//
 
 
 // Extraction of parameters from generation_parameters.txt and creation of parameters structure.
@@ -50,6 +54,23 @@ void read_parameters_file(parameters &param, std::string path) {
 				param.maxLen = std::stoi(cleanedLine) ;
 			}
 		}
+	}
+	file.close() ;
+}
+
+
+//----------------------------------------------------------------------------//
+
+
+void write_results(std::string pathToResults, vectors &traces, parameters &param) {
+	std::ofstream file ;
+	file.open(pathToResults) ;
+	file << "# Generated from expression : " << param.expression << "\n" << std::endl ;
+	for (size_t i=0 ; i<traces[0].size() ; i++) {
+		for (size_t j=0 ; j<traces.size() ; j++) {
+			file << traces[j][i] ;
+		}
+		file << "\n" ;
 	}
 	file.close() ;
 }

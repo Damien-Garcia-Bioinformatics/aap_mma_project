@@ -12,25 +12,11 @@
 #include "semantic_check_functions.hpp" 
 
 
-// Function checking if interval of generation is contained in maximum of length of traces to generate.
-void check_length(std::vector<genParam> &generation, size_t maxLen) {
-    size_t theoMin {0}, theoMax {0} ;
-    for (size_t i=0 ; i< generation.size() ; i++) {
-        theoMin += generation[i].minSize ;
-        theoMax += generation[i].maxSize ;
-    }
-    if (theoMin > maxLen || theoMax > maxLen) {
-        std::cout << "[semantic_check] Error code 3 :" << std::endl ;
-        std::cout << "[semantic_check] Interval values allows sequence generation over maximum length defined limit." << std::endl ;
-        exit(3) ;
-    }
-}
-
-
 //----------------------------------------------------------------------------//
 
 
 // Function checking if an element exists in a vector.
+// Called by check_anchors_and_events()
 bool exists_in_vector(const std::vector<std::string> &vector, std::string &element) {
     for (size_t i=0 ; i<vector.size() ; i++) {
         if (element == vector.at(i)) {
@@ -45,6 +31,7 @@ bool exists_in_vector(const std::vector<std::string> &vector, std::string &eleme
 
 
 // Function cheking availability of events or if it's already used as anchor.
+// Called by check_anchors_and_events()
 bool is_available_event(genParam &generation, std::vector<std::string> &elements) {
     for (size_t i=0 ; i<generation.events.size() ; i++) {
         // Deletion of unavailable event and attribute from generation structure
@@ -58,6 +45,39 @@ bool is_available_event(genParam &generation, std::vector<std::string> &elements
         return false ;
     }
     return true ;
+}
+
+
+//----------------------------------------------------------------------------//
+
+
+// Function checking if range is in min-max format and not inverted
+void check_range(std::vector<genParam> &generation) {
+    for (size_t i=0 ; i<generation.size() ; i++) {
+        if (generation[i].minSize > generation[i].maxSize) {
+            std::cout << "[semantic_check] Error code 3 :" << std::endl ;
+            std::cout << "[semantic_check] Minimum is greater than maximum in range of generative region" << std::endl ;
+            exit(3) ;
+        }
+    }
+}
+
+
+//----------------------------------------------------------------------------//
+
+
+// Function checking if range of generation is contained in maximum of length of traces to generate.
+void check_length(std::vector<genParam> &generation, size_t maxLen) {
+    size_t theoMin {0}, theoMax {0} ;
+    for (size_t i=0 ; i< generation.size() ; i++) {
+        theoMin += generation[i].minSize ;
+        theoMax += generation[i].maxSize ;
+    }
+    if (theoMin > maxLen || theoMax > maxLen) {
+        std::cout << "[semantic_check] Error code 3 :" << std::endl ;
+        std::cout << "[semantic_check] Range values allows sequence generation over maximum length defined limit." << std::endl ;
+        exit(3) ;
+    }
 }
 
 

@@ -8,7 +8,19 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
+#include <iostream>
 #include "miscellaneous.hpp"
+
+
+//----------------------------------------------------------------------------//
+
+
+void help() {
+    std::cout << "This is the help function" << std::endl ;
+}
+
+
+//----------------------------------------------------------------------------//
 
 
 // Function that returns a positive random integer between min and max.

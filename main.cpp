@@ -9,38 +9,44 @@
 
 
 #include <iostream>
-#include "data_generation/parameters_functions.hpp"
+#include "data_generation/file_handling_functions.hpp"
 #include "data_generation/parsing_functions.hpp"
 #include "data_generation/semantic_check_functions.hpp"
 #include "data_generation/generation_functions.hpp"
 #include "data_generation/miscellaneous.hpp"
 
 
-int main() {
+int main(int argc, char *argv[]) {
+	// Check if paths of parameter and results files are provided.
+	if (argc == 1) {
+		help() ;
+		exit(1) ;
+	}
+	std::string pathToParameters {argv[1]} ;
+	std::string pathToResults {argv[2]} ;
+
+	// 
+	std::cout << "[main] Reading generation parameters from : " << pathToParameters << std::endl ;
+	parameters tracesParameters ;
+	read_parameters_file(tracesParameters, pathToParameters) ;
+
 	// Initialisation of random function with time seed
 	srand(time(NULL)) ;
 
-	// // Initialisation of maximum length
-	// size_t maxLen {30} ;
-	// // Example of expression passed in program parameters by user
-	// std::string expression {"(2-3)E1<(4-8)e2X10|E2%25>E2(2-4)E3<(2-5)e1%40>"} ;
-
-	//Path to traces parameters
-	std::string path {"generation_parameters.txt"} ;
-
-	parameters tracesParameters ;
-	read_parameters_file(tracesParameters, path) ;
-
 	// Separation and categorisation of different regions in expression
+	std::cout << "[main] Creating sections from expression" << std::endl ;
 	data sections ;
 	expression_divider(tracesParameters.expression, sections) ;
 
 	// Extraction of generation parameters
+	std::cout << "[main] Parsing of expression sections" << std::endl ;
 	std::vector<genParam> generation(sections.type.size()) ;
 	expression_parser(sections, generation) ;
 
 	// Semantic check of generation parameters
+	std::cout << "[main] Checking expression syntax and semantics" << std::endl ;
 	check_length(generation, tracesParameters.maxLen) ;
+	check_range(generation) ;
 	check_anchors_and_events(generation) ;
 
 	// // Begin debugging
@@ -65,18 +71,21 @@ int main() {
 	// // End debuggin
 
 	// Generation of traces
-	size_t nbTraces {20} ; //Number of traces to generate
+	std::cout << "[main] Generation of traces" << std::endl ;
 	std::vector<std::vector<std::string>> traces(generation.size()) ;
-	generate_traces(generation, traces, nbTraces) ;
+	generate_traces(generation, traces, tracesParameters.nbTraces) ;
 	
-	// Begin debugging
-	for (size_t i=0 ; i<nbTraces ; i++) {
-		for (size_t j=0 ; j<traces.size() ; j++) {
-			std::cout << traces[j][i] ;
-		}
-		std::cout << std::endl ;
-	}
-	// End debugging
+	// // Begin debugging
+	// for (size_t i=0 ; i<tracesParameters.nbTraces ; i++) {
+	// 	for (size_t j=0 ; j<traces.size() ; j++) {
+	// 		std::cout << traces[j][i] ;
+	// 	}
+	// 	std::cout << std::endl ;
+	// }
+	// // End debugging
+
+	std::cout << "Writing traces to : " << pathToResults << std::endl ;
+	write_results(pathToResults, traces, tracesParameters) ;
 	
 	return 0 ;
 }

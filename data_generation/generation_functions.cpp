@@ -12,6 +12,9 @@
 #include "miscellaneous.hpp"
 
 
+//----------------------------------------------------------------------------//
+
+
 // Procedure that generates anchors subtraces of n traces (type 0 sections).
 void generate_events(genParam &generation, std::vector<std::string> &subtraces, size_t nbTraces) {
 	for (size_t i=0 ; i<nbTraces ; i++) {

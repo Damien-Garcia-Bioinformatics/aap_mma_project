@@ -18,6 +18,12 @@
 
 
 /**
+ * @brief 
+ */
+void help() ;
+
+
+/**
  * @brief Function that returns a positive random integer between min and max.
  * @param  unsigned_int Minimum of interval
  * @param  unsigned_int Maximum of interval
