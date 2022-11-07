@@ -12,6 +12,23 @@
 #define __PARAMETERS_FUNCTIONS__
 
 
+#include "structures.hpp"
 
 
-#endif __PARAMETERS_FUNCTIONS__
+/**
+ * @brief 
+ * 
+ * @param line 
+ */
+std::string clean_values(std::string) ;
+
+
+/**
+ * @brief 
+ * @param 
+ * @param 
+ */
+void read_parameters_file(parameters &, std::string) ;
+
+
+#endif

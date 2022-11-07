@@ -9,29 +9,45 @@
 
 
 #include "parameters_functions.hpp"
-#include "structures.hpp"
+
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 
 
+std::string clean_values(std::string line) {
+	std::string cleanedLine ;
+	for (size_t i=0 ; i<line.size() ; i++) {
+		if (line[i] == '#') {
+			break ;
+		}
+		if (line[i] != ' ' && line[i] != ';') {
+			cleanedLine += line[i] ;
+		} 
+	}
+	return cleanedLine ;
+}
+
+
 // Extraction of parameters from generation_parameters.txt and creation of parameters structure.
-void read_parameters_file(parameters &param) {
-	std::ofstream file ;
-	file.open("genertion_parameters.txt") ;
+void read_parameters_file(parameters &param, std::string path) {
+	std::ifstream file ;
+	file.open(path) ;
 	if (file.is_open()) {
 		std::string line ;
 		while (getline(file, line)) {
-			if (line.substr(0, line.find('=') == "expression") {
+			size_t separator {line.find('=')} ;
+			std::string cleanedLine {clean_values(line.substr(separator+1))} ;
+			if (line.substr(0, separator) == "expression") {
 				// Extraction of expression.
-				param.expression = line.substr(line.find('=')) ;
-			} else if (line.substr(0, line.find('=') == "expression") {
+				param.expression = cleanedLine ;
+			} else if (line.substr(0, separator) == "number_of_traces") {
 				// Extraction of number of traces to generate.
-				param.nbTraces = line.substr(line.find('=')) ;
-			} else if (line.substr(0, line.find('=') == "expression") {
+				param.nbTraces = std::stoi(cleanedLine) ;
+			} else if (line.substr(0, separator) == "maximum_length") {
 				// Extraction of maximum length of traces.
-				param.maxLen = line.substr(line.find('=')) ;
+				param.maxLen = std::stoi(cleanedLine) ;
 			}
 		}
 	}

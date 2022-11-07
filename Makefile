@@ -7,18 +7,22 @@
 #                Makefile for compiling the encoder program                  #
 ##############################################################################
 
-.PHONY: clean parser semantic generator miscellaneous rebuild
+.PHONY: clean rebuild
 
 EXE = main
 MAIN = main.cpp
 CXX = g++
 CXXFLAGS = -Wall -O2
-OBJECTS = parsing_functions.o generation_functions.o miscellaneous.o semantic_check_functions.o
+OBJECTS = parsing_functions.o generation_functions.o miscellaneous.o semantic_check_functions.o parameters_functions.o
 
 
 # To create the executable file, we need the object files
 all: $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $(EXE) $(MAIN) $(OBJECTS)
+
+# To create the object file parameters_functions.o, we need the source
+parameters_functions.o:
+	$(CXX) $(CXXFLAGS) -c data_generation/parameters_functions.cpp
 
 # To create the object file parsing_functions.o, we need the source
 parsing_functions.o:
@@ -39,21 +43,6 @@ miscellaneous.o:
 ##############################################################################
 #                    Shortcuts (use : "main [shortcut]")                     #
 ##############################################################################
-
-# Compilation of parsing functions
-parser: 
-	$(CXX) $(CXXFLAGS) -c data_generation/parsing_functions.cpp
-
-semantic:
-	$(CXX) $(CXXFLAGS) -c data_generation/semantic_check_functions.cpp
-
-# Compilation of generation functions
-generator: 
-	$(CXX) $(CXXFLAGS) -c data_generation/generation_functions.cpp
-
-# Compilation of miscellaneous functions
-miscellaneous:
-	$(CXX) $(CXXFLAGS) -c data_generation/miscellaneous.cpp
 
 # Removes all generated files by previous compilations
 clean:

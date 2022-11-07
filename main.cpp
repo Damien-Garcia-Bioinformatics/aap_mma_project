@@ -9,6 +9,7 @@
 
 
 #include <iostream>
+#include "data_generation/parameters_functions.hpp"
 #include "data_generation/parsing_functions.hpp"
 #include "data_generation/semantic_check_functions.hpp"
 #include "data_generation/generation_functions.hpp"
@@ -19,22 +20,27 @@ int main() {
 	// Initialisation of random function with time seed
 	srand(time(NULL)) ;
 
-	// Initialisation of maximum length
-	size_t maxLen {30} ;
+	// // Initialisation of maximum length
+	// size_t maxLen {30} ;
+	// // Example of expression passed in program parameters by user
+	// std::string expression {"(2-3)E1<(4-8)e2X10|E2%25>E2(2-4)E3<(2-5)e1%40>"} ;
 
-	// Example of expression passed in program parameters by user
-	std::string expression {"(2-3)E1<(4-8)e2X10|E2%25>E2(2-4)E3<(2-5)e1%40>"} ;
+	//Path to traces parameters
+	std::string path {"generation_parameters.txt"} ;
+
+	parameters tracesParameters ;
+	read_parameters_file(tracesParameters, path) ;
 
 	// Separation and categorisation of different regions in expression
 	data sections ;
-	expression_divider(expression, sections) ;
+	expression_divider(tracesParameters.expression, sections) ;
 
 	// Extraction of generation parameters
 	std::vector<genParam> generation(sections.type.size()) ;
 	expression_parser(sections, generation) ;
 
 	// Semantic check of generation parameters
-	check_length(generation, maxLen) ;
+	check_length(generation, tracesParameters.maxLen) ;
 	check_anchors_and_events(generation) ;
 
 	// // Begin debugging
