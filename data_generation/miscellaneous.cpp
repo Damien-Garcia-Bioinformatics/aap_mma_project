@@ -50,7 +50,6 @@ size_t randint(size_t min, size_t max) {
 
 // Procedure to shuffle values in a vector of strings.
 void shuffle(std::vector<std::string> &trace) {
-    // size_t nbShuffle {(trace.size())/2 + 1} ; //Number of shuffle turns
     size_t nbShuffle {trace.size()} ; //Number of shuffle turns
     size_t pos1, pos2 ;
     std::string temp ;

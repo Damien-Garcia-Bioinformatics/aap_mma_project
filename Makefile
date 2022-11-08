@@ -7,8 +7,11 @@
 #                Makefile for compiling the encoder program                  #
 ##############################################################################
 
+
+# Ignored if not specificaly called
 .PHONY: clean rebuild test_simple test_complex test_semantic1 test_semantic2 test_semantic3 test_semantic4
 
+# Variables
 EXE = main
 MAIN = main.cpp
 CXX = g++
@@ -16,23 +19,21 @@ CXXFLAGS = -Wall -O2
 OBJECTS = parsing_functions.o generation_functions.o miscellaneous.o semantic_check_functions.o file_handling_functions.o
 
 
-# To create the executable file, we need the object files
+# Creates executable file
 all: $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $(EXE) $(MAIN) $(OBJECTS)
 
-# To create the object file parameters_functions.o, we need the source
+
+# Creation of object files of data generation functions
 file_handling_functions.o:
 	$(CXX) $(CXXFLAGS) -c data_generation/file_handling_functions.cpp
 
-# To create the object file parsing_functions.o, we need the source
 parsing_functions.o:
 	$(CXX) $(CXXFLAGS) -c data_generation/parsing_functions.cpp
 
-# To create the object file semantic_check_functions.o, we need the source
 semantic_check_functions.o:
 	$(CXX) $(CXXFLAGS) -c data_generation/semantic_check_functions.cpp
 
-# To create the object file generation_functions.o, we need the source
 generation_functions.o: 
 	$(CXX) $(CXXFLAGS) -c data_generation/generation_functions.cpp
 

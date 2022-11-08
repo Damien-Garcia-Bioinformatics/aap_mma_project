@@ -8,6 +8,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
+#include <iostream>
 #include "parsing_functions.hpp"
 
 
@@ -175,6 +176,8 @@ void expression_parser(data &sections, std::vector<genParam> &generation) {
 				break ;
 			}
 			default : {
+				std::cout << "[parser] Neutrino error :" << std::endl ;
+				std::cout << "[parser] Error occured in expression partitioning." << std::endl ;
 				exit(1) ;
 				break ;
 			}
