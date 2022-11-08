@@ -67,16 +67,16 @@ test_complex:
 
 # Semantic error test 1
 test_semantic1:
-	./$(EXE) examples/test_semanticError1.txt examples/restult_semanticError1.txt
+	./$(EXE) examples/test_semanticError1.txt examples/result_semanticError1.txt
 
 # Semantic error test 2
 test_semantic2:
-	./$(EXE) examples/test_semanticError2.txt examples/restuls_semanticError2.txt
+	./$(EXE) examples/test_semanticError2.txt examples/result_semanticError2.txt
 
 # Semantic error test 3
 test_semantic3:
-	./$(EXE) examples/test_semanticError3.txt examples/restuls_semanticError3.txt
+	./$(EXE) examples/test_semanticError3.txt examples/result_semanticError3.txt
 
 # Semantic error test 4
 test_semantic4:
-	./$(EXE) examples/test_semanticError4.txt examples/restuls_semanticError4.txt
+	./$(EXE) examples/test_semanticError4.txt examples/result_semanticError4.txt

@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
 	// }
 	// // End debugging
 
-	std::cout << "Writing traces to : " << pathToResults << std::endl ;
+	std::cout << "[main] Writing traces to : " << pathToResults << std::endl ;
 	write_results(pathToResults, traces, tracesParameters) ;
 	
 	return 0 ;

@@ -36,7 +36,6 @@ bool is_available_event(genParam &generation, std::vector<std::string> &elements
     for (size_t i=0 ; i<generation.events.size() ; i++) {
         // Deletion of unavailable event and attribute from generation structure
         if (exists_in_vector(elements, generation.events[i])) {
-            std::cout << "removing values" << generation.events[i] << std::endl ;
             generation.events.erase(generation.events.begin()+i) ;
             generation.attributes.erase(generation.attributes.begin()+i) ;
         }
