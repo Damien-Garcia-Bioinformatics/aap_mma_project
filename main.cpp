@@ -17,15 +17,14 @@
 
 
 int main(int argc, char *argv[]) {
-	// Check if paths of parameter and results files are provided.
+	// Check if paths of parameter and result files are provided.
 	if (argc == 1) {
 		help() ;
 		exit(1) ;
 	}
-	std::string pathToParameters {argv[1]} ;
-	std::string pathToResults {argv[2]} ;
+	std::string pathToParameters {argv[1]}, pathToResults {argv[2]} ;
 
-	// 
+	// Reading generation parameters from file passed in program command line parameter.
 	std::cout << "[main] Reading generation parameters from : " << pathToParameters << std::endl ;
 	parameters tracesParameters ;
 	read_parameters_file(tracesParameters, pathToParameters) ;
@@ -49,7 +48,14 @@ int main(int argc, char *argv[]) {
 	check_range(generation) ;
 	check_anchors_and_events(generation) ;
 
-	// // Begin debugging
+	// Generation of traces
+	std::cout << "[main] Generation of traces" << std::endl ;
+	std::vector<std::vector<std::string>> traces(generation.size()) ;
+	generate_traces(generation, traces, tracesParameters.nbTraces) ;
+
+	std::cout << "[main] Writing traces to : " << pathToResults << std::endl ;
+	write_results(pathToResults, traces, tracesParameters) ;
+
 	// for (size_t i=0 ; i<sections.type.size() ; i++) {
 	// 	std::cout << "---------------------------" << std::endl ;
 	// 	std::cout << "typeSection : " << generation[i].typeSection 	<< std::endl ;
@@ -68,24 +74,13 @@ int main(int argc, char *argv[]) {
 	// 	}
 	// 	std::cout << std::endl ;
 	// }
-	// // End debuggin
-
-	// Generation of traces
-	std::cout << "[main] Generation of traces" << std::endl ;
-	std::vector<std::vector<std::string>> traces(generation.size()) ;
-	generate_traces(generation, traces, tracesParameters.nbTraces) ;
-	
-	// // Begin debugging
+	//
 	// for (size_t i=0 ; i<tracesParameters.nbTraces ; i++) {
 	// 	for (size_t j=0 ; j<traces.size() ; j++) {
 	// 		std::cout << traces[j][i] ;
 	// 	}
 	// 	std::cout << std::endl ;
 	// }
-	// // End debugging
-
-	std::cout << "[main] Writing traces to : " << pathToResults << std::endl ;
-	write_results(pathToResults, traces, tracesParameters) ;
 	
 	return 0 ;
 }

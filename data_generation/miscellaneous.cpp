@@ -16,7 +16,23 @@
 
 
 void help() {
-    std::cout << "This is the help function" << std::endl ;
+    std::cout << " +-----------------------------------------------------------------------------+" << std::endl ;
+    std::cout << " |                             PROGRAM EXECUTION                               |" << std::endl ;
+    std::cout << " |                                                                             |" << std::endl ;
+    std::cout << " |  Use : './main path_to_parameter_file path_to_result_file'                  |" << std::endl ;
+    std::cout << " |                                                                             |" << std::endl ;
+    std::cout << " +-----------------------------------------------------------------------------+" << std::endl ;
+    std::cout << " |                            PARAMETER FILE FORMAT                            |" << std::endl ;
+    std::cout << " |                                                                             |" << std::endl ;
+    std::cout << " |  Every parameter file must include :                                        |" << std::endl ;
+    std::cout << " |    - 'expression=[exampleExpression]'                                       |" << std::endl ;
+    std::cout << " |    - 'number_of_trace=[positiveInteger]'                                    |" << std::endl ;
+    std::cout << " |    - 'maximum_length=[positiveInteger]'                                     |" << std::endl ;
+    std::cout << " |                                                                             |" << std::endl ;
+    std::cout << " |  Do not include spaces on either side of the equal sign.                    |" << std::endl ;
+    std::cout << " |  You can comment the parameter file using '#'.                              |" << std::endl ;
+    std::cout << " |                                                                             |" << std::endl ;
+    std::cout << " +-----------------------------------------------------------------------------+" << std::endl ;
 }
 
 
