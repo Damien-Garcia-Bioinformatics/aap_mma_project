@@ -25,6 +25,14 @@ class Generator {
 	char typeGen ;						// '+', '*' or none
 	std::vector<std::string> events ;	// List of possible events
 	std::vector<int> attributes ;		// List of events attributes
+	std::string gen_result;			// returned generated sequence that'll be accumulated					
+
+	// keep the parsing methods private to have a light interface
+	// the main methods will be akin to the main in function oriented
+	
+	
+	
+
 } ;
 
 
@@ -32,9 +40,25 @@ class Generator {
 
 
 /// @brief Structure containing sections and type of sections of expression
-struct data {
+class  Request {
 	std::vector<int> type ;				// '0', '1' or '2' depending on the section type
-	std::vector<std::string> value ;	// Value of the expression by section
+	std::vector<std::string> value ;	// Value of the expression by section 
+	std::vector<Generator> Generations; //manque taille?
+	std::string expression;
+
+	// début de l'interface, utilisant les méthodes pour créer la list de générateur 
+	public :
+
+	// besoin du constructeur pour avoir accès à l'expression initialisée
+		Request(std::string userinput){
+			expression = userinput;
+		}
+		
+		void expression_divider(std::string &, data &) ;
+		void expression_parser(data &, std::vector<genParam> &) ;
+		void generate_traces(std::vector<genParam> &, std::vector<std::vector<std::string>> &, size_t) ;
+
+	
 } ;
 
 
