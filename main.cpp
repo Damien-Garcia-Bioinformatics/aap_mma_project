@@ -55,32 +55,6 @@ int main(int argc, char *argv[]) {
 
 	std::cout << "[main] Writing traces to : " << pathToResults << std::endl ;
 	write_results(pathToResults, traces, tracesParameters) ;
-
-	// for (size_t i=0 ; i<sections.type.size() ; i++) {
-	// 	std::cout << "---------------------------" << std::endl ;
-	// 	std::cout << "typeSection : " << generation[i].typeSection 	<< std::endl ;
-	// 	std::cout << "typeGen     : " << generation[i].typeGen  	<< std::endl ;
-	// 	std::cout << "Anchor      : " << generation[i].anchor   	<< std::endl ;
-	// 	std::cout << "minSize     : " << generation[i].minSize  	<< std::endl ;
-	// 	std::cout << "maxSize     : " << generation[i].maxSize  	<< std::endl ;
-	// 	std::cout << "events      : " ;
-	// 	for (size_t j=0 ; j<generation[i].events.size() ; j++) {
-	// 		std::cout << generation[i].events.at(j) << " " ;
-	// 	}
-	// 	std::cout << std::endl ;
-	// 	std::cout << "attributes  : " ;
-	// 	for (size_t j=0 ; j<generation[i].attributes.size() ; j++) {
-	// 		std::cout << generation[i].attributes.at(j) << " " ;
-	// 	}
-	// 	std::cout << std::endl ;
-	// }
-	//
-	// for (size_t i=0 ; i<tracesParameters.nbTraces ; i++) {
-	// 	for (size_t j=0 ; j<traces.size() ; j++) {
-	// 		std::cout << traces[j][i] ;
-	// 	}
-	// 	std::cout << std::endl ;
-	// }
 	
 	return 0 ;
 }
