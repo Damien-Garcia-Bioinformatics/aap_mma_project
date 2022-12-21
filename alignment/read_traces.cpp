@@ -8,8 +8,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-#include "read_traces.hpp"
 #include <fstream>
+#include <iostream>
+#include "read_traces.hpp"
 
 
 void read_trace(std::string &line, std::vector<std::string> &trace) {
@@ -17,13 +18,15 @@ void read_trace(std::string &line, std::vector<std::string> &trace) {
 	for (size_t i=0 ; i<line.size() ; i++) {
 		if (line[i] == ' ') {
 			trace.push_back(temp) ;
+			temp.clear() ;
 		} else {
-			temp += trace[i] ;
+			temp += line[i] ;
 		}
 	}
 	// Last value push back in vector.
 	if (!temp.empty()) {
 		trace.push_back(temp) ;
+		temp.clear() ;
 	}
 }
 
@@ -34,10 +37,14 @@ void read_file(std::string &path, vectors &traces) {
 	if (file.is_open()) {
 		std::string line ;
 		while (getline(file, line)) {
-			std::vector<std::string> trace ;
-			read_trace(line, trace) ;
-			traces.push_back(trace) ;
-			trace.clear() ;
+			if (line[0] != '#' && !line.empty()) {
+				std::vector<std::string> trace ;
+				read_trace(line, trace) ;
+				
+				traces.push_back(trace) ;
+				
+				trace.clear() ;
+			} 
 		}
 	}
 	file.close() ;

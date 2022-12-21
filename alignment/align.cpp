@@ -20,80 +20,24 @@
 #include "read_traces.hpp"
 
 
-using wireMatrix = std::vector<std::vector<size_t>> ;
-
-
-// Returns a wire matrix of size n+1, m+1 with all values set to 0
-wireMatrix wireMatrix_initializer(const std::string &seq1, const std::string &seq2) {
-    size_t northFront {seq1.size() + 1} ;
-    size_t eastFront {seq2.size() + 1} ;
-    wireMatrix matrix(northFront, std::vector<size_t>(eastFront, 0)) ;
-    return matrix ;
-}
-
-
-size_t del(char aa) {
+size_t del(std::string top) {
     return 3 ;
-    // switch (aa) {
-    //     case 'A' :
-    //         return 1 ;
-    //         break ;
-    //     case 'T' :
-    //         return 2 ;
-    //         break ;
-    //     case 'C' :
-    //         return 3 ;
-    //         break ;
-    //     case 'G' :
-    //         return 4 ;
-    //         break ;
-    //     default :
-    //         std::cout << "Err\n" ;
-    //         exit(1) ;
-    // }
 }
 
 
-size_t ins(char aa) {
+size_t ins(std::string top) {
     return 3 ;
-    // switch (aa) {
-    //     case 'A' :
-    //         return 1 ;
-    //         break ;
-    //     case 'T' :
-    //         return 2 ;
-    //         break ;
-    //     case 'C' :
-    //         return 3 ;
-    //         break ;
-    //     case 'G' :
-    //         return 4 ;
-    //         break ;
-    //     default :
-    //         std::cout << "Err\n" ;
-    //         exit(1) ;
-    // }
 }
 
 
-size_t sub(char aaSeq1, char aaSeq2) {
-    std::map<char, size_t> aa2int ;
-    aa2int['A'] = 0 ;
-    aa2int['T'] = 1 ;
-    aa2int['C'] = 2 ;
-    aa2int['G'] = 3 ;
-
-    size_t aa1 {aa2int[aaSeq1]} ;
-    size_t aa2 {aa2int[aaSeq2]} ;
-
-    size_t cost[4][4] {
-        {0,2,3,4},
-        {2,0,2,3},
-        {3,2,0,2},
-        {4,3,2,0}
-    } ;
-
-    return cost[aa1][aa2] ;
+size_t sub(std::string top1, std::string top2) {
+    if (top1 == top2) {
+        return 0 ;
+    } else if (top1 == "." && top2 != ".") {
+        return 1 ;
+    } else {
+        return 2 ;
+    }
 }
 
 
@@ -108,8 +52,11 @@ size_t min(size_t del, size_t ins, size_t sub) {
 }
 
 
-void wireMatrix_scoring(wireMatrix &matrix, const std::string &seq1, const std::string &seq2) {
-    matrix[0][0] = 0 ;
+wireMatrix wireMatrix_scoring(std::vector<std::string> &seq1, std::vector<std::string> &seq2) {
+    // wireMatrix definition with default value of 0
+    wireMatrix matrix {seq1.size()+1, std::vector<size_t>(seq2.size()+1, 0)} ;
+
+    // Calculation of wireMatrix scores
     for (size_t x=1 ; x<seq1.size() ; x++) {
         matrix[x][0] = matrix[x-1][0] + del(seq1[x-1]) ;
     }
@@ -122,6 +69,7 @@ void wireMatrix_scoring(wireMatrix &matrix, const std::string &seq1, const std::
             matrix[x][y] = min(delCost, insCost, subCost) ;
         }
     }
+    return matrix ;
 }
 
 
@@ -188,26 +136,38 @@ void print_result(wireMatrix &matrix, const std::string &seq1, const std::string
 
 
 int main() {
-    std::string seq1 {"ATCGGATCGATGCCCCCATGTTATATTT"} ;
-    std::string seq2 {"ATCGGATCGATGATGGCATTGTGTTAT"} ;
+    // std::string seq1 {". . E1 . . . . . . . . . . . . . . . . . . . E9 . E3 "} ;
+    // std::string seq2 {". . . . E1 . . . . . . . . . . . . . . . . . . . E9 . . E3 "} ;
+    // wireMatrix matrix {wireMatrix_scoring(seq1, seq2)} ;
 
-    wireMatrix matrix {wireMatrix_initializer(seq1, seq2)} ;
-    wireMatrix_scoring(matrix, seq1, seq2) ;
 
-    for (size_t y=0 ; y<seq2.size() ; y++) {
-        for (size_t x=0 ; x<seq1.size() ; x++) {
-            if (matrix[x][y] < 10) {
-                std::cout << matrix[x][y] << "  " ;
+    // Read and extract traces from data file
+    std::string path {"../examples/result_simple.txt"} ;
+    std::vector<std::vector<std::string>> traces ;
+    read_file(path, traces) ;
+
+
+    // Dissimilarity matrix creation
+    dissimMatrix dissimilarity {traces.size(), std::vector<size_t>(traces.size(), 0)} ;
+
+    for (size_t i=0 ; i<traces.size() ; i++) {
+        for (size_t j=0 ; j<traces.size() ; j++) {
+            if (i != j) {
+                dissimilarity[i][j] = wireMatrix_scoring(traces[i], traces[j])[traces[i].size()-1][traces[j].size()-1] ;
+            }
+        }
+    }
+
+    for (size_t i=0 ; i<dissimilarity.size() ; i++) {
+        for (size_t j=0 ; j<dissimilarity.size() ; j++) {
+            if (dissimilarity[i][j] < 10) {
+                std::cout << dissimilarity[i][j] << "  " ;
             } else {
-                std::cout << matrix[x][y] << " " ;
+                std::cout << dissimilarity[i][j] << " " ;
             }
         }
         std::cout << "\n" ;
     }
-
-    std::cout << "\n" ;
-    
-    print_result(matrix, seq1, seq2) ;
 
     return 0 ;
 }

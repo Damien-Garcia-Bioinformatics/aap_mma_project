@@ -13,9 +13,7 @@
 
 #include <string>
 #include <vector>
-
-
-using vectors = std::vector<std::vector<std::string>> ;
+#include "structures.hpp"
 
 
 /**
