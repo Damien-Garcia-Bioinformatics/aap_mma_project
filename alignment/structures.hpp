@@ -17,7 +17,7 @@
 
 using vectors = std::vector<std::vector<std::string>> ;
 using wireMatrix = std::vector<std::vector<size_t>> ;
-using dissimMatrix = std::vector<std::vector<size_t>> ;
+using dissimMatrix = std::vector<std::vector<wireMatrix>> ;
 
 
 struct alignment {
