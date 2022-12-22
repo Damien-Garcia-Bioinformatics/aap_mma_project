@@ -49,7 +49,9 @@ size_t min(size_t, size_t, size_t) ;
 /// @param  
 /// @param  
 /// @return 
-wireMatrix wireMatrix_scoring(std::vector<std::string> &, std::vector<std::string> &) ;
+wireMatrix wireMatrix_scoring(traceFormat &, traceFormat &) ;
 
+
+void pairwiseAlign(wireMatrix &, traceFormat &, traceFormat &) ;
 
 #endif

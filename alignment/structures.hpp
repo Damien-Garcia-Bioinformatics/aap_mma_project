@@ -14,16 +14,16 @@
 
 #include <string>
 
-
-using vectors = std::vector<std::vector<std::string>> ;
+using traceFormat = std::vector<std::string> ;
+using vectors = std::vector<traceFormat> ;
+using alignTrace = std::vector<vectors> ;
 using wireMatrix = std::vector<std::vector<size_t>> ;
 using dissimMatrix = std::vector<std::vector<wireMatrix>> ;
 
 
 struct alignment {
-    std::string seq1 ;
-    std::string link ;
-    std::string seq2 ;
+    traceFormat seq1 ;
+    traceFormat seq2 ;
 } ;
 
 

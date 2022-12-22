@@ -22,7 +22,20 @@
 /// @brief
 /// @param
 /// @return 
-dissimMatrix generate_full_dissimilarity_matrix(vectors &) ;
+dissimMatrix generate_dissimilarity_matrix(vectors &) ;
+
+
+/// @brief 
+/// @param  
+/// @param 
+/// @return
+std::pair<size_t,size_t> find_lowest_dissim(dissimMatrix &, vectors &) ;
+
+
+/// @brief 
+/// @param  
+/// @param  
+void update_matrix(dissimMatrix &, std::pair<size_t,size_t>) ;
 
 
 
