@@ -136,11 +136,6 @@ void print_result(wireMatrix &matrix, const std::string &seq1, const std::string
 
 
 int main() {
-    // std::string seq1 {". . E1 . . . . . . . . . . . . . . . . . . . E9 . E3 "} ;
-    // std::string seq2 {". . . . E1 . . . . . . . . . . . . . . . . . . . E9 . . E3 "} ;
-    // wireMatrix matrix {wireMatrix_scoring(seq1, seq2)} ;
-
-
     // Read and extract traces from data file
     std::string path {"../examples/result_simple.txt"} ;
     std::vector<std::vector<std::string>> traces ;
@@ -158,6 +153,7 @@ int main() {
         }
     }
 
+    // Begin debug
     for (size_t i=0 ; i<dissimilarity.size() ; i++) {
         for (size_t j=0 ; j<dissimilarity.size() ; j++) {
             if (dissimilarity[i][j] < 10) {
@@ -168,6 +164,7 @@ int main() {
         }
         std::cout << "\n" ;
     }
+    // End debug
 
     return 0 ;
 }
