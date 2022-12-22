@@ -124,6 +124,32 @@ std::vector<std::vector<std::string>> align(std::vector<std::vector<std::string>
 	return Output_List;
 }
 
+std::vector<std::vector<std::string>> Sort_Best (std::vector<std::vector<std::string>> Unsorted){
+	int max = 0;
+	int index = 0;
+	for (int i = 0; i < Unsorted.size(); i++){
+		if (Unsorted[i]>max){max = Unsorted[i]; index = i; }
+	}
+	for (int i = 0; i < max; i++){
+	for (int j = 0; j < Unsorted.size(); j++){
+		int maxcount = 0;
+	    int element_having_max_freq;
+	    for (int i = 0; i < n; i++) {
+	        int count = 0;
+	        for (int j = 0; j < n; j++) {
+	            if (arr[i] == arr[j])
+	                count++;
+	        }
+	        if (count > maxcount) {
+	            maxcount = count;
+	            element_having_max_freq = arr[i];
+	        }
+	    }
+	}}
+
+
+}
+
 int main(){
 	mtch = 1;
 	msmtch = 1;
@@ -147,6 +173,7 @@ int main(){
 	trace.push_back("b");
 	trace.push_back("c");
 	input.push_back(trace);
+	
 	trace.clear();
 	trace.push_back("a");
 	trace.push_back("--");
@@ -161,8 +188,9 @@ int main(){
 	trace.push_back("c");
 	input.push_back(trace);
 	trace.clear();
-	std::vector<std::vector<std::string>> output = align(input);
-	for (int i = 0; i < output.size();i++){std::cout << output[i][0] << std::endl;}
+	for (int i = 0; i < input.size();i++){for (int j=0;j<input[i].size();j++){ std::cout << input[i][j] << std::endl;}}
+	//std::vector<std::vector<std::string>> output = align(input);
+	//for (int i = 0; i < output.size();i++){std::cout << output[i][0] << std::endl;}
 
 	return 0;
 }
