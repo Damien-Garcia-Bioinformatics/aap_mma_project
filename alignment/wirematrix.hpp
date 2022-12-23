@@ -18,40 +18,19 @@
 #include "structures.hpp"
 
 
-/// @brief 
-/// @param  
-/// @return 
-size_t del(std::string) ;
+float del(vectors &, size_t) ;
 
 
-/// @brief 
-/// @param  
-/// @return 
-size_t ins(std::string) ;
+float ins(vectors &, size_t) ;
 
 
-/// @brief 
-/// @param  
-/// @param  
-/// @return 
-size_t sub(std::string, std::string ) ;
+float sub(vectors &elem1, vectors &, size_t, size_t) ;
 
 
-/// @brief
-/// @param
-/// @param
-/// @param
-/// @return
-size_t min(size_t, size_t, size_t) ;
-
-
-/// @brief 
-/// @param  
-/// @param  
-/// @return 
-wireMatrix wireMatrix_scoring(traceFormat &, traceFormat &) ;
+wireMatrix wireMatrix_scoring(vectors &, vectors &) ;
 
 
 void pairwiseAlign(wireMatrix &, traceFormat &, traceFormat &) ;
+
 
 #endif

@@ -19,11 +19,13 @@
 #include "structures.hpp"
 
 
+msaFormat generate_msa(vectors &) ;
+
+
 /// @brief
 /// @param
 /// @return 
-dissimMatrix generate_dissimilarity_matrix(vectors &) ;
-
+dissimMatrix generate_dissimilarity_matrix(msaFormat &) ;
 
 /// @brief 
 /// @param  

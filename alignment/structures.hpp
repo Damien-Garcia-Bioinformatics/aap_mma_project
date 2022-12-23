@@ -16,8 +16,8 @@
 
 using traceFormat = std::vector<std::string> ;
 using vectors = std::vector<traceFormat> ;
-using alignTrace = std::vector<vectors> ;
-using wireMatrix = std::vector<std::vector<size_t>> ;
+using msaFormat = std::vector<vectors> ;
+using wireMatrix = std::vector<std::vector<float>> ;
 using dissimMatrix = std::vector<std::vector<wireMatrix>> ;
 
 

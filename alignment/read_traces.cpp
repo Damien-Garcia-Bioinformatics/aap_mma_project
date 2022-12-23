@@ -13,7 +13,7 @@
 #include "read_traces.hpp"
 
 
-void read_trace(std::string &line, std::vector<std::string> &trace) {
+void read_trace(std::string &line, traceFormat &trace) {
 	std::string temp ;
 	for (size_t i=0 ; i<line.size() ; i++) {
 		if (line[i] == ' ') {
@@ -38,11 +38,9 @@ void read_file(std::string &path, vectors &traces) {
 		std::string line ;
 		while (getline(file, line)) {
 			if (line[0] != '#' && !line.empty()) {
-				std::vector<std::string> trace ;
+				traceFormat trace ;
 				read_trace(line, trace) ;
-				
 				traces.push_back(trace) ;
-				
 				trace.clear() ;
 			} 
 		}
