@@ -22,8 +22,8 @@ using dissimMatrix = std::vector<std::vector<wireMatrix>> ;
 
 
 struct alignment {
-    traceFormat seq1 ;
-    traceFormat seq2 ;
+    vectors elem1 ;
+    vectors elem2 ;
 } ;
 
 

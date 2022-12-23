@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <math.h>
 
 #include "structures.hpp"
 #include "read_traces.hpp"
@@ -20,7 +21,7 @@
 
 int main() {
     // Read and extract traces from data file
-    std::string path {"../examples/result_simple.txt"} ;
+    std::string path {"../examples/result_complex.txt"} ;
     vectors traces ;
     read_file(path, traces) ;
 
@@ -29,30 +30,15 @@ int main() {
     msaFormat msa {generate_msa(traces)} ;
     dissimMatrix dissimilarity {generate_dissimilarity_matrix(msa)} ;
 
-    
-    // for (size_t i=0 ; i<dissimilarity.size() ; i++) {
-    //     for (size_t j=0 ; j<dissimilarity[i].size() ; j++) {
-    //         // std::cout << dissimilarity[i][j][msa[i].size()-1][msa[j].size()-1] << "  " ;
-    //         wireMatrix test {dissimilarity[i][j]} ;
-    //         for (size_t x=0 ; x<test.size() ; x++) {
-    //             for (size_t y=0 ; y<test[x].size() ; y++) {
-    //                 std::cout << test[x][y] << "  " ;
-    //             }
-    //             std::cout << "\n" ;
-    //         }
-    //     }
-    //     std::cout << "\n" ;
-    // }
+    for (size_t i=0 ; i<dissimilarity.size() ; i++) {
+        for (size_t j=0 ; j<dissimilarity[i].size() ; j++) {
+            float val {dissimilarity[i][j][dissimilarity[i][j].size()-1][dissimilarity[i][j].size()-1]} ;
+            val = ((float)((int)(val*10)))/10 ;
+            std::cout << val << "  " ;
+        }std::cout << "\n" ;
+    }
 
-    // for (size_t i=0 ; i<dissimilarity.size() ; i++) {
-    //     for (size_t j=0 ; j<dissimilarity[i].size() ; j++) {
-    //         if (i > j) {
-    //             std::cout << dissimilarity[i][j][msa[i][0].size()-1][msa[j][0].size()-1] << "  " ;
-    //         }
-    //     }
-    //     std::cout << std::endl ;
-    // }
-
+    // std::pair<size_t,size_t> lowestPos {find_lowest_dissim(dissimilarity, )} ;
 
 
     // Begin debug
@@ -69,20 +55,6 @@ int main() {
     //     std::cout << "\n" ;
     // }
 
-    // pairwiseAlign(matrix, msa[1][0], msa[2][0]) ;
-
-    // for (size_t i=0 ; i<dissimilarity.size() ; i++) {
-    //     for (size_t j=0 ; j<dissimilarity[i].size() ; j++) {
-    //         //if (i > j) {
-    //             if (dissimilarity[i][j][traces[i].size()-1][traces[j].size()-1] < 10) {
-    //                 std::cout << dissimilarity[i][j][traces[i].size()-1][traces[j].size()-1] << "  " ;
-    //             } else {
-    //                 std::cout << dissimilarity[i][j][traces[i].size()-1][traces[j].size()-1] << " " ;
-    //             }
-    //         //}
-    //     }
-    //     std::cout << "\n" ;
-    // }
 
     // std::pair<size_t,size_t> lowest {find_lowest_dissim(dissimilarity, traces)} ;
     // std::cout << "\n" << lowest.first << " " << lowest.second << "\n\n" ;

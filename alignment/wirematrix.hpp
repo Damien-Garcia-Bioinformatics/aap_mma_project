@@ -24,13 +24,13 @@ float del(vectors &, size_t) ;
 float ins(vectors &, size_t) ;
 
 
-float sub(vectors &elem1, vectors &, size_t, size_t) ;
+float sub(vectors &, vectors &, size_t, size_t) ;
 
 
 wireMatrix wireMatrix_scoring(vectors &, vectors &) ;
 
 
-void pairwiseAlign(wireMatrix &, traceFormat &, traceFormat &) ;
+void pairwiseAlign(wireMatrix &, vectors &, vectors &) ;
 
 
 #endif

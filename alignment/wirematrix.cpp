@@ -91,51 +91,80 @@ wireMatrix wireMatrix_scoring(vectors &elem1, vectors &elem2) {
 }
 
 
-void pairwiseAlign(wireMatrix &matrix, traceFormat &seq1, traceFormat &seq2) {
-    size_t x {seq1.size()-1} ;
-    size_t y {seq2.size()-1} ;
+void pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
+    size_t x {elem1[0].size()-1} ;
+    size_t y {elem2[0].size()-1} ;
 
     alignment aligned ;
+    aligned.elem1.push_back(traceFormat(elem1.size())) ;
+    aligned.elem2.push_back(traceFormat(elem2.size())) ;
 
     while (x!=0 && y!= 0) {
         float goUp {matrix[x][y-1]} ;
         float goLeft {matrix[x-1][y]} ;
         float goDiag {matrix[x-1][y-1]} ;
         if (goDiag <= goUp && goDiag <= goLeft) {
-            aligned.seq1.push_back(seq1[x]) ;
-            aligned.seq2.push_back(seq2[y]) ;
+            for (size_t i=0 ; i<elem1.size() ; i++) {
+                aligned.elem1[i].push_back(elem1[i][x]) ;
+            }
+            for (size_t i=0 ; i<elem2.size() ; i++) {
+                aligned.elem2[i].push_back(elem2[i][y]) ;
+            }
             x-- ; y-- ;
         } else if (goUp < goLeft) {
-            aligned.seq1.push_back("-") ;
-            aligned.seq2.push_back(seq2[y]) ;
+            for (size_t i=0 ; i<elem1.size() ; i++) {
+                aligned.elem1[i].push_back("-") ;
+            }
+            for (size_t i=0 ; i<elem2.size() ; i++) {
+                aligned.elem2[i].push_back(elem2[i][y]) ;
+            }
             y-- ;
         } else {
-            aligned.seq1.push_back(seq1[x]) ;
-            aligned.seq2.push_back("-") ;
+            for (size_t i=0 ; i<elem1.size() ; i++) {
+                aligned.elem1[i].push_back(elem1[i][x]) ;
+            }
+            for (size_t i=0 ; i<elem2.size() ; i++) {
+                aligned.elem2[i].push_back("-") ;
+            }
             x-- ;
         }
     }
     while (x!=0) {
-        aligned.seq1.push_back(seq1[x]) ;
-        aligned.seq2.push_back("-") ;
+        for (size_t i=0 ; i<elem1.size() ; i++) {
+            aligned.elem1[i].push_back(elem1[i][x]) ;
+        }
+        for (size_t i=0 ; i<elem2.size() ; i++) {
+            aligned.elem2[i].push_back("-") ;
+        }
         x-- ;
     }
     while (y!=0) {
-        aligned.seq1.push_back("-") ;
-        aligned.seq2.push_back(seq2[y]) ;
+        for (size_t i=0 ; i<elem1.size() ; i++) {
+            aligned.elem1[i].push_back("-") ;
+        }
+        for (size_t i=0 ; i<elem2.size() ; i++) {
+            aligned.elem2[i].push_back(elem2[i][y]) ;
+        }
         y-- ;
     }
 
-    std::reverse(aligned.seq1.begin(), aligned.seq1.end()) ;
-    std::reverse(aligned.seq2.begin(), aligned.seq2.end()) ;
+    // Reverse the alignment
+    for (size_t i=0 ; i<elem1.size() ; i++) {
+        std::reverse(aligned.elem1[i].begin(), aligned.elem1[i].end()) ;
+    }
+    for (size_t i=0 ; i<elem2.size() ; i++) {
+        std::reverse(aligned.elem2[i].begin(), aligned.elem2[i].end()) ;
+    }
 
-    seq1 = aligned.seq1 ;
-    seq2 = aligned.seq2 ;
-
-    for (size_t i=0 ; i<aligned.seq1.size() ; i++) {
-        std::cout << aligned.seq1[i] << " " ;
-    } std::cout << "\n" ;
-    for (size_t i=0 ; i<aligned.seq2.size() ; i++) {
-        std::cout << aligned.seq2[i] << " " ;
-    } std::cout << "\n" ;
+    // Print alignment
+    for (size_t i=0 ; i<aligned.elem1.size() ; i++) {
+        for (size_t j=0 ; j<aligned.elem1[i].size() ; j++) {
+            std::cout << aligned.elem1[i][j] << " " ;
+        } std::cout << "\n" ;
+    }
+    for (size_t i=0 ; i<aligned.elem2.size() ; i++) {
+        for (size_t j=0 ; j<aligned.elem2[i].size() ; j++) {
+            std::cout << aligned.elem2[i][j] << " " ;
+        } std::cout << "\n" ;
+    }
 }
