@@ -31,7 +31,7 @@ dissimMatrix generate_dissimilarity_matrix(msaFormat &) ;
 /// @param  
 /// @param 
 /// @return
-std::pair<size_t,size_t> find_lowest_dissim(dissimMatrix &, vectors &) ;
+std::pair<size_t,size_t> find_lowest_dissim(dissimMatrix &) ;
 
 
 /// @brief 
@@ -39,6 +39,8 @@ std::pair<size_t,size_t> find_lowest_dissim(dissimMatrix &, vectors &) ;
 /// @param  
 void update_matrix(dissimMatrix &, std::pair<size_t,size_t>) ;
 
+
+void print_dissimMatrix(dissimMatrix &) ;
 
 
 #endif
