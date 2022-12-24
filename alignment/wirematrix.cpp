@@ -20,9 +20,9 @@ float del(vectors &elem1, size_t pos) {
     float delCost {0} ;
     for (size_t i=0 ; i<elem1.size() ; i++) {
         if (elem1[i][pos] == ".") {
-            delCost += 2 ;
+            delCost += 5 ;
         } else {
-            delCost += 3 ;
+            delCost += 6 ;
         }
     }
     delCost = delCost / elem1.size() ;
@@ -34,9 +34,9 @@ float ins(vectors &elem2, size_t pos) {
     float insCost {0} ;
     for (size_t i=0 ; i<elem2.size() ; i++) {
         if (elem2[i][pos] == ".") {
-            insCost += 2 ;
+            insCost += 5 ;
         } else {
-            insCost += 3 ;
+            insCost += 6 ;
         }
     }
     insCost = insCost / elem2.size() ;
@@ -53,9 +53,9 @@ float sub(vectors &elem1, vectors &elem2, size_t pos1, size_t pos2) {
                     subCost += 0 ;
                 } else if ((elem1[i][pos1] == "." && elem2[j][pos2] != ".") ||
                            (elem2[j][pos2] == "." && elem1[i][pos1] != ".")) {
-                    subCost += 4 ;
-                } else {
                     subCost += 2 ;
+                } else {
+                    subCost += 1 ;
                 }
             }
         }
@@ -94,9 +94,6 @@ wireMatrix wireMatrix_scoring(vectors &elem1, vectors &elem2) {
 vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
     size_t x {elem1[0].size()-1} ;
     size_t y {elem2[0].size()-1} ;
-
-    // std::cout << elem1.size() << "  " << elem2.size() << "\n" ;
-    // std::cout << elem1[0].size() << "  " << elem1[1].size() << "\n" ;
     
     alignment aligned ;
     for (size_t i=0 ; i<elem1.size() ; i++) {
@@ -105,15 +102,11 @@ vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
     for (size_t i=0 ; i<elem2.size() ; i++) {
         aligned.elem2.push_back(traceFormat()) ;
     }
-    
-    // std::cout << aligned.elem1.size() << "\n" ;
-    // std::cout << aligned.elem2.size() << "\n" ;
 
     while (x!=0 && y!= 0) {
         float goUp {matrix[x][y-1]} ;
         float goLeft {matrix[x-1][y]} ;
         float goDiag {matrix[x-1][y-1]} ;
-        // std::cout << goUp << "   " << goLeft << "   " << goDiag << "  -  " << x << "  " << y << "\n" ;
         if (goDiag <= goUp && goDiag <= goLeft) {
             for (size_t i=0 ; i<elem1.size() ; i++) {
                 aligned.elem1[i].push_back(elem1[i][x]) ;
@@ -140,8 +133,6 @@ vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
             x-- ;
         }
     }
-    // std::cout << "test\n" ;
-
     while (x!=0) {
         for (size_t i=0 ; i<elem1.size() ; i++) {
             aligned.elem1[i].push_back(elem1[i][x]) ;

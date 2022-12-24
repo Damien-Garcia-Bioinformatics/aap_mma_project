@@ -20,49 +20,45 @@
 
 
 int main() {
+    std::cout << "   +-------------------------------------+\n" ;
+    std::cout << "   |  Multiple Sequence Alignement tool  |\n" ;
+    std::cout << "   +-------------------------------------+\n\n" ;
+
     // Read and extract traces from data file
     std::string path {"../examples/result_complex.txt"} ;
+    std::cout << "Reading data from file : '" << path << "'\n" ;
     vectors traces ;
     read_file(path, traces) ;
 
-
     // Dissimilarity matrix creation
+    std::cout << "Generation of Multiple Sequence Alignment :\n" ;
     msaFormat msa {generate_msa(traces)} ;
     dissimMatrix dissimilarity {generate_dissimilarity_matrix(msa)} ;
-    print_dissimMatrix(dissimilarity) ;
+    // print_dissimMatrix(dissimilarity) ;
 
+    size_t iter {0} ;
     while (msa.size() > 1) {
-        std::cout << "\nFind lowest dissimilarity :\n" ;
+        iter++ ;
+        std::cout << "Iteration " << iter << "\n" ;
+        // std::cout << "\nFind lowest dissimilarity :\n" ;
         std::pair<size_t,size_t> lowest {find_lowest_dissim(dissimilarity)} ;
-        std::cout << lowest.first << " - " << lowest.second << "\n" ;
 
-        std::cout << "\nAligning sequences :\n" ;
+        // std::cout << "\nAligning sequences :\n" ;
         vectors align {pairwiseAlign(dissimilarity[lowest.first][lowest.second], msa[lowest.first], msa[lowest.second])} ;
-        print_alignment(align) ;
+        // print_alignment(align) ;
 
-        std::cout << "\nUpdating MSA\n" ;
+        // std::cout << "\nUpdating MSA\n" ;
         update_msa(msa, align, lowest) ;
-        std::cout << "\nUpdating dissimilarity matrix\n" ;
-        update_dissimMatrix(dissimilarity, msa, align, lowest) ;
-        std::cout << "test\n" ;
-        print_dissimMatrix(dissimilarity) ;
+        // std::cout << "\nUpdating dissimilarity matrix\n" ;
+        // update_dissimMatrix(dissimilarity, msa, align, lowest) ; //OPTIMIZED VERSION (NOT WORKING YET)
+        dissimilarity = generate_dissimilarity_matrix(msa) ;
+        // print_dissimMatrix(dissimilarity) ;
     }
 
-
-    // // Prints all wireMatrix in dissimMatrix
-    // for (size_t i=0 ; i<dissimilarity.size() ; i++) {
-    //     for (size_t j=0 ; j<dissimilarity[i].size() ; j++) {
-    //         wireMatrix matrix {dissimilarity[i][j]} ;
-    //         for (size_t x=0 ; x<matrix.size() ; x++) {
-    //             for (size_t y=0 ; y<matrix[x].size() ; y++) {
-    //                 std::cout << matrix[x][y] << "  " ;
-    //             }
-    //             std::cout << "\n" ;
-    //         }
-    //         std::cout << "\n\n" ;
-    //     }
-    // }
-
+    // std::cout << "MSA SIZE = " << msa.size() << "\n" ;
+    // std::cout << "SEQ SIZE = " << msa[0].size() << "\n" ;
+    std::cout << "\nResult :\n" ;
+    print_alignment(msa[0]) ;
 
     return 0 ;
 }
