@@ -91,18 +91,29 @@ wireMatrix wireMatrix_scoring(vectors &elem1, vectors &elem2) {
 }
 
 
-void pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
+vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
     size_t x {elem1[0].size()-1} ;
     size_t y {elem2[0].size()-1} ;
 
+    // std::cout << elem1.size() << "  " << elem2.size() << "\n" ;
+    // std::cout << elem1[0].size() << "  " << elem1[1].size() << "\n" ;
+    
     alignment aligned ;
-    aligned.elem1.push_back(traceFormat(elem1.size())) ;
-    aligned.elem2.push_back(traceFormat(elem2.size())) ;
+    for (size_t i=0 ; i<elem1.size() ; i++) {
+        aligned.elem1.push_back(traceFormat()) ;
+    }
+    for (size_t i=0 ; i<elem2.size() ; i++) {
+        aligned.elem2.push_back(traceFormat()) ;
+    }
+    
+    // std::cout << aligned.elem1.size() << "\n" ;
+    // std::cout << aligned.elem2.size() << "\n" ;
 
     while (x!=0 && y!= 0) {
         float goUp {matrix[x][y-1]} ;
         float goLeft {matrix[x-1][y]} ;
         float goDiag {matrix[x-1][y-1]} ;
+        // std::cout << goUp << "   " << goLeft << "   " << goDiag << "  -  " << x << "  " << y << "\n" ;
         if (goDiag <= goUp && goDiag <= goLeft) {
             for (size_t i=0 ; i<elem1.size() ; i++) {
                 aligned.elem1[i].push_back(elem1[i][x]) ;
@@ -129,6 +140,8 @@ void pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
             x-- ;
         }
     }
+    // std::cout << "test\n" ;
+
     while (x!=0) {
         for (size_t i=0 ; i<elem1.size() ; i++) {
             aligned.elem1[i].push_back(elem1[i][x]) ;
@@ -149,22 +162,32 @@ void pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
     }
 
     // Reverse the alignment
+    vectors newElem ;
     for (size_t i=0 ; i<elem1.size() ; i++) {
         std::reverse(aligned.elem1[i].begin(), aligned.elem1[i].end()) ;
+        newElem.push_back(aligned.elem1[i]) ;
     }
     for (size_t i=0 ; i<elem2.size() ; i++) {
         std::reverse(aligned.elem2[i].begin(), aligned.elem2[i].end()) ;
+        newElem.push_back(aligned.elem2[i]) ;
     }
 
+    return newElem ;
+}
+
+
+void print_alignment(vectors &aligned) {
     // Print alignment
-    for (size_t i=0 ; i<aligned.elem1.size() ; i++) {
-        for (size_t j=0 ; j<aligned.elem1[i].size() ; j++) {
-            std::cout << aligned.elem1[i][j] << " " ;
-        } std::cout << "\n" ;
-    }
-    for (size_t i=0 ; i<aligned.elem2.size() ; i++) {
-        for (size_t j=0 ; j<aligned.elem2[i].size() ; j++) {
-            std::cout << aligned.elem2[i][j] << " " ;
-        } std::cout << "\n" ;
+    size_t maxLength {0} ;
+    for (size_t i=0 ; i<aligned.size() ; i++) {
+        for (size_t j=0 ; j<aligned[i].size() ; j++) {
+            if (aligned[i][j].size() > maxLength) {
+                maxLength = aligned[i][j].size() ;
+            }
+        }
+        for (size_t j=0 ; j<aligned[i].size() ; j++) {
+            std::cout << aligned[i][j] << std::string((maxLength - aligned[i][j].size())+1, ' ') ;
+        }
+        std::cout << "\n" ;
     }
 }

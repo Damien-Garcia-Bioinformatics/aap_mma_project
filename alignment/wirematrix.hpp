@@ -30,7 +30,10 @@ float sub(vectors &, vectors &, size_t, size_t) ;
 wireMatrix wireMatrix_scoring(vectors &, vectors &) ;
 
 
-void pairwiseAlign(wireMatrix &, vectors &, vectors &) ;
+vectors pairwiseAlign(wireMatrix &, vectors &, vectors &) ;
+
+
+void print_alignment(vectors &) ;
 
 
 #endif

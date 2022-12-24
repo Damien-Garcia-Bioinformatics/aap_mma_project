@@ -29,17 +29,24 @@ int main() {
     // Dissimilarity matrix creation
     msaFormat msa {generate_msa(traces)} ;
     dissimMatrix dissimilarity {generate_dissimilarity_matrix(msa)} ;
-
     print_dissimMatrix(dissimilarity) ;
-    std::pair<size_t,size_t> lowest {find_lowest_dissim(dissimilarity)} ;
 
-    std::cout << lowest.first << "   " << lowest.second << "\n" ;
+    while (msa.size() > 1) {
+        std::cout << "\nFind lowest dissimilarity :\n" ;
+        std::pair<size_t,size_t> lowest {find_lowest_dissim(dissimilarity)} ;
+        std::cout << lowest.first << " - " << lowest.second << "\n" ;
 
-    pairwiseAlign(dissimilarity[lowest.first][lowest.second], msa[lowest.first], msa[lowest.second]) ;
+        std::cout << "\nAligning sequences :\n" ;
+        vectors align {pairwiseAlign(dissimilarity[lowest.first][lowest.second], msa[lowest.first], msa[lowest.second])} ;
+        print_alignment(align) ;
 
-
-
-
+        std::cout << "\nUpdating MSA\n" ;
+        update_msa(msa, align, lowest) ;
+        std::cout << "\nUpdating dissimilarity matrix\n" ;
+        update_dissimMatrix(dissimilarity, msa, align, lowest) ;
+        std::cout << "test\n" ;
+        print_dissimMatrix(dissimilarity) ;
+    }
 
 
     // // Prints all wireMatrix in dissimMatrix

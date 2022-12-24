@@ -43,4 +43,10 @@ void update_matrix(dissimMatrix &, std::pair<size_t,size_t>) ;
 void print_dissimMatrix(dissimMatrix &) ;
 
 
+void update_msa(msaFormat &, vectors &, std::pair<size_t,size_t> &) ;
+
+
+void update_dissimMatrix(dissimMatrix &, msaFormat &, vectors &, std::pair<size_t,size_t> &) ;
+
+
 #endif

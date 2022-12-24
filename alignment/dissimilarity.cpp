@@ -66,6 +66,36 @@ void print_dissimMatrix(dissimMatrix &D) {
 }
 
 
-void update_dissimMatrix(dissimMatrix &D, msaFormat &msa) {
-    
+void update_msa(msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest) {
+    // Removes vectors that needs to be aggregated
+    msa.erase(msa.begin()+lowest.first) ;
+    msa.erase(msa.begin()+lowest.second) ;
+    // Adds the aggregated and aligned version
+    msa.push_back(align) ;
+}
+
+void update_dissimMatrix(dissimMatrix &D, msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest) {
+    // Removes data that needs to be aggregated
+    std::cout << "dissimtest\n" ;
+    for (size_t i=0 ; i<D.size() ; i++) {
+        if (D[i].size() >= lowest.first) {
+            D[i].erase(D[i].begin()+lowest.first) ;
+        }
+        if (D[i].size() >= lowest.second) {
+            D[i].erase(D[i].begin()+lowest.second) ;
+        }
+    }
+    std::cout << "dissimtest2\n" ;
+    D.erase(D.begin()+lowest.first) ;
+    D.erase(D.begin()+lowest.second) ;
+
+    // Adds the dissimilarity and wireMatrix from newly aggregated and aligned vectors
+    std::cout << "dissimtest3\n" ;
+    std::vector<wireMatrix> temp ;
+    for (size_t i=0 ; i<msa.size()-1 ; i++) {
+        temp.push_back(wireMatrix_scoring(align, msa[i])) ;
+    }
+    std::cout << "dissimtest4\n" ;
+    D.push_back(temp) ;
+    std::cout << "dissimtest5\n" ;
 }
