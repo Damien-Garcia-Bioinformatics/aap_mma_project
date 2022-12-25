@@ -20,6 +20,6 @@
 
 
 # GENERATION PARAMETERS
-expression=(2-3)E1<(4-8)e2X10|E2%25>E2(2-4)E3<(2-5)e1%40>
-number_of_traces=10
-maximum_length=30
+expression=(2-3)E1(10-12)E9(1-4)E3<(5-6)+e3>E4(2-3)
+number_of_traces=20
+maximum_length=40
