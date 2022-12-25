@@ -20,7 +20,7 @@ float del(vectors &elem1, size_t pos) {
     float delCost {0} ;
     for (size_t i=0 ; i<elem1.size() ; i++) {
         if (elem1[i][pos] == ".") {
-            delCost += 5 ;
+            delCost += 4 ;
         } else {
             delCost += 6 ;
         }
@@ -34,7 +34,7 @@ float ins(vectors &elem2, size_t pos) {
     float insCost {0} ;
     for (size_t i=0 ; i<elem2.size() ; i++) {
         if (elem2[i][pos] == ".") {
-            insCost += 5 ;
+            insCost += 4 ;
         } else {
             insCost += 6 ;
         }
@@ -53,7 +53,7 @@ float sub(vectors &elem1, vectors &elem2, size_t pos1, size_t pos2) {
                     subCost += 0 ;
                 } else if ((elem1[i][pos1] == "." && elem2[j][pos2] != ".") ||
                            (elem2[j][pos2] == "." && elem1[i][pos1] != ".")) {
-                    subCost += 2 ;
+                    subCost += 3 ;
                 } else {
                     subCost += 1 ;
                 }
@@ -178,6 +178,39 @@ void print_alignment(vectors &aligned) {
         }
         for (size_t j=0 ; j<aligned[i].size() ; j++) {
             std::cout << aligned[i][j] << std::string((maxLength - aligned[i][j].size())+1, ' ') ;
+        }
+        std::cout << "\n" ;
+    }
+}
+
+void print_alignment_v2(vectors aligned) {
+    for (size_t i=0 ; i<aligned.size() ; i++) {
+        bool again {true} ;
+        while (again) {
+            if (aligned[i][aligned[i].size()-1] == "-") {
+                aligned[i].pop_back() ;
+            } else {
+                again = false ;
+            }
+        }
+    }
+    size_t maxLength {0} ;
+    for (size_t i=0 ; i<aligned.size() ; i++) {
+        for (size_t j=0 ; j<aligned[i].size() ; j++) {
+            if (aligned[i][j].size() > maxLength) {
+                maxLength = aligned[i][j].size() ;
+            }
+        }
+        bool begin {true} ;
+        for (size_t j=0 ; j<aligned[i].size() ; j++) {
+            if (aligned[i][j] != "-") {
+                begin = false ;
+            }
+            if (begin && aligned[i][j] == "-") {
+                std::cout << ' ' << std::string((maxLength - aligned[i][j].size())+1, ' ') ;
+            } else {
+                std::cout << aligned[i][j] << std::string((maxLength - aligned[i][j].size())+1, ' ') ;
+            }
         }
         std::cout << "\n" ;
     }

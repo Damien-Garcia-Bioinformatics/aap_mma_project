@@ -25,7 +25,7 @@ int main() {
     std::cout << "   +-------------------------------------+\n\n" ;
 
     // Read and extract traces from data file
-    std::string path {"../examples/result_complex.txt"} ;
+    std::string path {"../examples/test1_result.txt"} ;
     std::cout << "Reading data from file : '" << path << "'\n" ;
     vectors traces ;
     read_file(path, traces) ;
@@ -36,10 +36,7 @@ int main() {
     dissimMatrix dissimilarity {generate_dissimilarity_matrix(msa)} ;
     // print_dissimMatrix(dissimilarity) ;
 
-    size_t iter {0} ;
     while (msa.size() > 1) {
-        iter++ ;
-        std::cout << "Iteration " << iter << "\n" ;
         // std::cout << "\nFind lowest dissimilarity :\n" ;
         std::pair<size_t,size_t> lowest {find_lowest_dissim(dissimilarity)} ;
 
@@ -50,15 +47,18 @@ int main() {
         // std::cout << "\nUpdating MSA\n" ;
         update_msa(msa, align, lowest) ;
         // std::cout << "\nUpdating dissimilarity matrix\n" ;
-        // update_dissimMatrix(dissimilarity, msa, align, lowest) ; //OPTIMIZED VERSION (NOT WORKING YET)
-        dissimilarity = generate_dissimilarity_matrix(msa) ;
+        update_dissimMatrix(dissimilarity, msa, align, lowest) ; //OPTIMIZED VERSION
+        // dissimilarity = generate_dissimilarity_matrix(msa) ;
         // print_dissimMatrix(dissimilarity) ;
     }
 
     // std::cout << "MSA SIZE = " << msa.size() << "\n" ;
     // std::cout << "SEQ SIZE = " << msa[0].size() << "\n" ;
-    std::cout << "\nResult :\n" ;
     print_alignment(msa[0]) ;
+
+    std::cout << "\n\n\n" ;
+
+    print_alignment_v2(msa[0]) ;
 
     return 0 ;
 }

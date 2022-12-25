@@ -79,15 +79,15 @@ void update_msa(msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest
 void update_dissimMatrix(dissimMatrix &D, msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest) {
     // Removes data that needs to be aggregated
     std::cout << lowest.first << "  " << lowest.second << "\n" ;
-    if (lowest.second != 0) {
-        for (size_t i=0 ; i<D.size() ; i++) {
-            if (D[i].size() >= lowest.first) {
-                D[i].erase(D[i].begin()+lowest.first) ;
-            }
+    for (size_t i=0 ; i<D.size() ; i++) {
+        if (D[i].size() >= lowest.first) {
+            D[i].erase(D[i].begin()+lowest.first) ;
+        }
+        if (lowest.second != 0) {
             if (D[i].size() >= lowest.second) {
                 D[i].erase(D[i].begin()+lowest.second) ;
-            }
-        }        
+            }                
+        }
     }
     D.erase(D.begin()+lowest.first) ;
     D.erase(D.begin()+lowest.second) ;
