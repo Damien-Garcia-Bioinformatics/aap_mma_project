@@ -4,7 +4,7 @@
  
 
 ######################################################################################
-#                Makefile for compiling the data generation program                  #
+#                 Makefile for compiling and testing the MSA program                 #
 ######################################################################################
 
 

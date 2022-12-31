@@ -9,11 +9,11 @@
 
 
 #include <iostream>
-#include "data_generation/file_handling_functions.hpp"
-#include "data_generation/parsing_functions.hpp"
-#include "data_generation/semantic_check_functions.hpp"
-#include "data_generation/generation_functions.hpp"
-#include "data_generation/miscellaneous.hpp"
+#include "file_handling_functions.hpp"
+#include "parsing_functions.hpp"
+#include "semantic_check_functions.hpp"
+#include "generation_functions.hpp"
+#include "miscellaneous.hpp"
 
 
 int main(int argc, char *argv[]) {
