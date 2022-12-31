@@ -16,7 +16,7 @@ EXE = main
 MAIN = main.cpp
 CXX = g++
 CXXFLAGS = -Wall -O2
-OBJECTS = read_traces.o wirematrix.o dissimilarity.o
+OBJECTS = read_traces.o wirematrix.o dissimilarity.o write_results.o
 
 
 # Creates executable file
@@ -33,6 +33,9 @@ wirematrix.o:
 
 dissimilarity.o:
 	$(CXX) $(CXXFLAGS) -c dissimilarity.cpp
+
+write_results.o:
+	$(CXX) $(CXXFLAGS) -c write_results.cpp
 
 
 ##############################################################################

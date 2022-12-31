@@ -17,6 +17,7 @@
 #include "read_traces.hpp"
 #include "dissimilarity.hpp"
 #include "wirematrix.hpp"
+#include "write_results.hpp"
 
 
 int main() {
@@ -25,10 +26,11 @@ int main() {
     std::cout << "   +-------------------------------------+\n\n" ;
 
     // Read and extract traces from data file
-    std::string path {"../examples/test1_result.txt"} ;
+    std::string path {"../examples/result_complex.txt"} ;
     std::cout << "Reading data from file : '" << path << "'\n" ;
+    std::string expression ;
     vectors traces ;
-    read_file(path, traces) ;
+    read_file(path, expression, traces) ;
 
     // Dissimilarity matrix creation
     std::cout << "Generation of Multiple Sequence Alignment :\n" ;
@@ -54,11 +56,13 @@ int main() {
 
     // std::cout << "MSA SIZE = " << msa.size() << "\n" ;
     // std::cout << "SEQ SIZE = " << msa[0].size() << "\n" ;
-    print_alignment(msa[0]) ;
+    // print_alignment(msa[0]) ;
 
-    std::cout << "\n\n\n" ;
+    // std::cout << "\n\n\n" ;
 
     print_alignment_v2(msa[0]) ;
+
+    write_results(expression, msa[0]) ;
 
     return 0 ;
 }

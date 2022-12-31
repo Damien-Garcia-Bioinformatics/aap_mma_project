@@ -29,7 +29,7 @@ void read_trace(std::string &, std::vector<std::string> &) ;
  * @param
  * @param
  */
-void read_file(std::string &, vectors &) ;
+void read_file(std::string &, std::string &, vectors &) ;
 
 
 #endif

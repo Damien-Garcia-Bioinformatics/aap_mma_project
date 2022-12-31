@@ -31,12 +31,18 @@ void read_trace(std::string &line, traceFormat &trace) {
 }
 
 
-void read_file(std::string &path, vectors &traces) {
+void read_file(std::string &path, std::string &expression, vectors &traces) {
 	std::ifstream file ;
 	file.open(path) ;
 	if (file.is_open()) {
 		std::string line ;
 		while (getline(file, line)) {
+			// Extraction of generative expression
+			if (expression.empty()) {
+				expression = line.substr(line.find(':')+2) ;
+			}
+
+			// Extracting traces line by line
 			if (line[0] != '#' && !line.empty()) {
 				traceFormat trace ;
 				read_trace(line, trace) ;
