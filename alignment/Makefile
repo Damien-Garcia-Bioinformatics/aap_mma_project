@@ -9,7 +9,7 @@
 
 
 # Ignored if not specificaly called
-.PHONY: clean rebuild 
+.PHONY: clean rebuild test_simple test_complex test_semantic1 test_semantic2 test_semantic3 test_semantic4 
 
 # Variables
 EXE = main
@@ -49,3 +49,31 @@ clean:
 # Combination of "make clean" and "make all" commands
 rebuild:
 	$(MAKE) clean all
+
+##############################################################################
+#                          Test Execution of program                         #
+##############################################################################
+
+# Simple alignment test
+test_simple:
+	./$(EXE) ../examples/traces/simple.txt ../examples/alignment/simple.txt
+
+# Complex alignment test
+test_complex:
+	./$(EXE) ../examples/traces/complex.txt ../examples/alignment/complex.txt
+
+# # Semantic error test 1
+# test_semantic1:
+# 	./$(EXE) ../examples/traces/semanticError1.txt ../examples/alignment/semanticError1.txt
+
+# # Semantic error test 2
+# test_semantic2:
+# 	./$(EXE) ../examples/traces/semanticError2.txt ../examples/alignment/semanticError2.txt
+
+# # Semantic error test 3
+# test_semantic3:
+# 	./$(EXE) ../examples/traces/semanticError3.txt ../examples/alignment/semanticError3.txt
+
+# # Semantic error test 4
+# test_semantic4:
+# 	./$(EXE) ../examples/traces/semanticError4.txt ../examples/alignment/semanticError4.txt

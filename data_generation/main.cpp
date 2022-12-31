@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 	std::string pathToParameters {argv[1]}, pathToResults {argv[2]} ;
 
 	// Reading generation parameters from file passed in program command line parameter.
-	std::cout << "[main] Reading generation parameters from : " << pathToParameters << std::endl ;
+	std::cout << "[dataGen] Reading generation parameters from : " << pathToParameters << "\n" ;
 	parameters tracesParameters ;
 	read_parameters_file(tracesParameters, pathToParameters) ;
 
@@ -33,27 +33,27 @@ int main(int argc, char *argv[]) {
 	srand(time(NULL)) ;
 
 	// Separation and categorisation of different regions in expression
-	std::cout << "[main] Creating sections from expression" << std::endl ;
+	std::cout << "[dataGen] Creating sections from expression\n" ;
 	data sections ;
 	expression_divider(tracesParameters.expression, sections) ;
 
 	// Extraction of generation parameters
-	std::cout << "[main] Parsing of expression sections" << std::endl ;
+	std::cout << "[dataGen] Parsing of expression sections\n" ;
 	std::vector<genParam> generation(sections.type.size()) ;
 	expression_parser(sections, generation) ;
 
 	// Semantic check of generation parameters
-	std::cout << "[main] Checking expression syntax and semantics" << std::endl ;
+	std::cout << "[dataGen] Checking expression syntax and semantics\n" ;
 	check_length(generation, tracesParameters.maxLen) ;
 	check_range(generation) ;
 	check_anchors_and_events(generation) ;
 
 	// Generation of traces
-	std::cout << "[main] Generation of traces" << std::endl ;
+	std::cout << "[dataGen] Generation of traces\n" ;
 	std::vector<std::vector<std::string>> traces(generation.size()) ;
 	generate_traces(generation, traces, tracesParameters.nbTraces) ;
 
-	std::cout << "[main] Writing traces to : " << pathToResults << std::endl ;
+	std::cout << "[dataGen] Writing traces to : " << pathToResults << "\n" ;
 	write_results(pathToResults, traces, tracesParameters) ;
 	
 	return 0 ;

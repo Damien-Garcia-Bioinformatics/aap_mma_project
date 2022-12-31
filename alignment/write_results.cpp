@@ -15,9 +15,9 @@
 #include "structures.hpp"
 #include "write_results.hpp"
 
-void write_results(std::string &expression, vectors &msa) {
+void write_results(std::string &pathToRestults, std::string &expression, vectors &msa) {
     std::ofstream file ;
-    file.open("aligned.txt") ;
+    file.open(pathToRestults) ;
     if (!file.is_open()) {
         exit(1) ;
     }

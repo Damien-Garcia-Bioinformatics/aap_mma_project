@@ -20,49 +20,37 @@
 #include "write_results.hpp"
 
 
-int main() {
-    std::cout << "   +-------------------------------------+\n" ;
-    std::cout << "   |  Multiple Sequence Alignement tool  |\n" ;
-    std::cout << "   +-------------------------------------+\n\n" ;
+int main(int argc, char* argv[]) {
+   	// Check if paths of parameter and result files are provided
+	if (argc == 1) {
+		// help() ;
+		exit(1) ;
+	}
+	std::string pathToParameters {argv[1]}, pathToResults {argv[2]} ;
 
     // Read and extract traces from data file
-    std::string path {"../examples/result_complex.txt"} ;
-    std::cout << "Reading data from file : '" << path << "'\n" ;
+    std::cout << "[MSA] Reading traces from : " << pathToParameters << "\n" ;
     std::string expression ;
     vectors traces ;
-    read_file(path, expression, traces) ;
+    read_file(pathToParameters, expression, traces) ;
 
-    // Dissimilarity matrix creation
-    std::cout << "Generation of Multiple Sequence Alignment :\n" ;
+    // Dissimilarity matrix and MSA initialization
+    std::cout << "[MSA] Generation of Multiple Sequence Alignment\n" ;
     msaFormat msa {generate_msa(traces)} ;
     dissimMatrix dissimilarity {generate_dissimilarity_matrix(msa)} ;
-    // print_dissimMatrix(dissimilarity) ;
 
+    // Performing MSA (step by step aggreagation of sequences)
     while (msa.size() > 1) {
-        // std::cout << "\nFind lowest dissimilarity :\n" ;
         std::pair<size_t,size_t> lowest {find_lowest_dissim(dissimilarity)} ;
-
-        // std::cout << "\nAligning sequences :\n" ;
         vectors align {pairwiseAlign(dissimilarity[lowest.first][lowest.second], msa[lowest.first], msa[lowest.second])} ;
-        // print_alignment(align) ;
-
-        // std::cout << "\nUpdating MSA\n" ;
         update_msa(msa, align, lowest) ;
-        // std::cout << "\nUpdating dissimilarity matrix\n" ;
-        update_dissimMatrix(dissimilarity, msa, align, lowest) ; //OPTIMIZED VERSION
-        // dissimilarity = generate_dissimilarity_matrix(msa) ;
-        // print_dissimMatrix(dissimilarity) ;
+        update_dissimMatrix(dissimilarity, msa, align, lowest) ;
     }
 
-    // std::cout << "MSA SIZE = " << msa.size() << "\n" ;
-    // std::cout << "SEQ SIZE = " << msa[0].size() << "\n" ;
-    // print_alignment(msa[0]) ;
-
-    // std::cout << "\n\n\n" ;
-
-    print_alignment_v2(msa[0]) ;
-
-    write_results(expression, msa[0]) ;
+    // Showing results in terminal and saving in file
+    std::cout << "[MSA] Writing results to : " << pathToResults << "\n" ;
+    // print_alignment_v2(msa[0]) ;
+    write_results(pathToResults, expression, msa[0]) ;
 
     return 0 ;
 }
