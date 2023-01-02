@@ -13,6 +13,9 @@
 #include "read_traces.hpp"
 
 
+//----------------------------------------------------------------------------//
+
+
 void read_trace(std::string &line, traceFormat &trace) {
 	std::string temp ;
 	for (size_t i=0 ; i<line.size() ; i++) {
@@ -29,6 +32,9 @@ void read_trace(std::string &line, traceFormat &trace) {
 		temp.clear() ;
 	}
 }
+
+
+//----------------------------------------------------------------------------//
 
 
 void read_file(std::string &path, std::string &expression, vectors &traces) {

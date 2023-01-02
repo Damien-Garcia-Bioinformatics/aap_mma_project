@@ -15,9 +15,13 @@
 #include "structures.hpp"
 #include "write_results.hpp"
 
-void write_results(std::string &pathToRestults, std::string &expression, vectors &msa) {
+
+//----------------------------------------------------------------------------//
+
+
+void write_results(std::string &pathToResults, std::string &expression, vectors &msa) {
     std::ofstream file ;
-    file.open(pathToRestults) ;
+    file.open(pathToResults) ;
     if (!file.is_open()) {
         exit(1) ;
     }
@@ -37,3 +41,18 @@ void write_results(std::string &pathToRestults, std::string &expression, vectors
         file << "\n" ;
     }
 }
+
+
+//----------------------------------------------------------------------------//
+
+
+// void write_csv(std::string &pathToParameters, std::string &pathToResults, vectors &msa) {
+//     std:: ofstream file ;
+//     pathToResults = pathToResults.substr(0, pathToResults.find('.')) + ".csv" ;
+//     pathToParameters = pathToParameters.substr(pathToParameters.find_last_not_of('/')+1) ;
+//     if (!file.is_open()) {
+//         exit(1) ;
+//     }
+//     file << pathToParameters << ";" << "score_nw;score_e;match_e;score_g;proj_length\n" ;
+
+// }

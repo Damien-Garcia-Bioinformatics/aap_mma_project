@@ -16,6 +16,9 @@
 #include "structures.hpp"
 
 
+//----------------------------------------------------------------------------//
+
+
 float del(vectors &elem1, size_t pos) {
     float delCost {0} ;
     for (size_t i=0 ; i<elem1.size() ; i++) {
@@ -30,6 +33,9 @@ float del(vectors &elem1, size_t pos) {
 }
 
 
+//----------------------------------------------------------------------------//
+
+
 float ins(vectors &elem2, size_t pos) {
     float insCost {0} ;
     for (size_t i=0 ; i<elem2.size() ; i++) {
@@ -42,6 +48,9 @@ float ins(vectors &elem2, size_t pos) {
     insCost = insCost / elem2.size() ;
     return insCost ;
 }
+
+
+//----------------------------------------------------------------------------//
 
 
 float sub(vectors &elem1, vectors &elem2, size_t pos1, size_t pos2) {
@@ -63,6 +72,9 @@ float sub(vectors &elem1, vectors &elem2, size_t pos1, size_t pos2) {
     subCost = subCost / ((elem1.size()+elem2.size())-1) ;
     return subCost ;
 }
+
+
+//----------------------------------------------------------------------------//
 
 
 wireMatrix wireMatrix_scoring(vectors &elem1, vectors &elem2) {
@@ -89,6 +101,9 @@ wireMatrix wireMatrix_scoring(vectors &elem1, vectors &elem2) {
 
     return matrix ;
 }
+
+
+//----------------------------------------------------------------------------//
 
 
 vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
@@ -167,6 +182,9 @@ vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
 }
 
 
+//----------------------------------------------------------------------------//
+
+
 void print_alignment(vectors &aligned) {
     // Print alignment
     size_t maxLength {0} ;
@@ -182,6 +200,10 @@ void print_alignment(vectors &aligned) {
         std::cout << "\n" ;
     }
 }
+
+
+//----------------------------------------------------------------------------//
+
 
 void print_alignment_v2(vectors aligned) {
     for (size_t i=0 ; i<aligned.size() ; i++) {

@@ -12,6 +12,9 @@
 #include "wirematrix.hpp"
 
 
+//----------------------------------------------------------------------------//
+
+
 msaFormat generate_msa(vectors &traces) {
     msaFormat msa ;
     vectors temp ;
@@ -22,6 +25,9 @@ msaFormat generate_msa(vectors &traces) {
     }
     return msa ;
 }
+
+
+//----------------------------------------------------------------------------//
 
 
 dissimMatrix generate_dissimilarity_matrix(msaFormat &msa) {
@@ -38,7 +44,11 @@ dissimMatrix generate_dissimilarity_matrix(msaFormat &msa) {
     }
     return D ;
 }
- 
+
+
+//----------------------------------------------------------------------------//
+
+
 std::pair<size_t,size_t> find_lowest_dissim(dissimMatrix &D) {
     float lowestScore {D[1][0][D[1][0].size()-1][D[1][0][0].size()-1]} ;
     std::pair<size_t, size_t> lowestPos(1,0) ;
@@ -55,6 +65,9 @@ std::pair<size_t,size_t> find_lowest_dissim(dissimMatrix &D) {
 }
 
 
+//----------------------------------------------------------------------------//
+
+
 // Prints the dissimilarity matrix
 void print_dissimMatrix(dissimMatrix &D) {
     for (size_t i=0 ; i<D.size() ; i++) {
@@ -68,6 +81,9 @@ void print_dissimMatrix(dissimMatrix &D) {
 }
 
 
+//----------------------------------------------------------------------------//
+
+
 void update_msa(msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest) {
     // Removes vectors that needs to be aggregated
     msa.erase(msa.begin()+lowest.first) ;
@@ -75,6 +91,10 @@ void update_msa(msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest
     // Adds the aggregated and aligned version
     msa.push_back(align) ;
 }
+
+
+//----------------------------------------------------------------------------//
+
 
 void update_dissimMatrix(dissimMatrix &D, msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest) {
     // Removes data that needs to be aggregated
