@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 	std::string pathInput {argv[1]}, pathOutput {argv[2]} ;
 
     std::vector<scores> allScores ;
-    for(const auto& dirEntry : std::filesystem::directory_iterator(pathInput)){
+    for (const auto& dirEntry : std::filesystem::directory_iterator(pathInput)) {
         std::string path {dirEntry.path()} ;
         vectors msa {read_align(path)} ;
         scores fileScores ;
