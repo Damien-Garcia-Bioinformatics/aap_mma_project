@@ -12,13 +12,13 @@
 .PHONY: clean rebuild
 
 all:
-	cd data_generation && $(MAKE) all && cd ../alignment && $(MAKE) all
+	cd data_generation && $(MAKE) all && cd ../alignment && $(MAKE) all && cd ../quality_analysis && $(MAKE) all
 
 rebuild:
-	cd data_generation && $(MAKE) rebuild && cd ../alignment && $(MAKE) rebuild
+	cd data_generation && $(MAKE) rebuild && cd ../alignment && $(MAKE) rebuild && cd ../quality_analysis && $(MAKE) rebuild
 
 clean:
-	cd data_generation && $(MAKE) clean && cd ../alignment && $(MAKE) clean
+	cd data_generation && $(MAKE) clean && cd ../alignment && $(MAKE) clean && cd ../quality_analysis && $(MAKE) clean
 
 
 ####################################################
