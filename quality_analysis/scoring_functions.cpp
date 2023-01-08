@@ -16,7 +16,7 @@
 #include "scoring_functions.hpp"
 
 
-elemAtPos map_position(vectors &msa, size_t pos) {
+elemAtPos map_position(const vectors &msa, size_t pos) {
     std::map<std::string,size_t> elements ;
     for (size_t i=0 ; i<msa.size() ; i++) {
         if (elements.find(msa[i][pos]) == elements.end()) {

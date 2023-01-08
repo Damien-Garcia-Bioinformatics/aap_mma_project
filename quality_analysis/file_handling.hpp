@@ -16,13 +16,19 @@
 #include <string>
 #include <fstream>
 
-#include "../alignment/structures.hpp"
+#include "structures.hpp"
 
 
 /// @brief 
 /// @param  
 /// @param  
-void read_align(std::string &, vectors &) ;
+vectors read_align(const std::string &) ;
+
+
+/// @brief 
+/// @param  
+/// @param  
+void write_csv(std::string &, std::vector<scores> &) ;
 
 
 #endif

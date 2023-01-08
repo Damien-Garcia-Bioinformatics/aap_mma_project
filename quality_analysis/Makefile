@@ -16,7 +16,7 @@
 EXE = main
 MAIN = main.cpp
 CXX = g++
-CXXFLAGS = -Wall -O2
+CXXFLAGS = -std=c++17 -Wall -O2
 OBJECTS = scoring_functions.o file_handling.o
 
 

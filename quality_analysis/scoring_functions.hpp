@@ -13,10 +13,7 @@
 
 #include <map>
 
-#include "../alignment/structures.hpp"
-
-
-using elemAtPos = std::map<std::string,size_t> ;
+#include "structures.hpp"
 
 
 /// @brief 

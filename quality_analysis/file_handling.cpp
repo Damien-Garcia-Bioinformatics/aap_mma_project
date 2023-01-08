@@ -15,7 +15,8 @@
 #include "file_handling.hpp"
 
 
-void read_align(std::string &path, vectors &msa) {
+vectors read_align(const std::string &path) {
+    vectors msa ;
     std::ifstream file ;
     file.open(path) ;
     if (!file.is_open()) {
@@ -41,13 +42,22 @@ void read_align(std::string &path, vectors &msa) {
             msa.push_back(trace) ;
         }
     }
+    return msa ;
 }
 
 
-void write_csv(std::string &path) {
+void write_csv(std::string &path, std::vector<scores> &allScores) {
     std::ofstream file ;
     file.open(path) ;
     if (!file.is_open()) {
         exit(1) ;
+    }
+    file << "file;score_e;match_e;score_g;proj_length\n" ;
+    for (size_t i=0 ; i<allScores.size() ; i++) {
+        file << allScores[i].fileName << ";"
+             << allScores[i].score_e << ";"
+             << allScores[i].match_e << ";"
+             << allScores[i].score_g << ";"
+             << allScores[i].proj_length << "\n" ;
     }
 }
