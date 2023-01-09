@@ -8,6 +8,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
+#include <iostream>
 #include <string>
 #include <vector>
 #include <fstream>
@@ -67,9 +68,10 @@ size_t match_e(const vectors &msa) {
 
 size_t score_g(const vectors &msa) {
     size_t score {0} ;
+    std::cout << msa.size() << "   " << msa[0].size() << "\n" ;
     for (size_t i=0 ; i<msa.size() ; i++) {
         for (size_t j=0 ; j<msa[i].size() ; j++) {
-            if (msa[i][j] == "-") {
+            if (msa[i][j].find("-") != std::string::npos) {
                 score++ ;
             }
         }
@@ -78,5 +80,5 @@ size_t score_g(const vectors &msa) {
 }
 
 size_t proj_length(const vectors &msa) {
-    return ((size_t)(msa[0].size())) ;
+    return (msa[0].size()) ;
 }

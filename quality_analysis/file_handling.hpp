@@ -22,6 +22,12 @@
 /// @brief 
 /// @param  
 /// @param  
+long get_time(const std::string &) ;
+
+
+/// @brief 
+/// @param  
+/// @param  
 vectors read_align(const std::string &) ;
 
 

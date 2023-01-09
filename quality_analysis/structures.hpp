@@ -23,6 +23,7 @@ using vectors = std::vector<std::vector<std::string>> ;
 
 struct scores {
     std::string fileName ;
+    long time ;
     size_t score_e ;
     size_t match_e ;
     size_t score_g ;

@@ -14,6 +14,7 @@
 
 #include <string>
 #include <vector>
+#include <chrono>
 
 #include "structures.hpp"
 
@@ -21,7 +22,7 @@
 /// @param  string : Path to file where to store results.
 /// @param  string : Expression used to generate the sequences.
 /// @param  vector_vector_string : Mutiple Sequence Alignment result.
-void write_results(std::string &, std::string &, vectors &) ;
+void write_results(std::string &, std::string &, vectors &, long) ;
 
 
 #endif

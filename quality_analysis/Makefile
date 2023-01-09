@@ -42,3 +42,12 @@ clean:
 # Combination of "make clean" and "make all" commands
 rebuild:
 	$(MAKE) clean all
+
+
+##############################################################################
+#                          Test Execution of program                         #
+##############################################################################
+
+# Generates scores for all files in examples/alignment files
+test_scoring:
+	./$(EXE) ../examples/alignment/ ../examples/scoring/scores.csv

@@ -19,7 +19,7 @@
 void read_trace(std::string &line, traceFormat &trace) {
 	std::string temp ;
 	for (size_t i=0 ; i<line.size() ; i++) {
-		if (line[i] == ' ') {
+		if (line[i] == ' ' && !temp.empty()) {
 			trace.push_back(temp) ;
 			temp.clear() ;
 		} else {
