@@ -107,8 +107,20 @@ wireMatrix wireMatrix_scoring(vectors &elem1, vectors &elem2) {
 
 
 vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
-    size_t x {elem1[0].size()-1} ;
-    size_t y {elem2[0].size()-1} ;
+    // std::cout << "elem1\n" ;
+    // for (size_t i=0 ; i<elem1.size() ; i++) {
+    //     for (size_t j=0 ; j<elem1[i].size() ; j++) {
+    //         std::cout << elem1[i][j] << " " ;
+    //     }
+    //     std::cout << "\n" ;
+    // }
+    // std::cout << "elem2\n" ;
+    // for (size_t i=0 ; i<elem1.size() ; i++) {
+    //     for (size_t j=0 ; j<elem2[i].size() ; j++) {
+    //         std::cout << elem2[i][j] << " " ;
+    //     }
+    //     std::cout << "\n" ;
+    // }
     
     alignment aligned ;
     for (size_t i=0 ; i<elem1.size() ; i++) {
@@ -118,7 +130,9 @@ vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
         aligned.elem2.push_back(traceFormat()) ;
     }
 
-    while (x!=0 && y!= 0) {
+    size_t x {elem1[0].size()-1}, y {elem2[0].size()-1} ;
+    
+    while (x != 0 && y != 0) {
         float goUp {matrix[x][y-1]} ;
         float goLeft {matrix[x-1][y]} ;
         float goDiag {matrix[x-1][y-1]} ;
@@ -148,7 +162,7 @@ vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
             x-- ;
         }
     }
-    while (x!=0) {
+    while (x != 0) {
         for (size_t i=0 ; i<elem1.size() ; i++) {
             aligned.elem1[i].push_back(elem1[i][x]) ;
         }
@@ -157,7 +171,7 @@ vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
         }
         x-- ;
     }
-    while (y!=0) {
+    while (y != 0) {
         for (size_t i=0 ; i<elem1.size() ; i++) {
             aligned.elem1[i].push_back("-") ;
         }
@@ -166,6 +180,7 @@ vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
         }
         y-- ;
     }
+    std::cout << aligned.elem1[0].size() << "\n" ;
 
     // Reverse the alignment
     vectors newElem ;
@@ -177,6 +192,14 @@ vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
         std::reverse(aligned.elem2[i].begin(), aligned.elem2[i].end()) ;
         newElem.push_back(aligned.elem2[i]) ;
     }
+
+    // std::cout << "newElem\n" ;
+    // for (size_t i=0 ; i<newElem.size() ; i++) {
+    //     for (size_t j=0 ; j<newElem[i].size() ; j++) {
+    //         std::cout << newElem[i][j] << " " ;
+    //     }
+    //     std::cout << "\n" ;
+    // }
 
     return newElem ;
 }

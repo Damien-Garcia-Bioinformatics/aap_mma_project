@@ -35,12 +35,12 @@ int main(int argc, char* argv[]) {
     vectors traces ;
     read_file(pathToParameters, expression, traces) ;
 
-    for (size_t i=0 ; i<traces.size() ; i++) {
-        for (size_t j=0 ; j<traces[i].size() ; j++) {
-            std::cout << traces[i][j] << " " ;
-        }
-        std::cout << "\n" ;
-    }
+    // for (size_t i=0 ; i<traces.size() ; i++) {
+    //     for (size_t j=0 ; j<traces[i].size() ; j++) {
+    //         std::cout << traces[i][j] << " " ;
+    //     }
+    //     std::cout << "\n" ;
+    // }
 
     // Begin execution time calculation
     auto begin {std::chrono::high_resolution_clock::now()} ;
@@ -49,16 +49,19 @@ int main(int argc, char* argv[]) {
     std::cout << "[MSA] Generation of Multiple Sequence Alignment\n" ;
     msaFormat msa {generate_msa(traces)} ;
 
-    for (size_t i=0 ; msa.size() ; i++) {
-        for (size_t j=0 ; j<msa[i].size() ; j++) {
-            for (size_t k=0 ; k<msa[i][j].size() ; k++) {
-                std::cout << msa[i][j][k] << " " ;
-            }
-            std::cout << "\n" ;
-        }
-    }
 
     dissimMatrix dissimilarity {generate_dissimilarity_matrix(msa)} ;
+
+
+    // std::cout << "Before error :\n" ;
+    // for (size_t i=0 ; i<msa.size() ; i++) {
+    //     for (size_t j=0 ; j<msa[i].size() ; j++) {
+    //         for (size_t k=0 ; k<msa[i][j].size() ; k++) {
+    //             std::cout << msa[i][j][k] << " " ;
+    //         }
+    //         std::cout << "\n" ;
+    //     }
+    // }
 
     // Performing MSA (step by step aggreagation of sequences)
     while (msa.size() > 1) {
@@ -72,12 +75,13 @@ int main(int argc, char* argv[]) {
     auto end {std::chrono::high_resolution_clock::now()} ;
     long elapsed {std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count()} ;
     
-    for (size_t i=0 ; i<msa[0].size() ; i++) {
-        for (size_t j=0 ; j<msa[0][i].size() ; j++) {
-            std::cout << msa[0][i][j] << " " ;
-        }
-        std::cout << "\n" ;
-    }
+    // std::cout << "After error :\n" ;
+    // for (size_t i=0 ; i<msa[0].size() ; i++) {
+    //     for (size_t j=0 ; j<msa[0][i].size() ; j++) {
+    //         std::cout << msa[0][i][j] << " " ;
+    //     }
+    //     std::cout << "\n" ;
+    // }
 
 
     // Showing results in terminal and saving in file

@@ -18,7 +18,9 @@
 
 #include "structures.hpp"
 
-
+/// @brief 
+/// @param  
+/// @return 
 msaFormat generate_msa(vectors &) ;
 
 
@@ -39,13 +41,21 @@ std::pair<size_t,size_t> find_lowest_dissim(dissimMatrix &) ;
 /// @param  
 void update_matrix(dissimMatrix &, std::pair<size_t,size_t>) ;
 
-
+/// @brief 
+/// @param  
 void print_dissimMatrix(dissimMatrix &) ;
 
-
+/// @brief 
+/// @param  
+/// @param  
+/// @param  
 void update_msa(msaFormat &, vectors &, std::pair<size_t,size_t> &) ;
 
-
+/// @brief 
+/// @param  
+/// @param  
+/// @param  
+/// @param  
 void update_dissimMatrix(dissimMatrix &, msaFormat &, vectors &, std::pair<size_t,size_t> &) ;
 
 
