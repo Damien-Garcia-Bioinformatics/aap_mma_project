@@ -88,6 +88,7 @@ void update_msa(msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest
     // Removes vectors that needs to be aggregated
     msa.erase(msa.begin()+lowest.first) ;
     msa.erase(msa.begin()+lowest.second) ;
+    
     // Adds the aggregated and aligned version
     msa.push_back(align) ;
 }

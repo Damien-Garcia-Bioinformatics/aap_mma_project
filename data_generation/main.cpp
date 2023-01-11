@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 		exit(1) ;
 	}
 	std::string pathToParameters {argv[1]}, pathToResults {argv[2]} ;
-
+	
 	// Reading generation parameters from file passed in program command line parameter.
 	std::cout << "[dataGen] Reading generation parameters from : " << pathToParameters << "\n" ;
 	parameters tracesParameters ;
