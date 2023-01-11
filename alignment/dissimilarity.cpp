@@ -8,6 +8,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
+#include <iomanip>
+
 #include "dissimilarity.hpp"
 #include "wirematrix.hpp"
 
@@ -70,11 +72,12 @@ std::pair<size_t,size_t> find_lowest_dissim(dissimMatrix &D) {
 
 // Prints the dissimilarity matrix
 void print_dissimMatrix(dissimMatrix &D) {
+    std::cout << std::setprecision(1) << std::fixed ;
     for (size_t i=0 ; i<D.size() ; i++) {
         for (size_t j=0 ; j<D[i].size() ; j++) {
             float val {D[i][j][D[i][j].size()-1][D[i][j][0].size()-1]} ;
-            val = ((float)((int)(val*10))/10) ;
-            std::cout << val << "  " ;
+            // .back() method must be avoided because of undefined behavior on empty vectors
+            std::cout << std::right << std::setw(6) << val ;
         }
         std::cout << "\n" ;
     }
@@ -103,13 +106,14 @@ void update_dissimMatrix(dissimMatrix &D, msaFormat &msa, vectors &align, std::p
         if (D[i].size() >= lowest.first) {
             D[i].erase(D[i].begin()+lowest.first) ;
         }
-        if (lowest.second != 0) {
-            if (D[i].size() >= lowest.second) {
-                D[i].erase(D[i].begin()+lowest.second) ;
-            }                
-        }
     }
     D.erase(D.begin()+lowest.first) ;
+
+    for (size_t i=0 ; i<D.size() ; i++) {
+        if (D[i].size() > lowest.second) {
+            D[i].erase(D[i].begin()+lowest.second) ;
+        }                
+    }
     D.erase(D.begin()+lowest.second) ;
 
     // Adds the dissimilarity and wireMatrix from newly aggregated and aligned vectors

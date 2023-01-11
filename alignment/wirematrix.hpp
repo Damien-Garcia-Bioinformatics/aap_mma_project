@@ -38,5 +38,7 @@ void print_alignment(vectors &) ;
 
 void print_alignment_v2(vectors) ;
 
+void print_wirematrix(wireMatrix &) ;
+
 
 #endif
