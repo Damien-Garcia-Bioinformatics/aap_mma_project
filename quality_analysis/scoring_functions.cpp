@@ -10,6 +10,7 @@
 
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <vector>
 #include <fstream>
@@ -79,7 +80,7 @@ size_t match_e(const vectors &msa) {
 
 size_t score_g(const vectors &msa) {
     size_t score {0} ;
-    std::cout << msa.size() << "   " << msa[0].size() << "\n" ;
+    // std::cout << msa.size() << "   " << msa[0].size() << "\n" ;
     for (size_t i=0 ; i<msa.size() ; i++) {
         for (size_t j=0 ; j<msa[i].size() ; j++) {
             if (msa[i][j].find("-") != std::string::npos) {
@@ -96,4 +97,19 @@ size_t score_g(const vectors &msa) {
 
 size_t proj_length(const vectors &msa) {
     return (msa[0].size()) ;
+}
+
+
+/* ------------------------------ PRINT_SCORES ------------------------------ */
+
+
+void print_scores(const std::vector<scores> &allScores) {
+    for (size_t i=0 ; i<allScores.size() ; i++) {
+        std::cout << "  file_name = " << allScores[i].fileName << "\n" ;
+        std::cout << "  exec_time = " << allScores[i].time << "\n" ;
+        std::cout << "    score_e = " << allScores[i].score_e << "\n" ;
+        std::cout << "    match_e = " << allScores[i].match_e << "\n" ;
+        std::cout << "    score_g = " << allScores[i].score_g << "\n" ;
+        std::cout << "proj_length = " << allScores[i].proj_length << "\n\n" ;
+    }
 }

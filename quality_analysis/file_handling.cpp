@@ -51,9 +51,11 @@ vectors read_align(const std::string &path) {
     while (getline(file, line)) {
         if (line[0] != '#' && !line.empty()) {
             for (size_t i=0 ; i<line.size() ; i++) {
-                if (line[i] == ' ' && !temp.empty()) {
-                    trace.push_back(temp) ;
-                    temp.clear() ;
+                if (line[i] == ' ') {
+                    if (!temp.empty()) {
+                        trace.push_back(temp) ;
+                        temp.clear() ;
+                    }
                 } else {
                     temp += line[i] ;
                 }
@@ -63,6 +65,7 @@ vectors read_align(const std::string &path) {
                 temp.clear() ;
             }
             msa.push_back(trace) ;
+            trace.clear() ;
         }
     }
     return msa ;
@@ -78,7 +81,7 @@ void write_csv(std::string &path, std::vector<scores> &allScores) {
     if (!file.is_open()) {
         exit(1) ;
     }
-    file << "file;time;score_e;match_e;score_g;proj_length\n" ;
+    file << "file_name;exec_time;score_e;match_e;score_g;proj_length\n" ;
     for (size_t i=0 ; i<allScores.size() ; i++) {
         file << allScores[i].fileName << ";"
              << allScores[i].time << ";"

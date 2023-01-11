@@ -18,7 +18,7 @@ EXE = main
 MAIN = main.cpp
 CXX = g++
 CXXFLAGS = -Wall -O2
-OBJECTS = read_traces.o wirematrix.o dissimilarity.o write_results.o miscellaneous.o
+OBJECTS = file_handling.o wirematrix.o dissimilarity.o miscellaneous.o
 
 
 # Creates executable file
@@ -27,17 +27,14 @@ all: $(OBJECTS)
 
 
 # Creation of object files of data generation functions
-read_traces.o:
-	$(CXX) $(CXXFLAGS) -c read_traces.cpp
+file_handling.o:
+	$(CXX) $(CXXFLAGS) -c file_handling.cpp
 
 wirematrix.o:
 	$(CXX) $(CXXFLAGS) -c wirematrix.cpp
 
 dissimilarity.o:
 	$(CXX) $(CXXFLAGS) -c dissimilarity.cpp
-
-write_results.o:
-	$(CXX) $(CXXFLAGS) -c write_results.cpp
 
 miscellaneous.o:
 	$(CXX) $(CXXFLAGS) -c miscellaneous.cpp

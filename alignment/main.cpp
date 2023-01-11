@@ -16,10 +16,9 @@
 #include <chrono>
 
 #include "structures.hpp"
-#include "read_traces.hpp"
+#include "file_handling.hpp"
 #include "dissimilarity.hpp"
 #include "wirematrix.hpp"
-#include "write_results.hpp"
 
 
 int main(int argc, char* argv[]) {
@@ -56,9 +55,8 @@ int main(int argc, char* argv[]) {
     auto end {std::chrono::high_resolution_clock::now()} ;
     long elapsed {std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count()} ;
 
-    // Showing results in terminal and saving in file
+    // Saving alignment results to output file
     std::cout << "[MSA] Writing results to : " << pathToResults << "\n" ;
-    // print_alignment_v2(msa[0]) ;
     write_results(pathToResults, expression, msa[0], elapsed) ;
 
     return 0 ;

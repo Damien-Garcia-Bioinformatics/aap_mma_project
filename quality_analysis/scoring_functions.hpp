@@ -49,4 +49,9 @@ size_t score_g(const vectors &) ;
 size_t proj_length(const vectors &) ;
 
 
+/// @brief 
+/// @param  
+void print_scores(const std::vector<scores> &) ;
+
+
 #endif
