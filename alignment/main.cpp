@@ -63,6 +63,13 @@ int main(int argc, char* argv[]) {
     //     }
     // }
 
+    // for (size_t i=0 ; i<dissimilarity[3][2].size() ; i++) {
+    //     for(size_t j=0 ; j<dissimilarity[3][2][i].size() ; j++) {
+    //         std::cout << dissimilarity[3][2][i][j] << "  " ;
+    //     }
+    //     std::cout << "\n" ;
+    // }
+
     // Performing MSA (step by step aggreagation of sequences)
     while (msa.size() > 1) {
         std::pair<size_t,size_t> lowest {find_lowest_dissim(dissimilarity)} ;
