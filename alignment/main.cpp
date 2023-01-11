@@ -12,8 +12,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <math.h>
-#include <chrono>
+// #include <math.h>
+#include <ctime>
 
 #include "structures.hpp"
 #include "file_handling.hpp"
@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
     read_file(pathToParameters, expression, traces) ;
 
     // Begin execution time calculation
-    auto begin {std::chrono::high_resolution_clock::now()} ;
+    std::clock_t cpuTimeStart {std::clock()} ;
 
     // Dissimilarity matrix and MSA initialization
     std::cout << "[MSA] Generation of Multiple Sequence Alignment\n" ;
@@ -52,12 +52,12 @@ int main(int argc, char* argv[]) {
     }
 
     // Ending execution time calculation
-    auto end {std::chrono::high_resolution_clock::now()} ;
-    long elapsed {std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count()} ;
+    std::clock_t cpuTimeStop {std::clock()} ;
+    long cpuTimeElapse {1000 * (cpuTimeStop - cpuTimeStart) / CLOCKS_PER_SEC} ;
 
     // Saving alignment results to output file
     std::cout << "[MSA] Writing results to : " << pathToResults << "\n" ;
-    write_results(pathToResults, expression, msa[0], elapsed) ;
+    write_results(pathToResults, expression, msa[0], cpuTimeElapse) ;
 
     return 0 ;
 }

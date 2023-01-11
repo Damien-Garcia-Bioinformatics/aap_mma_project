@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
     // Writing results to csv file at pathOutput.
     write_csv(pathOutput, allScores) ;
     
-    // print_scores(allScores) ;
+    print_scores(allScores) ;
 
     return 0 ;
 }

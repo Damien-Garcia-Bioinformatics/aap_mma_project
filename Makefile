@@ -39,22 +39,22 @@ clean:
 
 
 test_simple:
-	cd data_generation && $(MAKE) test_simple && cd ../alignment && $(MAKE) test_simple
+	cd data_generation && $(MAKE) -s test_simple && cd ../alignment && $(MAKE) -s test_simple
 
 test_complex:
-	cd data_generation && $(MAKE) test_complex && cd ../alignment && $(MAKE) test_complex
+	cd data_generation && $(MAKE) -s test_complex && cd ../alignment && $(MAKE) -s test_complex
 
 test_semantic1:
-	cd data_generation && $(MAKE) test_semantic1
+	cd data_generation && $(MAKE) -s test_semantic1
 
 test_semantic2:
-	cd data_generation && $(MAKE) test_semantic2
+	cd data_generation && $(MAKE) -s test_semantic2
 
 test_semantic3:
-	cd data_generation && $(MAKE) test_semantic3
+	cd data_generation && $(MAKE) -s test_semantic3
 
 test_semantic4:
-	cd data_generation && $(MAKE) test_semantic4
+	cd data_generation && $(MAKE) -s test_semantic4
 
 test_scoring:
-	cd quality_analysis && $(MAKE) test_scoring
+	cd quality_analysis && $(MAKE) -s test_scoring

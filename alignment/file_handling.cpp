@@ -12,7 +12,6 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <chrono>
 
 #include "file_handling.hpp"
 
