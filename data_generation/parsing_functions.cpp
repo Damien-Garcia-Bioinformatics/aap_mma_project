@@ -3,16 +3,18 @@
 // M2BB
 
 
-////////////////////////////////////////////////////////////////////////////////
-//                           Functions definition                             //
-////////////////////////////////////////////////////////////////////////////////
+
+/* -------------------------------------------------------------------------- */
+/*                            Functions definition                            */
+/* -------------------------------------------------------------------------- */
 
 
 #include <iostream>
+
 #include "parsing_functions.hpp"
 
 
-//----------------------------------------------------------------------------//
+/* ---------------------------- EXTRACT-INTERVAL ---------------------------- */
 
 
 // Procedure that extracts minimum and maximum values from interval and stores these values in generation structure.
@@ -24,7 +26,7 @@ void extract_interval(const std::string &expression, genParam &generation) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* ---------------------------- EXTRACT-TYPE-GEN ---------------------------- */
 
 
 // Procedure that extracts the generation type and stores it in generation structure.
@@ -37,7 +39,7 @@ void extract_type_gen(const std::string &expression, genParam &generation) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* ---------------------- EXTRACT-EVENTS-AND-ATTRIBUTES --------------------- */
 
 
 // Procedure that extracts potential events and attributes from complex generative regions and stores them in generation structure.
@@ -78,7 +80,7 @@ void extract_events_and_attributes(const std::string &expression, genParam &gene
 }
 
 
-//----------------------------------------------------------------------------//
+/* ------------------------------- ADD-SECTION ------------------------------ */
 
 
 // 
@@ -91,7 +93,7 @@ void add_section(data &sections, std::string &section, size_t type) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* --------------------------- EXPRESSION-DIVIDER --------------------------- */
 
 
 // Procedure used to create segments of the expression passed in parameter.
@@ -133,7 +135,7 @@ void expression_divider(std::string &expression, data &sections) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* ---------------------------- EXPRESSION-PARSER --------------------------- */
 
 
 //Procedure used to parse each segment, extract generation parameters and store them in a structure.

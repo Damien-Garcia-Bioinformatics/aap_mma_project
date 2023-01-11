@@ -3,9 +3,11 @@
 // M2BB
 
 
-////////////////////////////////////////////////////////////////////////////////
-//                           Functions declaration                            //
-////////////////////////////////////////////////////////////////////////////////
+
+/* -------------------------------------------------------------------------- */
+/*                            Functions declaration                           */
+/* -------------------------------------------------------------------------- */
+
 
 #ifndef __READ_TRACES__
 #define __READ_TRACES__
@@ -13,22 +15,20 @@
 
 #include <string>
 #include <vector>
+
 #include "structures.hpp"
 
 
-/**
- * @brief 
- * @param
- * @param
- */
+/// @brief 
+/// @param  
+/// @param  
 void read_trace(std::string &, std::vector<std::string> &) ;
 
 
-/**
- * @brief 
- * @param
- * @param
- */
+/// @brief 
+/// @param  
+/// @param  
+/// @param  
 void read_file(std::string &, std::string &, vectors &) ;
 
 

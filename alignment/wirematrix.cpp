@@ -3,9 +3,10 @@
 // M2BB
 
 
-////////////////////////////////////////////////////////////////////////////////
-//                           Functions definition                             //
-////////////////////////////////////////////////////////////////////////////////
+
+/* -------------------------------------------------------------------------- */
+/*                            Functions definition                            */
+/* -------------------------------------------------------------------------- */
 
 
 #include <iostream>
@@ -18,23 +19,23 @@
 #include "structures.hpp"
 
 
-//------------------------------GLOBAL-VARIABLES------------------------------//
+/* ---------------------------- GLOBAL-VARIABLES ---------------------------- */
 
 // Note to the reader :
 // Global variables are almost always a bad practice. Here, for the purpose of testing
 // many different scoring parameters, they allow easier manipulation and limit the search
 // in the many lines of the following functions and procedures.
 
-const float INDEL_TOP {1} ;
-const float INDEL_GAP {2} ;
-const float INDEL_ELSE {6} ;
+const float     INDEL_TOP {1} ;
+const float     INDEL_GAP {2} ;
+const float    INDEL_ELSE {6} ;
 
-const float MATCH {0} ;
+const float   SUBST_MATCH {0} ;
 const float SUBST_GAP_TOP {2} ;
-const float SUBST_ELSE {2} ;
+const float    SUBST_ELSE {2} ;
 
 
-//----------------------------------------------------------------------------//
+/* ----------------------------------- DEL ---------------------------------- */
 
 
 float del(vectors &elem1, size_t pos) {
@@ -53,7 +54,7 @@ float del(vectors &elem1, size_t pos) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* ----------------------------------- INS ---------------------------------- */
 
 
 float ins(vectors &elem2, size_t pos) {
@@ -72,7 +73,7 @@ float ins(vectors &elem2, size_t pos) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* ----------------------------------- SUB ---------------------------------- */
 
 
 float sub(vectors &elem1, vectors &elem2, size_t pos1, size_t pos2) {
@@ -81,7 +82,7 @@ float sub(vectors &elem1, vectors &elem2, size_t pos1, size_t pos2) {
         for (size_t j=0 ; j<elem2.size() ; j++) {
             if (i <= j) {
                 if (elem1[i][pos1] == elem2[j][pos2]) {
-                    subCost += MATCH ;
+                    subCost += SUBST_MATCH ;
                 } else if ((elem1[i][pos1] == "." && elem2[j][pos2] != "-") ||
                            (elem2[j][pos2] == "." && elem1[i][pos1] != "-")) {
                     subCost += SUBST_GAP_TOP ;
@@ -96,7 +97,7 @@ float sub(vectors &elem1, vectors &elem2, size_t pos1, size_t pos2) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* --------------------------- WIREMATRIX-SCORING --------------------------- */
 
 
 wireMatrix wireMatrix_scoring(vectors &elem1, vectors &elem2) {
@@ -127,71 +128,45 @@ wireMatrix wireMatrix_scoring(vectors &elem1, vectors &elem2) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* ----------------------------- PAIRWISE-ALIGN ----------------------------- */
 
 
 vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
-    print_wirematrix(matrix) ;
-    
     alignment aligned ;
-    for (size_t i=0 ; i<elem1.size() ; i++) {
-        aligned.elem1.push_back(traceFormat()) ;
-    }
-    for (size_t i=0 ; i<elem2.size() ; i++) {
-        aligned.elem2.push_back(traceFormat()) ;
-    }
-    size_t x {matrix.size()-1}, y {matrix[0].size()-1} ;
+    for (size_t i=0 ; i<elem1.size() ; i++) aligned.elem1.push_back(traceFormat()) ;
+    for (size_t i=0 ; i<elem2.size() ; i++) aligned.elem2.push_back(traceFormat()) ;
 
+    size_t x {matrix.size()-1}, y {matrix[0].size()-1} ;
     while (x != 0 && y != 0) {
         float goUp {matrix[x][y-1]} ;
         float goLeft {matrix[x-1][y]} ;
         float goDiag {matrix[x-1][y-1]} ;
 
         if (goDiag <= goUp && goDiag <= goLeft) {
-            for (size_t i=0 ; i<elem1.size() ; i++) {
-                aligned.elem1[i].push_back(elem1[i][x-1]) ;
-            }
-            for (size_t i=0 ; i<elem2.size() ; i++) {
-                aligned.elem2[i].push_back(elem2[i][y-1]) ;
-            }
+            for (size_t i=0 ; i<elem1.size() ; i++) aligned.elem1[i].push_back(elem1[i][x-1]) ;
+            for (size_t i=0 ; i<elem2.size() ; i++) aligned.elem2[i].push_back(elem2[i][y-1]) ;
             x-- ; y-- ;
         } else if (goUp < goLeft) {
-            for (size_t i=0 ; i<elem1.size() ; i++) {
-                aligned.elem1[i].push_back("-") ;
-            }
-            for (size_t i=0 ; i<elem2.size() ; i++) {
-                aligned.elem2[i].push_back(elem2[i][y-1]) ;
-            }
+            for (size_t i=0 ; i<elem1.size() ; i++) aligned.elem1[i].push_back("-") ;
+            for (size_t i=0 ; i<elem2.size() ; i++) aligned.elem2[i].push_back(elem2[i][y-1]) ;
             y-- ;
         } else {
-            for (size_t i=0 ; i<elem1.size() ; i++) {
-                aligned.elem1[i].push_back(elem1[i][x-1]) ;
-            }
-            for (size_t i=0 ; i<elem2.size() ; i++) {
-                aligned.elem2[i].push_back("-") ;
-            }
+            for (size_t i=0 ; i<elem1.size() ; i++) aligned.elem1[i].push_back(elem1[i][x-1]) ;
+            for (size_t i=0 ; i<elem2.size() ; i++) aligned.elem2[i].push_back("-") ;
             x-- ;
         }
     }
     while (x != 0) {
-        for (size_t i=0 ; i<elem1.size() ; i++) {
-            aligned.elem1[i].push_back(elem1[i][x-1]) ;
-        }
-        for (size_t i=0 ; i<elem2.size() ; i++) {
-            aligned.elem2[i].push_back("-") ;
-        }
+        for (size_t i=0 ; i<elem1.size() ; i++) aligned.elem1[i].push_back(elem1[i][x-1]) ;
+        for (size_t i=0 ; i<elem2.size() ; i++) aligned.elem2[i].push_back("-") ;
         x-- ;
     }
     while (y != 0) {
-        for (size_t i=0 ; i<elem1.size() ; i++) {
-            aligned.elem1[i].push_back("-") ;
-        }
-        for (size_t i=0 ; i<elem2.size() ; i++) {
-            aligned.elem2[i].push_back(elem2[i][y-1]) ;
-        }
+        for (size_t i=0 ; i<elem1.size() ; i++) aligned.elem1[i].push_back("-") ;
+        for (size_t i=0 ; i<elem2.size() ; i++) aligned.elem2[i].push_back(elem2[i][y-1]) ;
         y-- ;
     }
-
+    
     // Reverse the alignment
     vectors newElem ;
     for (size_t i=0 ; i<aligned.elem1.size() ; i++) {
@@ -203,99 +178,34 @@ vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
         newElem.push_back(aligned.elem2[i]) ;
     }
 
-    std::cout << "[elem1] :\n" ;
-    for (size_t i=0 ; i<elem1.size() ; i++) {
-        for (size_t j=0 ; j<elem1[i].size() ; j++) {
-            std::cout << elem1[i][j] << " " ;
+    { //Debug
+        std::cout << "[elem1] :\n" ;
+        for (size_t i=0 ; i<elem1.size() ; i++) {
+            for (size_t j=0 ; j<elem1[i].size() ; j++) {
+                std::cout << elem1[i][j] << " " ;
+            }
+            std::cout << "\n" ;
         }
         std::cout << "\n" ;
-    }
-    std::cout << "\n" ;
 
-    std::cout << "[elem2] :\n" ;
-    for (size_t i=0 ; i<elem2.size() ; i++) {
-        for (size_t j=0 ; j<elem2[i].size() ; j++) {
-            std::cout << elem2[i][j] << " " ;
+        std::cout << "[elem2] :\n" ;
+        for (size_t i=0 ; i<elem2.size() ; i++) {
+            for (size_t j=0 ; j<elem2[i].size() ; j++) {
+                std::cout << elem2[i][j] << " " ;
+            }
+            std::cout << "\n" ;
         }
         std::cout << "\n" ;
-    }
-    std::cout << "\n" ;
 
-    std::cout << "[Result] :\n" ;
-    for (size_t i=0 ; i<newElem.size() ; i++) {
-        for (size_t j=0 ; j<newElem[i].size() ; j++) {
-            std::cout << newElem[i][j] << " " ;
+        std::cout << "[Result] :\n" ;
+        for (size_t i=0 ; i<newElem.size() ; i++) {
+            for (size_t j=0 ; j<newElem[i].size() ; j++) {
+                std::cout << newElem[i][j] << " " ;
+            }
+            std::cout << "\n" ;
         }
-        std::cout << "\n" ;
+        std::cout << "\n\n" ;
     }
-    std::cout << "\n\n" ;
 
     return newElem ;
-}
-
-
-//----------------------------------------------------------------------------//
-
-
-void print_alignment(vectors &aligned) {
-    // Print alignment
-    size_t maxLength {0} ;
-    for (size_t i=0 ; i<aligned.size() ; i++) {
-        for (size_t j=0 ; j<aligned[i].size() ; j++) {
-            if (aligned[i][j].size() > maxLength) {
-                maxLength = aligned[i][j].size() ;
-            }
-        }
-        for (size_t j=0 ; j<aligned[i].size() ; j++) {
-            std::cout << aligned[i][j] << std::string((maxLength - aligned[i][j].size())+1, ' ') ;
-        }
-        std::cout << "\n" ;
-    }
-}
-
-
-//----------------------------------------------------------------------------//
-
-
-void print_alignment_v2(vectors aligned) {
-    for (size_t i=0 ; i<aligned.size() ; i++) {
-        bool again {true} ;
-        while (again) {
-            if (aligned[i][aligned[i].size()-1] == "-") {
-                aligned[i].pop_back() ;
-            } else {
-                again = false ;
-            }
-        }
-    }
-    size_t maxLength {0} ;
-    for (size_t i=0 ; i<aligned.size() ; i++) {
-        for (size_t j=0 ; j<aligned[i].size() ; j++) {
-            if (aligned[i][j].size() > maxLength) {
-                maxLength = aligned[i][j].size() ;
-            }
-        }
-        bool begin {true} ;
-        for (size_t j=0 ; j<aligned[i].size() ; j++) {
-            if (aligned[i][j] != "-") {
-                begin = false ;
-            }
-            if (begin && aligned[i][j] == "-") {
-                std::cout << ' ' << std::string((maxLength - aligned[i][j].size())+1, ' ') ;
-            } else {
-                std::cout << aligned[i][j] << std::string((maxLength - aligned[i][j].size())+1, ' ') ;
-            }
-        }
-        std::cout << "\n" ;
-    }
-}
-
-void print_wirematrix(wireMatrix &matrix) {
-    for (size_t x=0 ; x<matrix.size() ; x++) {
-        for (size_t y=0 ; y<matrix[0].size() ; y++) {
-            std::cout << std::setprecision(0) << std::fixed << std::setw(3) << std::right << matrix[x][y] ;
-        }
-        std::cout << "\n" ;
-    }
-    std::cout << "\n\n" ;
 }

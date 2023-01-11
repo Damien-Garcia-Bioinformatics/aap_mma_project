@@ -3,18 +3,20 @@
 // M2BB
 
 
-////////////////////////////////////////////////////////////////////////////////
-//                           Functions definition                             //
-////////////////////////////////////////////////////////////////////////////////
+
+/* -------------------------------------------------------------------------- */
+/*                            Functions definition                            */
+/* -------------------------------------------------------------------------- */
 
 
-#include "structures.hpp"
-#include "file_handling_functions.hpp"
 #include <iostream>
 #include <fstream>
 
+#include "structures.hpp"
+#include "file_handling_functions.hpp"
 
-//----------------------------------------------------------------------------//
+
+/* ------------------------------ CLEAN-VALUES ------------------------------ */
 
 
 std::string clean_values(std::string line) {
@@ -31,8 +33,7 @@ std::string clean_values(std::string line) {
 }
 
 
-//----------------------------------------------------------------------------//
-
+/* -------------------------- READ-PARAMETERS-FILE -------------------------- */
 
 // Extraction of parameters from generation_parameters.txt and creation of parameters structure.
 void read_parameters_file(parameters &param, std::string path) {
@@ -59,7 +60,7 @@ void read_parameters_file(parameters &param, std::string path) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* ------------------------------ WRITE-RESULTS ----------------------------- */
 
 
 void write_results(std::string pathToResults, vectors &traces, parameters &param) {

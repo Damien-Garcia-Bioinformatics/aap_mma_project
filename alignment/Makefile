@@ -3,20 +3,22 @@
 # M2BB
  
 
-######################################################################################
-#                 Makefile for compiling and testing the MSA program                 #
-######################################################################################
+
+# ---------------------------------------------------------------------------- #
+#              Makefile for compiling and testing the MSA program              #
+# ---------------------------------------------------------------------------- #
 
 
 # Ignored if not specificaly called
 .PHONY: clean rebuild test_simple test_complex test_semantic1 test_semantic2 test_semantic3 test_semantic4 
+
 
 # Variables
 EXE = main
 MAIN = main.cpp
 CXX = g++
 CXXFLAGS = -Wall -O2
-OBJECTS = read_traces.o wirematrix.o dissimilarity.o write_results.o
+OBJECTS = read_traces.o wirematrix.o dissimilarity.o write_results.o miscellaneous.o
 
 
 # Creates executable file
@@ -37,10 +39,14 @@ dissimilarity.o:
 write_results.o:
 	$(CXX) $(CXXFLAGS) -c write_results.cpp
 
+miscellaneous.o:
+	$(CXX) $(CXXFLAGS) -c miscellaneous.cpp
 
-##############################################################################
-#                    Shortcuts (use : "main [shortcut]")                     #
-##############################################################################
+
+
+# ---------------------------------------------------------------------------- #
+#                      Shortcuts (use : "main [shortcut]")                     #
+# ---------------------------------------------------------------------------- #
 
 # Removes all generated files by previous compilations
 clean:
@@ -50,9 +56,12 @@ clean:
 rebuild:
 	$(MAKE) clean all
 
-##############################################################################
-#                          Test Execution of program                         #
-##############################################################################
+
+
+# ---------------------------------------------------------------------------- #
+#                           Test Execution of program                          #
+# ---------------------------------------------------------------------------- #
+
 
 # Simple alignment test
 test_simple:

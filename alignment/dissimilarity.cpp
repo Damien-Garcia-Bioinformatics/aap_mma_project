@@ -3,18 +3,20 @@
 // M2BB
 
 
-////////////////////////////////////////////////////////////////////////////////
-//                           Functions definition                             //
-////////////////////////////////////////////////////////////////////////////////
+
+/* -------------------------------------------------------------------------- */
+/*                            Functions definition                            */
+/* -------------------------------------------------------------------------- */
 
 
+#include <iostream>
 #include <iomanip>
 
 #include "dissimilarity.hpp"
 #include "wirematrix.hpp"
 
 
-//----------------------------------------------------------------------------//
+/* ------------------------------ GENERATE-MSA ------------------------------ */
 
 
 msaFormat generate_msa(vectors &traces) {
@@ -29,7 +31,7 @@ msaFormat generate_msa(vectors &traces) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* ---------------------- GENERATE-DISSIMILARITY-MATRIX --------------------- */
 
 
 dissimMatrix generate_dissimilarity_matrix(msaFormat &msa) {
@@ -48,7 +50,7 @@ dissimMatrix generate_dissimilarity_matrix(msaFormat &msa) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* --------------------------- FIND-LOWEST-DISSIM --------------------------- */
 
 
 std::pair<size_t,size_t> find_lowest_dissim(dissimMatrix &D) {
@@ -67,24 +69,7 @@ std::pair<size_t,size_t> find_lowest_dissim(dissimMatrix &D) {
 }
 
 
-//----------------------------------------------------------------------------//
-
-
-// Prints the dissimilarity matrix
-void print_dissimMatrix(dissimMatrix &D) {
-    std::cout << std::setprecision(1) << std::fixed ;
-    for (size_t i=0 ; i<D.size() ; i++) {
-        for (size_t j=0 ; j<D[i].size() ; j++) {
-            float val {D[i][j][D[i][j].size()-1][D[i][j][0].size()-1]} ;
-            // .back() method must be avoided because of undefined behavior on empty vectors
-            std::cout << std::right << std::setw(6) << val ;
-        }
-        std::cout << "\n" ;
-    }
-}
-
-
-//----------------------------------------------------------------------------//
+/* ------------------------------- UPDATE-MSA ------------------------------- */
 
 
 void update_msa(msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest) {
@@ -97,7 +82,7 @@ void update_msa(msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest
 }
 
 
-//----------------------------------------------------------------------------//
+/* --------------------------- UPDATE-DISSIMMATRIX -------------------------- */
 
 
 void update_dissimMatrix(dissimMatrix &D, msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest) {

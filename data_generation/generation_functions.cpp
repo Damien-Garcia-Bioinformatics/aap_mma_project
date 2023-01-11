@@ -3,16 +3,17 @@
 // M2BB
 
 
-////////////////////////////////////////////////////////////////////////////////
-//                           Functions definition                             //
-////////////////////////////////////////////////////////////////////////////////
+
+/* -------------------------------------------------------------------------- */
+/*                            Functions definition                            */
+/* -------------------------------------------------------------------------- */
 
 
 #include "generation_functions.hpp"
 #include "miscellaneous.hpp"
 
 
-//----------------------------------------------------------------------------//
+/* ----------------------------- GENERATE-EVENTS ---------------------------- */
 
 
 // Procedure that generates anchors subtraces of n traces (type 0 sections).
@@ -24,7 +25,7 @@ void generate_events(genParam &generation, std::vector<std::string> &subtraces, 
 }
 
 
-//----------------------------------------------------------------------------//
+/* ------------------------------ GENERATE-TOPS ----------------------------- */
 
 
 // Procedure that generates simple generative regions (types 1 sections).
@@ -44,7 +45,7 @@ void generate_tops(genParam &generation, std::vector<std::string> &subtraces, si
 }
 
 
-//----------------------------------------------------------------------------//
+/* ---------------------------- NUMBER-OF-EVENTS ---------------------------- */
 
 // Subprocedure that generates complex generative regions (types 2 sections) in typeGen "X" cases.
 void number_of_event(genParam &generation, std::vector<std::string> &subtraces, size_t nbTraces, size_t eventChoice) {
@@ -80,7 +81,7 @@ void number_of_event(genParam &generation, std::vector<std::string> &subtraces, 
 }
 
 
-//----------------------------------------------------------------------------//
+/* -------------------------- PERCENTAGE-OF-EVENTS -------------------------- */
 
 
 // Subprocedure that generates complex generative regions (types 2 sections) in typeGen "%" cases.
@@ -123,7 +124,8 @@ void percentage_of_event(genParam &generation, std::vector<std::string> &subtrac
 	}
 }
 
-//----------------------------------------------------------------------------//
+
+/* ----------------------------- GENERATE-TRACES ---------------------------- */
 
 
 // General procedure that generates traces.

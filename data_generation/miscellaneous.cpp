@@ -3,40 +3,42 @@
 // M2BB
 
 
-////////////////////////////////////////////////////////////////////////////////
-//                           Functions definition                             //
-////////////////////////////////////////////////////////////////////////////////
+
+/* -------------------------------------------------------------------------- */
+/*                            Functions definition                            */
+/* -------------------------------------------------------------------------- */
 
 
 #include <iostream>
+
 #include "miscellaneous.hpp"
 
 
-//----------------------------------------------------------------------------//
+/* ---------------------------------- HELP ---------------------------------- */
 
 
 void help() {
-    std::cout << " +-----------------------------------------------------------------------------+" << std::endl ;
-    std::cout << " |                             PROGRAM EXECUTION                               |" << std::endl ;
-    std::cout << " |                                                                             |" << std::endl ;
-    std::cout << " |  Use : './main path_to_parameter_file path_to_result_file'                  |" << std::endl ;
-    std::cout << " |                                                                             |" << std::endl ;
-    std::cout << " +-----------------------------------------------------------------------------+" << std::endl ;
-    std::cout << " |                            PARAMETER FILE FORMAT                            |" << std::endl ;
-    std::cout << " |                                                                             |" << std::endl ;
-    std::cout << " |  Every parameter file must include :                                        |" << std::endl ;
-    std::cout << " |    - 'expression=[exampleExpression]'                                       |" << std::endl ;
-    std::cout << " |    - 'number_of_trace=[positiveInteger]'                                    |" << std::endl ;
-    std::cout << " |    - 'maximum_length=[positiveInteger]'                                     |" << std::endl ;
-    std::cout << " |                                                                             |" << std::endl ;
-    std::cout << " |  Do not include spaces on either side of the equal sign.                    |" << std::endl ;
-    std::cout << " |  You can comment the parameter file using '#'.                              |" << std::endl ;
-    std::cout << " |                                                                             |" << std::endl ;
-    std::cout << " +-----------------------------------------------------------------------------+" << std::endl ;
+    std::cout << " +-----------------------------------------------------------------------------+\n" ;
+    std::cout << " |                             PROGRAM EXECUTION                               |\n" ;
+    std::cout << " |                                                                             |\n" ;
+    std::cout << " |  Use : './main path_to_parameter_file path_to_result_file'                  |\n" ;
+    std::cout << " |                                                                             |\n" ;
+    std::cout << " +-----------------------------------------------------------------------------+\n" ;
+    std::cout << " |                            PARAMETER FILE FORMAT                            |\n" ;
+    std::cout << " |                                                                             |\n" ;
+    std::cout << " |  Every parameter file must include :                                        |\n" ;
+    std::cout << " |    - 'expression=[exampleExpression]'                                       |\n" ;
+    std::cout << " |    - 'number_of_trace=[positiveInteger]'                                    |\n" ;
+    std::cout << " |    - 'maximum_length=[positiveInteger]'                                     |\n" ;
+    std::cout << " |                                                                             |\n" ;
+    std::cout << " |  Do not include spaces on either side of the equal sign.                    |\n" ;
+    std::cout << " |  You can comment the parameter file using '#'.                              |\n" ;
+    std::cout << " |                                                                             |\n" ;
+    std::cout << " +-----------------------------------------------------------------------------+\n" ;
 }
 
 
-//----------------------------------------------------------------------------//
+/* --------------------------------- RANDINT -------------------------------- */
 
 
 // Function that returns a positive random integer between min and max.
@@ -45,7 +47,7 @@ size_t randint(size_t min, size_t max) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* --------------------------------- SHUFFLE -------------------------------- */
 
 
 // Procedure to shuffle values in a vector of strings.

@@ -3,13 +3,15 @@
 # M2BB
  
 
-##############################################################################
-#                              General Makefile                              #
-##############################################################################
+
+# ---------------------------------------------------------------------------- #
+#                               General Makefile                               #
+# ---------------------------------------------------------------------------- #
 
 
 # Ignored if not specificaly called
 .PHONY: clean rebuild data_generation alignment quality_analysis test_simple test_complex test_semantic1 test_semantic2 test_semantic3 test_semantic4 test_scoring
+
 
 all:
 	cd data_generation && $(MAKE) all && cd ../alignment && $(MAKE) all && cd ../quality_analysis && $(MAKE) all
@@ -30,9 +32,11 @@ clean:
 	cd data_generation && $(MAKE) clean && cd ../alignment && $(MAKE) clean && cd ../quality_analysis && $(MAKE) clean
 
 
-##############################################################################
-#                          Test Execution of program                         #
-##############################################################################
+
+# ---------------------------------------------------------------------------- #
+#                           Test Execution of program                          #
+# ---------------------------------------------------------------------------- #
+
 
 test_simple:
 	cd data_generation && $(MAKE) test_simple && cd ../alignment && $(MAKE) test_simple

@@ -3,9 +3,10 @@
 // M2BB
 
 
-////////////////////////////////////////////////////////////////////////////////
-//                            Function declaration                            //
-////////////////////////////////////////////////////////////////////////////////
+
+/* -------------------------------------------------------------------------- */
+/*                            Function declaration                            */
+/* -------------------------------------------------------------------------- */
 
 
 #ifndef __WIREMATRIX__
@@ -31,14 +32,6 @@ wireMatrix wireMatrix_scoring(vectors &, vectors &) ;
 
 
 vectors pairwiseAlign(wireMatrix &, vectors &, vectors &) ;
-
-
-void print_alignment(vectors &) ;
-
-
-void print_alignment_v2(vectors) ;
-
-void print_wirematrix(wireMatrix &) ;
 
 
 #endif

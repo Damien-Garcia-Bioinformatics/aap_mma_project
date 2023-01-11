@@ -3,9 +3,10 @@
 // M2BB
 
 
-////////////////////////////////////////////////////////////////////////////////
-//                           Functions definition                             //
-////////////////////////////////////////////////////////////////////////////////
+
+/* -------------------------------------------------------------------------- */
+/*                            Functions definition                            */
+/* -------------------------------------------------------------------------- */
 
 
 #include <iostream>
@@ -15,6 +16,9 @@
 #include <map>
 
 #include "scoring_functions.hpp"
+
+
+/* ------------------------------ MAP-POSITION ------------------------------ */
 
 
 elemAtPos map_position(const vectors &msa, size_t pos) {
@@ -30,9 +34,8 @@ elemAtPos map_position(const vectors &msa, size_t pos) {
 }
 
 
-// void score_nw() {
+/* --------------------------------- SCORE-E -------------------------------- */
 
-// }
 
 size_t score_e(const vectors &msa) {
     size_t score {0} ;
@@ -50,6 +53,10 @@ size_t score_e(const vectors &msa) {
     return score ;
 }
 
+
+/* --------------------------------- MATCH-E -------------------------------- */
+
+
 size_t match_e(const vectors &msa) {
     size_t score {0} ;
 
@@ -66,6 +73,10 @@ size_t match_e(const vectors &msa) {
     return score ;
 }
 
+
+/* --------------------------------- SCORE-G -------------------------------- */
+
+
 size_t score_g(const vectors &msa) {
     size_t score {0} ;
     std::cout << msa.size() << "   " << msa[0].size() << "\n" ;
@@ -78,6 +89,10 @@ size_t score_g(const vectors &msa) {
     }
     return score ;
 }
+
+
+/* ------------------------------- PROJ-LENGTH ------------------------------ */
+
 
 size_t proj_length(const vectors &msa) {
     return (msa[0].size()) ;

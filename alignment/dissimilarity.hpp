@@ -3,20 +3,22 @@
 // M2BB
 
 
-////////////////////////////////////////////////////////////////////////////////
-//                            Function declaration                            //
-////////////////////////////////////////////////////////////////////////////////
+
+/* -------------------------------------------------------------------------- */
+/*                            Function declaration                            */
+/* -------------------------------------------------------------------------- */
+
 
 
 #ifndef __DISSIMILARITY__
 #define __DISSIMILARITY__
 
 
-#include <iostream>
 #include <string>
 #include <vector>
 
 #include "structures.hpp"
+
 
 /// @brief 
 /// @param  
@@ -28,6 +30,7 @@ msaFormat generate_msa(vectors &) ;
 /// @param
 /// @return 
 dissimMatrix generate_dissimilarity_matrix(msaFormat &) ;
+
 
 /// @brief 
 /// @param  
@@ -41,9 +44,6 @@ std::pair<size_t,size_t> find_lowest_dissim(dissimMatrix &) ;
 /// @param  
 void update_matrix(dissimMatrix &, std::pair<size_t,size_t>) ;
 
-/// @brief 
-/// @param  
-void print_dissimMatrix(dissimMatrix &) ;
 
 /// @brief 
 /// @param  

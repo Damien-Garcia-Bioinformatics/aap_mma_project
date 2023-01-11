@@ -3,16 +3,17 @@
 // M2BB
 
 
-////////////////////////////////////////////////////////////////////////////////
-//                           Functions definition                             //
-////////////////////////////////////////////////////////////////////////////////
+
+/* -------------------------------------------------------------------------- */
+/*                            Functions definition                            */
+/* -------------------------------------------------------------------------- */
 
 
 #include <iostream>
 #include "semantic_check_functions.hpp" 
 
 
-//----------------------------------------------------------------------------//
+/* ---------------------------- EXISTS-IN-VECTOR ---------------------------- */
 
 
 // Function checking if an element exists in a vector.
@@ -27,7 +28,7 @@ bool exists_in_vector(const std::vector<std::string> &vector, std::string &eleme
 }
 
 
-//----------------------------------------------------------------------------//
+/* --------------------------- IS-AVAILABLE-EVENT --------------------------- */
 
 
 // Function cheking availability of events or if it's already used as anchor.
@@ -48,7 +49,7 @@ bool is_available_event(genParam &generation, std::vector<std::string> &elements
 }
 
 
-//----------------------------------------------------------------------------//
+/* ------------------------------- CHECK-RANGE ------------------------------ */
 
 
 // Function checking if range is in min-max format and not inverted
@@ -63,7 +64,7 @@ void check_range(std::vector<genParam> &generation) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* ------------------------------ CHECK-LENGTH ------------------------------ */
 
 
 // Function checking if range of generation is contained in maximum of length of traces to generate.
@@ -81,7 +82,7 @@ void check_length(std::vector<genParam> &generation, size_t maxLen) {
 }
 
 
-//----------------------------------------------------------------------------//
+/* ------------------------ CHECK-ANCHORS-AND-EVENTS ------------------------ */
 
 
 // Procedure cheking uniqueness of anchors and disponibility of events in generative regions.

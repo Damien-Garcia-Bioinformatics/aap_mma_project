@@ -5,12 +5,12 @@
 
 
 /* -------------------------------------------------------------------------- */
-/*                            Functions declaration                           */
+/*                            Function declaration                            */
 /* -------------------------------------------------------------------------- */
 
 
-#ifndef __FILE_HANDLING_FUNCTIONS__
-#define __FILE_HANDLING_FUNCTIONS__
+#ifndef __MISCELLANEOUS__
+#define __MISCELLANEOUS__
 
 
 #include <string>
@@ -19,26 +19,24 @@
 #include "structures.hpp"
 
 
-using vectors = std::vector<std::vector<std::string>> ;
+/// @brief 
+/// @param  
+void print_alignment(vectors &) ;
 
 
 /// @brief 
 /// @param  
-/// @return 
-std::string clean_values(std::string) ;
+void print_alignment_v2(vectors) ;
 
 
 /// @brief 
 /// @param  
-/// @param  
-void read_parameters_file(parameters &, std::string) ;
+void print_wirematrix(wireMatrix &) ;
 
 
 /// @brief 
 /// @param  
-/// @param  
-/// @param  
-void write_results(std::string, vectors &, parameters &) ;
+void print_dissimMatrix(dissimMatrix &) ;
 
 
 #endif

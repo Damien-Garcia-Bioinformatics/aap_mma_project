@@ -3,9 +3,10 @@
 // M2BB
 
 
-////////////////////////////////////////////////////////////////////////////////
-//                           Functions definition                             //
-////////////////////////////////////////////////////////////////////////////////
+
+/* -------------------------------------------------------------------------- */
+/*                            Functions definition                            */
+/* -------------------------------------------------------------------------- */
 
 
 #include <string>
@@ -13,6 +14,9 @@
 #include <fstream>
 
 #include "file_handling.hpp"
+
+
+/* -------------------------------- GET-TIME -------------------------------- */
 
 
 long get_time(const std::string &path) {
@@ -29,6 +33,9 @@ long get_time(const std::string &path) {
     }
     return -1 ;
 }
+
+
+/* ------------------------------- READ-ALIGN ------------------------------- */
 
 
 vectors read_align(const std::string &path) {
@@ -60,6 +67,9 @@ vectors read_align(const std::string &path) {
     }
     return msa ;
 }
+
+
+/* -------------------------------- WRITE-CSV ------------------------------- */
 
 
 void write_csv(std::string &path, std::vector<scores> &allScores) {
