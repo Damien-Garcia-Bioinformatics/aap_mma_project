@@ -83,7 +83,7 @@ void extract_events_and_attributes(const std::string &expression, genParam &gene
 /* ------------------------------- ADD-SECTION ------------------------------ */
 
 
-// 
+// A simple procedure to add data to the sections structure
 void add_section(data &sections, std::string &section, size_t type) {
 	if (!section.empty()) {
 		sections.value.push_back(section) ;

@@ -18,7 +18,7 @@
 
 
 /**
- * @brief 
+ * @brief Procedure that shows usual commands on screen
  */
 void help() ;
 

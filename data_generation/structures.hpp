@@ -18,6 +18,9 @@
 
 /**
  * @brief Structure containing data extracted from parameter file. Used for traces generation.
+ * @param Expression string containing the succession of generating intervals
+ * @param NumberOfTraces how much traces the resulting generated expression should contain
+ * @param MaximumLength maximum length of the generated expression
  */
 struct parameters {
 	std::string expression ;			// Expression used for traces generation
@@ -28,6 +31,13 @@ struct parameters {
 
 /**
  * @brief Structure containing generative parameters extracted from expression sections
+ * @param MinimumSize minimum accepted size of the generated interval
+ * @param MaximumSize maximum accepted size of the generated interval
+ * @param TypeOfSections type depending on an identifier (% or k), defined by 0 to 2 integers
+ * @param Anchor the anchor of the generated interval
+ * @param TypeOfGenerator character that dictates whether events exists or not
+ * @param events explicited events to place in the generated interval
+ * @param attributes how much of the explicited events to place in the generated interval
  */
 struct genParam {
 	size_t minSize ;					// Minimum in interval
@@ -42,6 +52,8 @@ struct genParam {
 
 /**
  * @brief Structure containing sections and type of sections of expression
+ * @param Type types of the generated intervals
+ * @param value what the intervals are 
  */
 struct data {
 	std::vector<int> type ;				// '0', '1' or '2' depending on the section type

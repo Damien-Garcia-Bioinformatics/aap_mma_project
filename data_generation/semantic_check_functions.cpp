@@ -52,7 +52,7 @@ bool is_available_event(genParam &generation, std::vector<std::string> &elements
 /* ------------------------------- CHECK-RANGE ------------------------------ */
 
 
-// Function checking if range is in min-max format and not inverted
+// Procedure checking if range is in min-max format and not inverted
 void check_range(std::vector<genParam> &generation) {
     for (size_t i=0 ; i<generation.size() ; i++) {
         if (generation[i].minSize > generation[i].maxSize) {
@@ -67,7 +67,7 @@ void check_range(std::vector<genParam> &generation) {
 /* ------------------------------ CHECK-LENGTH ------------------------------ */
 
 
-// Function checking if range of generation is contained in maximum of length of traces to generate.
+// Procedure checking if range of generation is contained in maximum of length of traces to generate.
 void check_length(std::vector<genParam> &generation, size_t maxLen) {
     size_t theoMin {0}, theoMax {0} ;
     for (size_t i=0 ; i< generation.size() ; i++) {
