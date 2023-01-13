@@ -1,3 +1,3 @@
-file_name;exec_time;score_e;match_e;score_g;proj_length
-complex.txt;15;200;49;71;28
-simple.txt;17;242;28;85;33
+file_name;exec_time;score_e;match_e;score_g;proj_length;general_score
+complex.txt;19;180;53;69;26;0.606923
+simple.txt;18;258;30;62;32;0.68375

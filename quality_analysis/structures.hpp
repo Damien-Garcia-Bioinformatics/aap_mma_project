@@ -27,6 +27,7 @@ struct scores {
     size_t match_e ;
     size_t score_g ;
     size_t proj_length ;
+    float general_score ;
 } ;
 
 

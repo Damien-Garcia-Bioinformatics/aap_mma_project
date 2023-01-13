@@ -18,7 +18,8 @@
 
 /* ------------------------------ CLEAN-VALUES ------------------------------ */
 
-// Comments are not worth keeping for generation, and separators as well, this function removes them
+
+// Comments are not worth keeping for generation, and separators as well, this function removes them.
 std::string clean_values(std::string line) {
 	std::string cleanedLine ;
 	for (size_t i=0 ; i<line.size() ; i++) {
@@ -34,6 +35,7 @@ std::string clean_values(std::string line) {
 
 
 /* -------------------------- READ-PARAMETERS-FILE -------------------------- */
+
 
 // Extraction of parameters from generation_parameters.txt and creation of parameters structure.
 // The parameter structure gives a general outlook of the job
@@ -62,6 +64,7 @@ void read_parameters_file(parameters &param, std::string path) {
 
 
 /* ------------------------------ WRITE-RESULTS ----------------------------- */
+
 
 // Once the generation is made according to instructions, its expressions are written to a file output
 void write_results(std::string pathToResults, vectors &traces, parameters &param) {

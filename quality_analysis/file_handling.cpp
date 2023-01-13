@@ -81,13 +81,14 @@ void write_csv(std::string &path, std::vector<scores> &allScores) {
     if (!file.is_open()) {
         exit(1) ;
     }
-    file << "file_name;exec_time;score_e;match_e;score_g;proj_length\n" ;
+    file << "file_name;exec_time;score_e;match_e;score_g;proj_length;general_score\n" ;
     for (size_t i=0 ; i<allScores.size() ; i++) {
         file << allScores[i].fileName << ";"
              << allScores[i].time << ";"
              << allScores[i].score_e << ";"
              << allScores[i].match_e << ";"
              << allScores[i].score_g << ";"
-             << allScores[i].proj_length << "\n" ;
+             << allScores[i].proj_length << ";"
+             << allScores[i].general_score << "\n" ;
     }
 }

@@ -23,21 +23,21 @@ using vectors = std::vector<std::vector<std::string>> ;
 
 
 /// @brief Allows to clean up the input file by not considering comments and removing spaces
-/// @param  Line takes the line to be cleaned
-/// @return cleaned line
+/// @param  Line Line to clean
+/// @return Cleaned line
 std::string clean_values(std::string) ;
 
 
-/// @brief Reads the parameter file and initiate the pram structure that dictates the constraints for generation
-/// @param  ParameterStructure the structure that represents the parameters
-/// @param  PathToParamFile the path to the parameter file
+/// @brief Reads the parameter file and initiate the param structure that dictates the constraints for generation
+/// @param  ParameterStructure The structure containing the parameters
+/// @param  PathToParamFile Path to the parameter file
 void read_parameters_file(parameters &, std::string) ;
 
 
 /// @brief Uses the generated expressions stocked as vectors to write the results in a file
-/// @param  PathToOutputFile the path to where the results are written
-/// @param  TracesVector generated traces that are iterated upon
-/// @param  ParameterStructure gives the order of generations and represents the input expression
+/// @param  PathToOutputFile Path to where the results are written
+/// @param  TracesVector Generated traces that are iterated upon
+/// @param  ParameterStructure Gives the order of generations and represents the input expression
 void write_results(std::string, vectors &, parameters &) ;
 
 

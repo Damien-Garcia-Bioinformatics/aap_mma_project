@@ -42,7 +42,8 @@ void extract_type_gen(const std::string &expression, genParam &generation) {
 /* ---------------------- EXTRACT-EVENTS-AND-ATTRIBUTES --------------------- */
 
 
-// Procedure that extracts potential events and attributes from complex generative regions and stores them in generation structure.
+// Procedure that extracts potential events and attributes from complex generative
+// regions and stores them in generation structure.
 void extract_events_and_attributes(const std::string &expression, genParam &generation) {
 	bool isEvent {true} ;
 	bool isXtimes {false} ;

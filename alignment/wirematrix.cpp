@@ -178,34 +178,5 @@ vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
         newElem.push_back(aligned.elem2[i]) ;
     }
 
-    { //Debug
-        std::cout << "[elem1] :\n" ;
-        for (size_t i=0 ; i<elem1.size() ; i++) {
-            for (size_t j=0 ; j<elem1[i].size() ; j++) {
-                std::cout << elem1[i][j] << " " ;
-            }
-            std::cout << "\n" ;
-        }
-        std::cout << "\n" ;
-
-        std::cout << "[elem2] :\n" ;
-        for (size_t i=0 ; i<elem2.size() ; i++) {
-            for (size_t j=0 ; j<elem2[i].size() ; j++) {
-                std::cout << elem2[i][j] << " " ;
-            }
-            std::cout << "\n" ;
-        }
-        std::cout << "\n" ;
-
-        std::cout << "[Result] :\n" ;
-        for (size_t i=0 ; i<newElem.size() ; i++) {
-            for (size_t j=0 ; j<newElem[i].size() ; j++) {
-                std::cout << newElem[i][j] << " " ;
-            }
-            std::cout << "\n" ;
-        }
-        std::cout << "\n\n" ;
-    }
-
     return newElem ;
 }

@@ -18,7 +18,7 @@ EXE = main
 MAIN = main.cpp
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -O2
-OBJECTS = scoring_functions.o file_handling.o
+OBJECTS = scoring_functions.o file_handling.o miscellaneous.o
 
 
 # Creates executable file
@@ -30,6 +30,9 @@ scoring_functions.o:
 
 file_handling.o:
 	$(CXX) $(CXXFLAGS) -c file_handling.cpp
+
+miscellaneous.o:
+	$(CXX) $(CXXFLAGS) -c miscellaneous.cpp
 
 
 

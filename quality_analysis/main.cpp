@@ -17,6 +17,7 @@
 #include "structures.hpp"
 #include "file_handling.hpp"
 #include "scoring_functions.hpp"
+#include "miscellaneous.hpp"
 
 
 int main(int argc, char* argv[]) {
@@ -28,6 +29,7 @@ int main(int argc, char* argv[]) {
 	std::string pathInput {argv[1]}, pathOutput {argv[2]} ;
 
     // Reading all files in pathInput and calculating alignement scores.
+    header() ;
     std::vector<scores> allScores ;
     for (const auto& dirEntry : std::filesystem::directory_iterator(pathInput)) {
         std::string path {dirEntry.path()} ;
@@ -40,13 +42,15 @@ int main(int argc, char* argv[]) {
         fileScores.match_e = match_e(msa) ;
         fileScores.score_g = score_g(msa) ;
         fileScores.proj_length = proj_length(msa) ;
+        fileScores.general_score = general_score(msa) ;
         allScores.push_back(fileScores) ;
+
+        
+        print_results(fileScores, msa) ;
     }
     
     // Writing results to csv file at pathOutput.
     write_csv(pathOutput, allScores) ;
-    
-    print_scores(allScores) ;
 
     return 0 ;
 }

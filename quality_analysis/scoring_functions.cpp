@@ -100,16 +100,13 @@ size_t proj_length(const vectors &msa) {
 }
 
 
-/* ------------------------------ PRINT_SCORES ------------------------------ */
+/* ------------------------------ GENERAL-SCORE ----------------------------- */
 
 
-void print_scores(const std::vector<scores> &allScores) {
-    for (size_t i=0 ; i<allScores.size() ; i++) {
-        std::cout << "  file_name = " << allScores[i].fileName << "\n" ;
-        std::cout << "  exec_time = " << allScores[i].time << "\n" ;
-        std::cout << "    score_e = " << allScores[i].score_e << "\n" ;
-        std::cout << "    match_e = " << allScores[i].match_e << "\n" ;
-        std::cout << "    score_g = " << allScores[i].score_g << "\n" ;
-        std::cout << "proj_length = " << allScores[i].proj_length << "\n\n" ;
-    }
+float general_score(const vectors &msa) {
+    float nbPos {(float)(proj_length(msa)) * (float)(msa.size())} ;
+    float percentageGap   {((float)(score_g(msa)) / nbPos)} ;
+    float percentageMatch {((float)(score_e(msa)) / nbPos)} ;
+
+    return ( (percentageGap * 0.2) + (percentageMatch * 0.8) ) ;
 }

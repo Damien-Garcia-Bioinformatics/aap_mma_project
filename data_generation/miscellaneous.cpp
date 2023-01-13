@@ -18,23 +18,24 @@
 
 
 void help() {
-    std::cout << " +-----------------------------------------------------------------------------+\n" ;
-    std::cout << " |                             PROGRAM EXECUTION                               |\n" ;
-    std::cout << " |                                                                             |\n" ;
-    std::cout << " |  Use : './main path_to_parameter_file path_to_result_file'                  |\n" ;
-    std::cout << " |                                                                             |\n" ;
-    std::cout << " +-----------------------------------------------------------------------------+\n" ;
-    std::cout << " |                            PARAMETER FILE FORMAT                            |\n" ;
-    std::cout << " |                                                                             |\n" ;
-    std::cout << " |  Every parameter file must include :                                        |\n" ;
-    std::cout << " |    - 'expression=[exampleExpression]'                                       |\n" ;
-    std::cout << " |    - 'number_of_trace=[positiveInteger]'                                    |\n" ;
-    std::cout << " |    - 'maximum_length=[positiveInteger]'                                     |\n" ;
-    std::cout << " |                                                                             |\n" ;
-    std::cout << " |  Do not include spaces on either side of the equal sign.                    |\n" ;
-    std::cout << " |  You can comment the parameter file using '#'.                              |\n" ;
-    std::cout << " |                                                                             |\n" ;
-    std::cout << " +-----------------------------------------------------------------------------+\n" ;
+    std::cout << "  ╔═══════════════════════════════════════════════════════════════════════════════╗\n" ;
+    std::cout << "  ║                             PROGRAM EXECUTION                                 ║\n" ;
+    std::cout << "  ║                                                                               ║\n" ;
+    std::cout << "  ║  Use : './main path_to_parameter_file path_to_result_file'                    ║\n" ;
+    std::cout << "  ║                                                                               ║\n" ;
+    std::cout << "  ╚═══════════════════════════════════════════════════════════════════════════════╝\n" ;
+    std::cout << "  ╔═══════════════════════════════════════════════════════════════════════════════╗\n" ;
+    std::cout << "  ║                            PARAMETER FILE FORMAT                              ║\n" ;
+    std::cout << "  ║                                                                               ║\n" ;
+    std::cout << "  ║  Every parameter file must include :                                          ║\n" ;
+    std::cout << "  ║    - 'expression=[exampleExpression]'                                         ║\n" ;
+    std::cout << "  ║    - 'number_of_trace=[positiveInteger]'                                      ║\n" ;
+    std::cout << "  ║    - 'maximum_length=[positiveInteger]'                                       ║\n" ;
+    std::cout << "  ║                                                                               ║\n" ;
+    std::cout << "  ║  Do not include spaces on either side of the equal sign.                      ║\n" ;
+    std::cout << "  ║  You can comment the parameter file using '#'.                                ║\n" ;
+    std::cout << "  ║                                                                               ║\n" ;
+    std::cout << "  ╚═══════════════════════════════════════════════════════════════════════════════╝\n" ;
 }
 
 

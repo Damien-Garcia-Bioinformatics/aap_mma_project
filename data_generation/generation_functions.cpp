@@ -17,8 +17,8 @@
 
 
 // Procedure that generates anchors subtraces of n traces (type 0 sections).
-// It takes the genParam structure by reference, and is called in the generate_traces() function
-// The type 0 sections do not comprise the % or k identifiers, thus comprise less constraints
+// It takes the genParam structure by reference, and is called in the generate_traces() function.
+// The type 0 sections do not include the % or k identifiers, thus include less constraints.
 void generate_events(genParam &generation, std::vector<std::string> &subtraces, size_t nbTraces) {
 	for (size_t i=0 ; i<nbTraces ; i++) {
 		std::string subtrace {generation.anchor + " "} ;
@@ -31,8 +31,8 @@ void generate_events(genParam &generation, std::vector<std::string> &subtraces, 
 
 
 // Procedure that generates simple generative regions (types 1 sections).
-// It takes the genParam structure by reference, and is called in the generate_traces() function
-// The type 1 section use the k identifier to declare the number of time tops should be generated
+// It takes the genParam structure by reference, and is called in the generate_traces() function.
+// The type 1 section use the k identifier to declare the number of time tops should be generated.
 void generate_tops(genParam &generation, std::vector<std::string> &subtraces, size_t nbTraces) {
 	size_t size ;
 
@@ -51,9 +51,10 @@ void generate_tops(genParam &generation, std::vector<std::string> &subtraces, si
 
 /* ---------------------------- NUMBER-OF-EVENTS ---------------------------- */
 
+
 // Subprocedure that generates complex generative regions (types 2 sections) in typeGen "X" cases.
-// It takes the genParam structure by reference, and is called in the generate_traces() function
-// The type 2 sections use the % identifier to separate probabilities for each event
+// It takes the genParam structure by reference, and is called in the generate_traces() function.
+// The type 2 sections use the % identifier to separate probabilities for each event.
 void number_of_event(genParam &generation, std::vector<std::string> &subtraces, size_t nbTraces, size_t eventChoice) {
 	// Selection of min and max number of event in section depending on generation type '+' or '*'
 	size_t min = (generation.typeGen == '+') ? 1 : 0 ;
@@ -91,8 +92,8 @@ void number_of_event(genParam &generation, std::vector<std::string> &subtraces, 
 
 
 // Subprocedure that generates complex generative regions (types 2 sections) in typeGen "%" cases.
-// It takes the genParam structure by reference, and is called in the generate_traces() function
-// The type 2 sections use the % identifier to separate probabilities for each event
+// It takes the genParam structure by reference, and is called in the generate_traces() function.
+// The type 2 sections use the % identifier to separate probabilities for each event.
 void percentage_of_event(genParam &generation, std::vector<std::string> &subtraces, size_t nbTraces, size_t eventChoice) {
 	// Defines the number of traces that will contain the selected event
 	size_t containsEvent {generation.attributes[eventChoice]*nbTraces/100} ;
