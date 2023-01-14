@@ -17,6 +17,7 @@
 #include <map>
 
 #include "scoring_functions.hpp"
+#include "file_handling.hpp"
 
 
 /* ------------------------------ MAP-POSITION ------------------------------ */
@@ -109,4 +110,19 @@ float general_score(const vectors &msa) {
     float percentageMatch {((float)(score_e(msa)) / nbPos)} ;
 
     return ( (percentageGap * 0.2) + (percentageMatch * 0.8) ) ;
+}
+
+
+/* ----------------------------- MEASURE-SCORES ----------------------------- */
+
+scores measure_scores(const std::string &path, const vectors &msa) {
+    scores fileScores ;
+    fileScores.fileName = path.substr(path.find_last_of('/')+1) ;
+    fileScores.time = get_time(path) ;
+    fileScores.score_e = score_e(msa) ;
+    fileScores.match_e = match_e(msa) ;
+    fileScores.score_g = score_g(msa) ;
+    fileScores.proj_length = proj_length(msa) ;
+    fileScores.general_score = general_score(msa) ;
+    return fileScores ;
 }

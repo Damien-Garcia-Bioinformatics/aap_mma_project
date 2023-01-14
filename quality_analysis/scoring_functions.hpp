@@ -60,4 +60,11 @@ float general_score(const vectors &) ;
 void print_results(const std::vector<scores> &) ;
 
 
+/// @brief 
+/// @param  
+/// @param  
+/// @return 
+scores measure_scores(const std::string &, const vectors &) ;
+
+
 #endif

@@ -39,10 +39,10 @@ clean:
 
 
 test_simple:
-	cd data_generation && $(MAKE) -s test_simple && cd ../alignment && $(MAKE) -s test_simple
+	cd data_generation && $(MAKE) -s test_simple && cd ../alignment && $(MAKE) -s test_simple && cd ../quality_analysis && $(MAKE) -s file_scoring_simple
 
 test_complex:
-	cd data_generation && $(MAKE) -s test_complex && cd ../alignment && $(MAKE) -s test_complex
+	cd data_generation && $(MAKE) -s test_complex && cd ../alignment && $(MAKE) -s test_complex && cd ../quality_analysis && $(MAKE) -s file_scoring_complex
 
 test_semantic1:
 	cd data_generation && $(MAKE) -s test_semantic1
