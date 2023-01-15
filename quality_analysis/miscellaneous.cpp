@@ -68,8 +68,9 @@ void print_results(const scores fs, vectors msa) {
     std::cout << top << lineBreak << strAlign << lineBreak ;
     for (size_t j=0 ; j<print[0].size() ; j++) {
         for (size_t i=0 ; i<print.size() ; i++) {
+            std::string name {"[s" + std::to_string(i) + "]"} ;
             std::cout << tab ;
-            std::cout << "[s" << i << "] " ;
+            std::cout << std::left << std::setw(nameSize+1) << name ;
             std::cout << std::left << std::setw(maximalSize) << print[i][j] ;
             std::cout << " ║\n" ;
         }
