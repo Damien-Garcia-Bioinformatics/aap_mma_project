@@ -20,7 +20,8 @@ using msaFormat = std::vector<vectors> ;
 using wireMatrix = std::vector<std::vector<float>> ;
 using dissimMatrix = std::vector<std::vector<wireMatrix>> ;
 
-
+// As stated above, "vectors" is a reference to several sequences at once.
+// This allow for computation of an average when the dissimilarity matrix is purged.
 struct alignment {
     vectors elem1 ;
     vectors elem2 ;

@@ -18,7 +18,7 @@
 
 /* ------------------------------ GENERATE-MSA ------------------------------ */
 
-
+// Function that returns the sequences in the format necessary for alignment
 msaFormat generate_msa(vectors &traces) {
     msaFormat msa ;
     vectors temp ;
@@ -33,7 +33,7 @@ msaFormat generate_msa(vectors &traces) {
 
 /* ---------------------- GENERATE-DISSIMILARITY-MATRIX --------------------- */
 
-
+// Function that builds the dissimilarity matrix from the sequences in the given structure
 dissimMatrix generate_dissimilarity_matrix(msaFormat &msa) {
     dissimMatrix D ;
     std::vector<wireMatrix> temp ;
@@ -52,7 +52,7 @@ dissimMatrix generate_dissimilarity_matrix(msaFormat &msa) {
 
 /* --------------------------- FIND-LOWEST-DISSIM --------------------------- */
 
-
+// Function that returns the position of the lowest score in the dissimilarity matrix 
 std::pair<size_t,size_t> find_lowest_dissim(dissimMatrix &D) {
     float lowestScore {D[1][0][D[1][0].size()-1][D[1][0][0].size()-1]} ;
     std::pair<size_t, size_t> lowestPos(1,0) ;
@@ -71,7 +71,8 @@ std::pair<size_t,size_t> find_lowest_dissim(dissimMatrix &D) {
 
 /* ------------------------------- UPDATE-MSA ------------------------------- */
 
-
+// Procedure to update the MSA structure by removing the aggregated traces's unique instances
+// and replace it with their aligned counterparts
 void update_msa(msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest) {
     // Removes vectors that needs to be aggregated
     msa.erase(msa.begin()+lowest.first) ;
@@ -84,7 +85,8 @@ void update_msa(msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest
 
 /* --------------------------- UPDATE-DISSIMMATRIX -------------------------- */
 
-
+// Procedure that removes the lines and columns of the dissimilarity matrix
+// and replaces them with the aggregate
 void update_dissimMatrix(dissimMatrix &D, msaFormat &msa, vectors &align, std::pair<size_t,size_t> &lowest) {
     // Removes data that needs to be aggregated
     for (size_t i=0 ; i<D.size() ; i++) {
