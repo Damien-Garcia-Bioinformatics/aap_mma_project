@@ -18,6 +18,27 @@
 #include "miscellaneous.hpp"
 
 
+/* ---------------------------------- HELP ---------------------------------- */
+
+
+void help() {
+    std::cout << "  ╔═══════════════════════════════════════════════════════════════════════════════╗\n" ;
+    std::cout << "  ║                             PROGRAM EXECUTION                                 ║\n" ;
+    std::cout << "  ║                                                                               ║\n" ;
+    std::cout << "  ║  Use : './main [path_to_alignment] [path_to_output]'                          ║\n" ;
+    std::cout << "  ║                                                                               ║\n" ;
+    std::cout << "  ║  [path_to_parameter_file] can either be a single file, or a directory which   ║\n" ;
+    std::cout << "  ║  contains multiple files to score. If you select to score a single file, the  ║\n" ;
+    std::cout << "  ║  [path_to_output] is not necessary, results will only be shown on command     ║\n" ;
+    std::cout << "  ║  line output.                                                                 ║\n" ;
+    std::cout << "  ║                                                                               ║\n" ;
+    std::cout << "  ║  [path_to_output] is the path where a csv file format will be created and     ║\n" ;
+    std::cout << "  ║  and it will contain the scores of multiple alignment files.                  ║\n" ;
+    std::cout << "  ║                                                                               ║\n" ;
+    std::cout << "  ╚═══════════════════════════════════════════════════════════════════════════════╝\n" ;
+}
+
+
 /* ------------------------------ PRINT-SCORES ------------------------------ */
 
 

@@ -109,7 +109,7 @@ float general_score(const vectors &msa) {
     float percentageGap   {((float)(score_g(msa)) / nbPos)} ;
     float percentageMatch {((float)(score_e(msa)) / nbPos)} ;
 
-    return ( (percentageGap * 0.2) + (percentageMatch * 0.8) ) ;
+    return ( (percentageGap * 0.1) + (percentageMatch * 0.9) ) ;
 }
 
 

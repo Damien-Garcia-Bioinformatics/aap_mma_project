@@ -20,6 +20,10 @@
 
 
 /// @brief 
+void help() ;
+
+
+/// @brief 
 /// @param  
 void print_alignment(vectors &) ;
 

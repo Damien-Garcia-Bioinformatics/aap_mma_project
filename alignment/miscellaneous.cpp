@@ -9,7 +9,6 @@
 /* -------------------------------------------------------------------------- */
 
 
-
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -17,6 +16,19 @@
 
 #include "structures.hpp"
 #include "miscellaneous.hpp"
+
+
+/* ---------------------------------- HELP ---------------------------------- */
+
+
+void help() {
+    std::cout << "  ╔═══════════════════════════════════════════════════════════════════════════════╗\n" ;
+    std::cout << "  ║                             PROGRAM EXECUTION                                 ║\n" ;
+    std::cout << "  ║                                                                               ║\n" ;
+    std::cout << "  ║  Use : './main path_to_parameter_file path_to_result_file'                    ║\n" ;
+    std::cout << "  ║                                                                               ║\n" ;
+    std::cout << "  ╚═══════════════════════════════════════════════════════════════════════════════╝\n" ;
+}
 
 
 /* ----------------------------- PRINT-ALIGNMENT ---------------------------- */
