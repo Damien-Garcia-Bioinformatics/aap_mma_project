@@ -4,6 +4,7 @@
 \usepackage[english]{babel}
 \usepackage[a4paper,left=1.5cm,right=1.5cm,top=2.5cm,bottom=2.5cm]{geometry}
 \usepackage{multicol}
+\usepackage{indentfirst}
 
 % Figures :
 \usepackage{caption}
@@ -14,12 +15,7 @@
 {\par\medskip\noindent\minipage{\linewidth}}
 {\endminipage\par\medskip}
 
-% Other packages :
-\usepackage{indentfirst}
-\usepackage{tcolorbox}
-\usepackage[hidelinks]{hyperref}
-
-% Listing package :
+% Code/Algorithm packages :
 \usepackage{listings}
 \lstset{
 	linewidth=0.8\columnwidth,
@@ -29,23 +25,28 @@
 	frame=line,
 	numbers=left, 
 }
-\lstset{literate=
-	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
-	{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
-	{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
-	{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
-	{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
-	{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
-	{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
-	{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
-	{ã}{{\~a}}1 {ẽ}{{\~e}}1 {ĩ}{{\~i}}1 {õ}{{\~o}}1 {ũ}{{\~u}}1
-	{Ã}{{\~A}}1 {Ẽ}{{\~E}}1 {Ĩ}{{\~I}}1 {Õ}{{\~O}}1 {Ũ}{{\~U}}1
-	{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
-	{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
-	{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
-	{€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
-	{»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1 {¡}{{!`}}1 
-}
+%\lstset{literate=
+	%	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+	%	{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+	%	{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+	%	{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+	%	{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+	%	{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+	%	{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+	%	{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+	%	{ã}{{\~a}}1 {ẽ}{{\~e}}1 {ĩ}{{\~i}}1 {õ}{{\~o}}1 {ũ}{{\~u}}1
+	%	{Ã}{{\~A}}1 {Ẽ}{{\~E}}1 {Ĩ}{{\~I}}1 {Õ}{{\~O}}1 {Ũ}{{\~U}}1
+	%	{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+	%	{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+	%	{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+	%	{€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+	%	{»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1 {¡}{{!`}}1 
+	%}
+
+% Other packages :
+\usepackage{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -72,6 +73,8 @@
 
 \section{Traces generation}
 
+\subsection{Objectives}
+
 The first section of the project aims to generate sequences called traces which are composed of tops and events. Events can be anchors, meaning they are shared by all generated traces and only exist once for each trace, or simple events that depending on the generation parameters, either exist in a trace or not, and could in some cases have repetitions. For easier further analysis of the traces, tops are represented by a dot (``."), events always start by a full case ``E" for anchors and lower case ``e" for other events.\\
 
 In order to generate traces, the program relies on parameters files providing a RegEx-like\footnote{Regular Expression} sequence, the number of traces to generate and the maximal size of the traces to generate.
@@ -83,24 +86,44 @@ number_of_traces=20
 maximum_length=100
 \end{lstlisting}
 
+The expression is separated in 3 sections types :
+\begin{itemize}
+	\item Simple generative regions : Containing only tops, delimited by parenthesis.
+	\item Complex generative regions : Containing tops and events, delimited by a less-than and greater-than signs.
+	\item Anchors : Events outside of generative regions.
+\end{itemize}
 
-\begin{table}
-\begin{center}
-\caption{blableblibloblubly}
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-	\hline
-	\textbf{Required for simple generation} && $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &&&&&&& \\
-	\hline
-	\textbf{Required for complex generation} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ && $\times$ &&&&& $\times$ \\
-	\hline
-	\textbf{Expression} & $<$ & ( & min & - & max & ) & + & event & X & val & $|$ & ... & $>$ \\
-	\hline
-\end{tabular}
-\end{center}
+\begin{table}[H]
+	\begin{center}
+		\caption{Generative regions format}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			\textbf{Expression} & $<$ & ( & min & - & max & ) & + & event & X & val & $|$ & ... & $>$ \\
+			\hline
+			\textbf{Required for simple generation} && $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &&&&&&& \\
+			\hline
+			\textbf{Required for complex generation} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ && $\times$ &&&&& $\times$ \\
+			\hline
+		\end{tabular}
+	\end{center}
 \end{table}
 
+\subsection{Compilation and execution}
+
+Compile the program using Makefile command:
+\begin{itemize}
+	\item {\fontfamily{qcr}\selectfont{\textbf{make data\_generation}}}
+\end{itemize}
+
+The program runs syntaxic and semantic checks on the expression to avoid errors and unpredictable behavior during traces generation. Working examples can be executed with the commands:
+\begin{itemize}
+	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_simple}}} -- shows working trace generations with simple generative region.
+	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_complex}}} -- shows working trace generations with complex generative region.
+	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_semantic[1-4]}}} -- shows syntaxic/semantic errors\footnote{{\fontfamily{qcr}\selectfont{make test\_semantic4}} is currently not working. In theory it should return an error but generates traces.}
+\end{itemize}
 
 \section{Alignment}
+
 
 
 \section{MSA quality assessment}
