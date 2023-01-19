@@ -16,6 +16,7 @@
 {\endminipage\par\medskip}
 
 % Code/Algorithm packages :
+\usepackage{algorithm}
 \usepackage{listings}
 \lstset{
 	linewidth=0.8\columnwidth,
@@ -119,17 +120,18 @@ The program runs syntaxic and semantic checks on the expression to avoid errors 
 \begin{itemize}
 	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_simple}}} -- shows working trace generations with simple generative region.
 	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_complex}}} -- shows working trace generations with complex generative region.
-	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_semantic[1-4]}}} -- shows syntaxic/semantic errors\footnote{{\fontfamily{qcr}\selectfont{make test\_semantic4}} is currently not working. In theory it should return an error but generates traces.}
+	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_semantic[1-4]}}} -- shows syntaxic/semantic errors\footnote{{\fontfamily{qcr}\selectfont{make test\_semantic4}} is currently not working. In theory it should return an error, yet it generates traces.}.
 \end{itemize}
 
-\section{Alignment}
+\section{Multiple Sequence Alignment (MSA)}
 
+To perform the MSA, the program relies on two main methods being (i) pairwise alignment algorithm and (ii) Unweighted Pair Group Method with Arithmetic mean (UPGMA) algorithm. The decision guiding the order in which traces will be aggregated by UPGMA algorithm is by measuring the dissimilarity between each pair of traces. This measure is inherently linked to the pairwise alignment process.\\
 
+\begin{lstlisting}[caption={Pseudocode of MSA algorithm}, language=]
+# Initialisation of dissimilarity matrix
+\end{lstlisting}
 
 \section{MSA quality assessment}
-
-
-
 
 
 \end{document}
