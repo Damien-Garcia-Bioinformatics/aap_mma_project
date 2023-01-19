@@ -78,7 +78,11 @@ void print_results(const scores fs, vectors msa) {
             }
         }
         for (size_t j=0 ; j<msa[i].size() ; j++) {
-            if ((temp.size() + elemSize + 2) >= maximalSize || j == msa[i].size() -1) {
+            if ((temp.size() + elemSize + 2) >= maximalSize) {
+                print[i].push_back(temp) ;
+                temp.clear() ;
+            } else if (j == msa[i].size()-1) {
+                temp += msa[i][j] + std::string(" ", elemSize - msa[i][j].size()) + " " ;
                 print[i].push_back(temp) ;
                 temp.clear() ;
             } else {
@@ -98,13 +102,13 @@ void print_results(const scores fs, vectors msa) {
         std::cout << lineBreak ;
     }
     std::cout << strScore << lineBreak ;
-    std::cout << tab << "file_name   = " << std::left << std::setw(64) << fs.fileName      << "║\n" ;
-    std::cout << tab << "exec_time   = " << std::left << std::setw(64) << fs.time          << "║\n" ;
-    std::cout << tab << "score_e     = " << std::left << std::setw(64) << fs.score_e       << "║\n" ;
-    std::cout << tab << "match_e     = " << std::left << std::setw(64) << fs.match_e       << "║\n" ;
-    std::cout << tab << "score_g     = " << std::left << std::setw(64) << fs.score_g       << "║\n" ;
-    std::cout << tab << "proj_length = " << std::left << std::setw(64) << fs.proj_length   << "║\n" ;
-    std::cout << tab << "gen_score   = " << std::left << std::setw(64) << fs.general_score << "║\n" ;
+    std::cout << tab << "file_name      = " << std::left << std::setw(61) << fs.fileName      << "║\n" ;
+    std::cout << tab << "exec_time (ms) = " << std::left << std::setw(61) << fs.time          << "║\n" ;
+    std::cout << tab << "score_e        = " << std::left << std::setw(61) << fs.score_e       << "║\n" ;
+    std::cout << tab << "match_e        = " << std::left << std::setw(61) << fs.match_e       << "║\n" ;
+    std::cout << tab << "score_g        = " << std::left << std::setw(61) << fs.score_g       << "║\n" ;
+    std::cout << tab << "proj_length    = " << std::left << std::setw(61) << fs.proj_length   << "║\n" ;
+    std::cout << tab << "gen_score      = " << std::left << std::setw(61) << fs.general_score << "║\n" ;
 
     std::cout << lineBreak ;
     std::cout << end ;
