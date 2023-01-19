@@ -18,7 +18,7 @@
 
 /* -------------------------------- GET-TIME -------------------------------- */
 
-
+// Function returning sampled time for an operation
 long get_time(const std::string &path) {
     std::ifstream file ;
     file.open(path) ;
@@ -37,7 +37,7 @@ long get_time(const std::string &path) {
 
 /* ------------------------------- READ-ALIGN ------------------------------- */
 
-
+// Function returning the alignment from a file where it is stocked
 vectors read_align(const std::string &path) {
     vectors msa ;
     std::ifstream file ;
@@ -74,7 +74,7 @@ vectors read_align(const std::string &path) {
 
 /* -------------------------------- WRITE-CSV ------------------------------- */
 
-
+// Procedure to write the process' result to a CSV file
 void write_csv(std::string &path, std::vector<scores> &allScores) {
     std::ofstream file ;
     file.open(path) ;

@@ -22,7 +22,7 @@
 
 /* ------------------------------ MAP-POSITION ------------------------------ */
 
-
+// Function that returns the elements at a stated position
 elemAtPos map_position(const vectors &msa, size_t pos) {
     std::map<std::string,size_t> elements ;
     for (size_t i=0 ; i<msa.size() ; i++) {
@@ -38,10 +38,9 @@ elemAtPos map_position(const vectors &msa, size_t pos) {
 
 /* --------------------------------- SCORE-E -------------------------------- */
 
-
+// Function that returns the event score
 size_t score_e(const vectors &msa) {
     size_t score {0} ;
-
     for (size_t i=0 ; i<msa[0].size() ; i++) {
         elemAtPos map {map_position(msa, i)} ;
         std::map<std::string,size_t>::iterator it ;
@@ -51,17 +50,15 @@ size_t score_e(const vectors &msa) {
             }
         }
     }
-    
     return score ;
 }
 
 
 /* --------------------------------- MATCH-E -------------------------------- */
 
-
+// Function that returns the event matching score
 size_t match_e(const vectors &msa) {
     size_t score {0} ;
-
     for (size_t i=0 ; i<msa[0].size() ; i++) {
         elemAtPos map {map_position(msa, i)} ;
         std::map<std::string,size_t>::iterator it ;
@@ -71,14 +68,13 @@ size_t match_e(const vectors &msa) {
             }
         }
     }
-    
     return score ;
 }
 
 
 /* --------------------------------- SCORE-G -------------------------------- */
 
-
+// Function that returns the gap score
 size_t score_g(const vectors &msa) {
     size_t score {0} ;
     // std::cout << msa.size() << "   " << msa[0].size() << "\n" ;
@@ -95,7 +91,7 @@ size_t score_g(const vectors &msa) {
 
 /* ------------------------------- PROJ-LENGTH ------------------------------ */
 
-
+// Function that returns the length of the projection of an alignment
 size_t proj_length(const vectors &msa) {
     return (msa[0].size()) ;
 }
@@ -103,7 +99,7 @@ size_t proj_length(const vectors &msa) {
 
 /* ------------------------------ GENERAL-SCORE ----------------------------- */
 
-
+// Function that returns the general score using all precedents
 float general_score(const vectors &msa) {
     float nbPos {(float)(proj_length(msa)) * (float)(msa.size())} ;
     float percentageGap   {((float)(score_g(msa)) / nbPos)} ;
@@ -115,6 +111,7 @@ float general_score(const vectors &msa) {
 
 /* ----------------------------- MEASURE-SCORES ----------------------------- */
 
+// Function returning the structure holding all scores
 scores measure_scores(const std::string &path, const vectors &msa) {
     scores fileScores ;
     fileScores.fileName = path.substr(path.find_last_of('/')+1) ;

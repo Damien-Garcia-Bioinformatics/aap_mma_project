@@ -19,7 +19,7 @@
 using elemAtPos = std::map<std::string,size_t> ;
 using vectors = std::vector<std::vector<std::string>> ;
 
-
+// Structure holding all the score and parameters for a dataset
 struct scores {
     std::string fileName ;
     long time ;

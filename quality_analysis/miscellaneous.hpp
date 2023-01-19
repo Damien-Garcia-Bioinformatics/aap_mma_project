@@ -21,13 +21,13 @@
 #include "structures.hpp"
 
 
-/// @brief 
+/// @brief Header.
 void header() ;
 
 
-/// @brief 
-/// @param  
-/// @param  
+/// @brief Procedure to print the traces from the datastes properly, as well as the scores
+/// @param ScoreResults : computed scores resumed in a structure
+/// @param AlignedTraces : vector of vector of aligned sequenced
 void print_results(const scores, vectors) ;
 
 

@@ -41,7 +41,7 @@ void help() {
 
 /* ------------------------------ PRINT-SCORES ------------------------------ */
 
-
+// header !
 void header() {
     std::cout << "  ╔═══════════════════════════════════════════════════════════════════════════════╗\n" ;
     std::cout << "  ║                           ███╗   ███╗███████╗ █████╗                          ║\n" ;
@@ -54,7 +54,7 @@ void header() {
 }
 
 
-// Weird mumbo jumbo down there, I dunno what I'm doing :'(
+// Procedure to print the traces from the datastes properly, as well as the scores
 void print_results(const scores fs, vectors msa) {
     size_t nameSize {std::to_string(msa.size()-1).size()+3} ;
     size_t maximalSize {80 - nameSize - 4} ; // Width of print

@@ -20,21 +20,19 @@
 #include "structures.hpp"
 
 
-/// @brief 
-/// @param  
-/// @param  
+/// @brief Function returning sampled time for an operation
+/// @param  PathToFile : path to input file
 long get_time(const std::string &) ;
 
 
-/// @brief 
-/// @param  
-/// @param  
+/// @brief Function returning the alignment from a file where it is stocked
+/// @param  PathToFile : path to input file
 vectors read_align(const std::string &) ;
 
 
-/// @brief 
-/// @param  
-/// @param  
+/// @brief Procedure to write the process' result to a CSV file
+/// @param PathToFile : path to output file
+/// @param ScoreStructure : structure containing all scores
 void write_csv(std::string &, std::vector<scores> &) ;
 
 
