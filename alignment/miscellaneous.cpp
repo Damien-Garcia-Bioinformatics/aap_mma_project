@@ -9,6 +9,7 @@
 /* -------------------------------------------------------------------------- */
 
 
+
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -18,24 +19,10 @@
 #include "miscellaneous.hpp"
 
 
-/* ---------------------------------- HELP ---------------------------------- */
-
-
-void help() {
-    std::cout << "  ╔═══════════════════════════════════════════════════════════════════════════════╗\n" ;
-    std::cout << "  ║                             PROGRAM EXECUTION                                 ║\n" ;
-    std::cout << "  ║                                                                               ║\n" ;
-    std::cout << "  ║  Use : './main path_to_parameter_file path_to_result_file'                    ║\n" ;
-    std::cout << "  ║                                                                               ║\n" ;
-    std::cout << "  ╚═══════════════════════════════════════════════════════════════════════════════╝\n" ;
-}
-
-
 /* ----------------------------- PRINT-ALIGNMENT ---------------------------- */
 
-
+// Procedure that prints the alignment to screen
 void print_alignment(vectors &aligned) {
-    // Print alignment
     size_t maxLength {0} ;
     for (size_t i=0 ; i<aligned.size() ; i++) {
         for (size_t j=0 ; j<aligned[i].size() ; j++) {
@@ -53,7 +40,7 @@ void print_alignment(vectors &aligned) {
 
 /* --------------------------- PRINT-ALIGNMENT-V2 --------------------------- */
 
-
+// Enhanced procedure that shows alignments in a more orderly manner
 void print_alignment_v2(vectors aligned) {
     for (size_t i=0 ; i<aligned.size() ; i++) {
         bool again {true} ;
@@ -90,7 +77,7 @@ void print_alignment_v2(vectors aligned) {
 
 /* ---------------------------- PRINT-WIREMATRIX ---------------------------- */
 
-
+// Procedure showing the content of a wire matrix on screen
 void print_wirematrix(wireMatrix &matrix) {
     for (size_t x=0 ; x<matrix.size() ; x++) {
         for (size_t y=0 ; y<matrix[0].size() ; y++) {
@@ -105,7 +92,7 @@ void print_wirematrix(wireMatrix &matrix) {
 /* --------------------------- PRINT-DISSIMMATRIX --------------------------- */
 
 
-// Prints the dissimilarity matrix
+// Procedure that prints the dissimilarity matrix, of which only the last part of the wire matrix is shown
 void print_dissimMatrix(dissimMatrix &D) {
     std::cout << std::setprecision(1) << std::fixed ;
     for (size_t i=0 ; i<D.size() ; i++) {

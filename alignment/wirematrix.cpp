@@ -37,7 +37,7 @@ const float    SUBST_ELSE {2} ;
 
 /* ----------------------------------- DEL ---------------------------------- */
 
-
+// Function returning the cost of a deletion for a given alignment
 float del(vectors &elem1, size_t pos) {
     float delCost {0} ;
     for (size_t i=0 ; i<elem1.size() ; i++) {
@@ -56,7 +56,7 @@ float del(vectors &elem1, size_t pos) {
 
 /* ----------------------------------- INS ---------------------------------- */
 
-
+// Function returning the cost of an insertion for a given alignment
 float ins(vectors &elem2, size_t pos) {
     float insCost {0} ;
     for (size_t i=0 ; i<elem2.size() ; i++) {
@@ -75,7 +75,7 @@ float ins(vectors &elem2, size_t pos) {
 
 /* ----------------------------------- SUB ---------------------------------- */
 
-
+// Function returning the cost of a substitution for a given alignment
 float sub(vectors &elem1, vectors &elem2, size_t pos1, size_t pos2) {
     float subCost {0} ;
     for (size_t i=0 ; i<elem1.size() ; i++) {
@@ -99,7 +99,7 @@ float sub(vectors &elem1, vectors &elem2, size_t pos1, size_t pos2) {
 
 /* --------------------------- WIREMATRIX-SCORING --------------------------- */
 
-
+// Function computing and returning the scoring matrix
 wireMatrix wireMatrix_scoring(vectors &elem1, vectors &elem2) {
     // wireMatrix definition with default value of 0
     wireMatrix matrix(elem1[0].size()+1, std::vector<float>(elem2[0].size()+1, 0)) ;
@@ -130,7 +130,7 @@ wireMatrix wireMatrix_scoring(vectors &elem1, vectors &elem2) {
 
 /* ----------------------------- PAIRWISE-ALIGN ----------------------------- */
 
-
+// Function cleaning the alignment based on the scoring matrix
 vectors pairwiseAlign(wireMatrix &matrix, vectors &elem1, vectors &elem2) {
     alignment aligned ;
     for (size_t i=0 ; i<elem1.size() ; i++) aligned.elem1.push_back(traceFormat()) ;

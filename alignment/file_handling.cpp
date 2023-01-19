@@ -18,7 +18,7 @@
 
 /* ------------------------------- READ-TRACE ------------------------------- */
 
-
+// Procedure to transform the line of a file into a trace in the correct format
 void read_trace(std::string &line, traceFormat &trace) {
 	std::string temp ;
 	for (size_t i=0 ; i<line.size() ; i++) {
@@ -39,7 +39,7 @@ void read_trace(std::string &line, traceFormat &trace) {
 
 /* -------------------------------- READ-FILE ------------------------------- */
 
-
+// Procedure that calls read_trace on every line of a file
 void read_file(std::string &path, std::string &expression, vectors &traces) {
 	std::ifstream file ;
 	file.open(path) ;
@@ -66,7 +66,7 @@ void read_file(std::string &path, std::string &expression, vectors &traces) {
 
 /* ------------------------------ WRITE-RESULTS ----------------------------- */
 
-
+// Procedure that fotrmats and write the outpout to a chosen file
 void write_results(std::string &pathToResults, std::string &expression, vectors &msa, long time) {
     std::ofstream file ;
     file.open(pathToResults) ;

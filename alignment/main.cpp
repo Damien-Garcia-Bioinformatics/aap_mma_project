@@ -12,19 +12,19 @@
 #include <iostream>
 #include <string>
 #include <vector>
+// #include <math.h>
 #include <ctime>
 
 #include "structures.hpp"
 #include "file_handling.hpp"
 #include "dissimilarity.hpp"
 #include "wirematrix.hpp"
-#include "miscellaneous.hpp"
 
 
 int main(int argc, char* argv[]) {
    	// Check if paths of parameter and result files are provided
 	if (argc == 1) {
-		help() ;
+		// help() ;
 		exit(1) ;
 	}
 	std::string pathToParameters {argv[1]}, pathToResults {argv[2]} ;
