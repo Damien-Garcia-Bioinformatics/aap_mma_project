@@ -16,7 +16,7 @@
 {\endminipage\par\medskip}
 
 % Code/Algorithm packages :
-\usepackage{algorithm}
+\usepackage{xcolor}
 \usepackage{listings}
 \lstset{
 	linewidth=0.8\columnwidth,
@@ -24,7 +24,11 @@
 	xrightmargin=0.1\columnwidth,
 	basicstyle=\footnotesize\ttfamily,
 	frame=line,
-	numbers=left, 
+	numbers=left,
+	keywordstyle=\color{blue}\bf,
+	commentstyle=\color{OliveGreen},
+	stringstyle=\color{red},
+	breaklines=true,
 }
 %\lstset{literate=
 	%	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
@@ -80,7 +84,7 @@ The first section of the project aims to generate sequences called traces which 
 
 In order to generate traces, the program relies on parameters files providing a RegEx-like\footnote{Regular Expression} sequence, the number of traces to generate and the maximal size of the traces to generate.
 
-\begin{lstlisting}[caption={Parameters files example}]
+\begin{lstlisting}{python}
 # GENERATION PARAMETERS
 expression=(2-3)E1(10-12)E9(1-4)E3
 number_of_traces=20
@@ -125,11 +129,18 @@ The program runs syntaxic and semantic checks on the expression to avoid errors 
 
 \section{Multiple Sequence Alignment (MSA)}
 
-To perform the MSA, the program relies on two main methods being (i) pairwise alignment algorithm and (ii) Unweighted Pair Group Method with Arithmetic mean (UPGMA) algorithm. The decision guiding the order in which traces will be aggregated by UPGMA algorithm is by measuring the dissimilarity between each pair of traces. This measure is inherently linked to the pairwise alignment process.\\
 
-\begin{lstlisting}[caption={Pseudocode of MSA algorithm}, language=]
-# Initialisation of dissimilarity matrix
-\end{lstlisting}
+To perform the MSA, the program relies on two main methods being (i) pairwise alignment algorithm and (ii) Unweighted Pair Group Method with Arithmetic mean (UPGMA) algorithm. The decision guiding the order in which traces will be aggregated by UPGMA algorithm is by measuring the dissimilarity between each pair of traces. This measure is inherently linked to the pairwise alignment process.
+
+\begin{itemize}
+\item[\textbf{Step 1}] At first, all the traces are stored into a data type that can either contain one or more traces. This way, when a pair of traces will be aggregated, the algorithm won't have to rely on different methods and functions depending on the progress of the MSA. All functions and methods are programmed to process two single traces as well as batches of traces.
+
+\item[\textbf{Step 2}] Next, every pair is aligned which allows to get the dissimilarity score. The pair with the lowest dissimilarity score is then selected, modified with considerations to the alignment results. At this point the traces might include gaps represented by hyphens (``-''). The updated traces are then aggregated into one batch of traces.
+
+\item[\textbf{Step 3}] The dissimilarity matrix\footnote{Represents a lower triangular matrix for optimization purpose. Dissim(T1, T2) $\equiv$ Dissim(T2, T1)} is updated by removing the pairs and adding the new batch of traces. The dissimilarity score for the new batch is then calculated with every other traces and/or batches. This method allows the algorithm to avoid recalculating every dissimilarity score by keeping unmodified data and only calculating scores for new batches.
+\end{itemize}
+
+\textbf{Steps 2} and \textbf{3} are repeated until all traces are aggregated into one batch.
 
 \section{MSA quality assessment}
 

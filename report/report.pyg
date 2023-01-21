@@ -1,0 +1,4 @@
+# GENERATION PARAMETERS
+expression=(2-3)E1(10-12)E9(1-4)E3
+number_of_traces=20
+maximum_length=100
