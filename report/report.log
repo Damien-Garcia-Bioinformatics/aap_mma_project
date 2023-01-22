@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.9.3)  21 JAN 2023 16:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.9.3)  22 JAN 2023 12:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -772,19 +772,19 @@ LaTeX Font Info:    Trying to load font information for OT1+qcr on input line 1
 (/usr/share/texmf/tex/latex/tex-gyre/ot1qcr.fd
 File: ot1qcr.fd 2009/09/25 v1.2 font definition file for OT1/qcr
 ) [2] [3]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 148.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 148.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 152.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 152.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 148.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 148.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 152.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 152.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: F1E15F17CC96E7EADA2F6EBD97D36BDE;312.
+(rerunfilecheck)             Checksum: 2250E43D55B838A3CF065F648C95EFD8;378.
  ) 
 Here is how much of TeX's memory you used:
- 19014 strings out of 483154
- 348714 string characters out of 5965024
+ 19016 strings out of 483154
+ 348744 string characters out of 5965024
  612345 words of memory out of 5000000
- 33680 multiletter control sequences out of 15000+600000
+ 33681 multiletter control sequences out of 15000+600000
  539295 words of font info for 47 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  59i,9n,75p,841b,1056s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -801,10 +801,10 @@ fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/sha
 re/texmf/fonts/type1/public/tex-gyre/qcrb.pfb></usr/share/texmf/fonts/type1/pub
 lic/tex-gyre/qcrr.pfb>
-Output written on report.pdf (3 pages, 163536 bytes).
+Output written on report.pdf (3 pages, 163727 bytes).
 PDF statistics:
- 125 PDF objects out of 1000 (max. 8388607)
- 105 compressed objects within 2 object streams
- 21 named destinations out of 1000 (max. 500000)
- 53 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 130 PDF objects out of 1000 (max. 8388607)
+ 110 compressed objects within 2 object streams
+ 22 named destinations out of 1000 (max. 500000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 
