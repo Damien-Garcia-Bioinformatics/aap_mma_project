@@ -5,6 +5,8 @@
 \usepackage[a4paper,left=1.5cm,right=1.5cm,top=2.5cm,bottom=2.5cm]{geometry}
 \usepackage{multicol}
 \usepackage{indentfirst}
+\usepackage[bottom]{footmisc}
+\usepackage{fancyhdr}
 
 % Figures :
 \usepackage{caption}
@@ -56,6 +58,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\pagestyle{fancy}
+%Advanced Algorithmics and Programming -- Models Methods and Programming}
+\fancyhead[C]{\footnotesize{\textsc{Advanced Algorithmics and Programming -- Models Methods and Programming}}}
+\fancyhead[L]{\includegraphics[height=1.5em]{img/NU_logo.png}}
+\fancyhead[R]{\footnotesize{M2BB}}
 
 \begin{document}
 	
@@ -88,7 +95,9 @@ In order to facilitate usage of the program, a Makefile is provided in the proje
 	\item {\fontfamily{qcr}\selectfont{\textbf{make quality\_analysis}}} : Compiles the scoring program.
 \end{itemize}
 
-Six example are at disposal to test the program and check the execution process. The program runs syntaxic and semantic checks on the expression to avoid errors and unpredictable behavior during traces generation. Working examples and basic syntaxic/semantic error case can be executed with the commands:
+Six example are at disposal to test the program and check the execution process.
+The program runs syntaxic and semantic checks on the expression to avoid errors and unpredictable behavior during traces generation.
+Working examples and basic syntaxic/semantic error case can be executed with the commands:
 \begin{itemize}
 	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_simple}}} : Working trace generation using simple generative regions.
 	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_complex}}} : Working trace generation using complex generative regions.
@@ -96,14 +105,20 @@ Six example are at disposal to test the program and check the execution process.
 \end{itemize}
 
 
-Each section of the project can be executed independently with the same command line structure: {\fontfamily{qcr}\selectfont{\textbf{./main [inputFile] [outputFile]}}}. Input file is either the parameters file for the data\_generation program, the traces to align for the alignment program, or the aligned traces for the quality\_analysis program. Output file is the path where the results should be written.\\
+Each section of the project can be executed independently with the same command line structure: {\fontfamily{qcr}\selectfont{\textbf{./main [inputFile] [outputFile]}}}.
+Input file is either the parameters file for the data\_generation program, the traces to align for the alignment program, or the aligned traces for the quality\_analysis program.
+Output file is the path where the results should be written.\\
 
-A Python3 script is also at disposal for easy and efficient complete execution of the project. Use the command: {\fontfamily{qcr}\selectfont{\textbf{python3 pipeline.py [pathToDatasetDirectory]}}}. The pipeline will handle any necessary compilation, execute the program accordingly to previously explained process and create the results directories if necessary.
+A Python3 script is also at disposal for easy and efficient complete execution of the project.
+Use the command: {\fontfamily{qcr}\selectfont{\textbf{python3 pipeline.py [pathToDatasetDirectory]}}}.
+The pipeline will handle any necessary compilation, execute the program accordingly to previously explained process and create the results directories if necessary.
 
 
 \section{Traces generation}
 
-The first section of the project aims to generate sequences called traces which are composed of tops and events. Events can be anchors, meaning they are shared by all generated traces and only exist once for each trace, or simple events that depending on the generation parameters, either exist in a trace or not, and could in some cases have repetitions. For easier further analysis of the traces, tops are represented by a dot (``."), events always start by a full case ``E" for anchors and lower case ``e" for other events.\\
+The first section of the project aims to generate sequences called traces which are composed of tops and events.
+Events can be anchors, meaning they are shared by all generated traces and only exist once for each trace, or simple events that depending on the generation parameters, either exist in a trace or not, and could in some cases have repetitions.
+For easier further analysis of the traces, tops are represented by a dot (``."), events always start by a full case ``E" for anchors and lower case ``e" for other events.\\
 
 In order to generate traces, the program relies on parameters files providing a RegEx-like\footnote{Regular Expression} sequence, the number of traces to generate and the maximal size of the traces to generate.
 
@@ -165,14 +180,22 @@ Traces are generated and written in a single file, with on expression per line a
 \section{Multiple Sequence Alignment (MSA)}
 
 
-To perform the MSA, the program relies on two main methods being (i) pairwise alignment algorithm and (ii) Unweighted Pair Group Method with Arithmetic mean (UPGMA) algorithm. The decision guiding the order in which traces will be aggregated by UPGMA algorithm is by measuring the dissimilarity between each pair of traces. This measure is inherently linked to the pairwise alignment process.
+To perform the MSA, the program relies on two main methods being (i) pairwise alignment algorithm and (ii) Unweighted Pair Group Method with Arithmetic mean (UPGMA) algorithm.
+The decision guiding the order in which traces will be aggregated by UPGMA algorithm is by measuring the dissimilarity between each pair of traces. This measure is inherently linked to the pairwise alignment process.
 
 \begin{itemize}
-\item[\textbf{Step 1}] At first, all the traces are stored into a data type that can either contain one or more traces. This way, when a pair of traces will be aggregated, the algorithm won't have to rely on different methods and functions depending on the progress of the MSA. All functions and methods are programmed to process two single traces as well as batches of traces.
+\item[\textbf{Step 1}] At first, all the traces are stored into a data type that can either contain one or more traces.
+This way, when a pair of traces will be aggregated, the algorithm won't have to rely on different methods and functions depending on the progress of the MSA.
+All functions and methods are programmed to process two single traces as well as batches of traces.
 
-\item[\textbf{Step 2}] Next, every pair is aligned which allows to get the dissimilarity score. The pair with the lowest dissimilarity score is then selected and modified with considerations to the alignment results. At this point the traces might include gaps represented by hyphens (``-''). The updated traces are then aggregated into one batch of traces.
+\item[\textbf{Step 2}] Next, every pair is aligned which allows to get the dissimilarity score.
+The pair with the lowest dissimilarity score is then selected and modified with considerations to the alignment results.
+At this point the traces might include gaps represented by hyphens (``-'').
+The updated traces are then aggregated into one batch of traces.
 
-\item[\textbf{Step 3}] The dissimilarity matrix\footnote{Represented by a lower triangular matrix for optimization purpose. Dissim(T1, T2) $\equiv$ Dissim(T2, T1)} is updated by removing the pairs and adding the new batch of traces. The dissimilarity score for the new batch is then calculated with every other traces and/or batches. This method allows the algorithm to avoid recalculating every dissimilarity score by keeping unmodified data and only calculating scores for new batches.
+\item[\textbf{Step 3}] The dissimilarity matrix\footnote{Represented by a lower triangular matrix for optimization purpose. Dissim(T1, T2) $=$ Dissim(T2, T1)} is updated by removing the pairs and adding the new batch of traces.
+The dissimilarity score for the new batch is then calculated with every other traces and/or batches.
+This method allows the algorithm to avoid recalculating every dissimilarity score by keeping unmodified data and only calculating scores for new batches.
 \end{itemize}
 
 \textbf{Steps 2} and \textbf{3} are repeated until all traces are aggregated into one batch.
@@ -190,9 +213,18 @@ To perform the MSA, the program relies on two main methods being (i) pairwise al
 
 \subsection{Quality of the method}
 
+
+
 \section{Prospects}
 
+As seen by the various results presented, the alignment is of relatively good quality considering the questionable methods used in the algorithm.
+The main concern is that the $\sigma$ values are fixed \emph{a priori} while these weights could be carefully chosen based on the inputs.
+For example, if we know that there is a large difference between the sequence lengths, 
+
+
+
+
 \section*{Supplementary figures}
-\addcontentsline{toc}{section}{Supplementary figures
+\addcontentsline{toc}{section}{Supplementary figures}
 
 \end{document}
