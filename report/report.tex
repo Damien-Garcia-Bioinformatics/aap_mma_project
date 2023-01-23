@@ -19,7 +19,7 @@
 \usepackage{xcolor}
 \usepackage{listings}
 \lstset{
-	linewidth=0.8\columnwidth,
+%	linewidth=0.8\columnwidth,
 	xleftmargin=0.1\columnwidth,
 	xrightmargin=0.1\columnwidth,
 	basicstyle=\footnotesize\ttfamily,
@@ -76,17 +76,40 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Traces generation}
+\section{Compilation and execution}
 
-\subsection{Objectives}
+In order to facilitate usage of the program, a Makefile is provided in the projects archive allowing for easy compilation of the diverse programs:
+\begin{itemize}
+	\item {\fontfamily{qcr}\selectfont{\textbf{make all}}} : Compiles the complete project.
+	\item {\fontfamily{qcr}\selectfont{\textbf{make clean}}} : Removes all the compiled files and potential precompiled headers.
+	\item {\fontfamily{qcr}\selectfont{\textbf{make rebuild}}} : Combination of {\fontfamily{qcr}\selectfont{\textbf{make clean}}} and {\fontfamily{qcr}\selectfont{\textbf{make all}}}
+	\item {\fontfamily{qcr}\selectfont{\textbf{make data\_generation}}} : Compiles the traces generation program.
+	\item {\fontfamily{qcr}\selectfont{\textbf{make alignment}}} : Compiles the alignment program.
+	\item {\fontfamily{qcr}\selectfont{\textbf{make quality\_analysis}}} : Compiles the scoring program.
+\end{itemize}
+
+Six example are at disposal to test the program and check the execution process. The program runs syntaxic and semantic checks on the expression to avoid errors and unpredictable behavior during traces generation. Working examples and basic syntaxic/semantic error case can be executed with the commands:
+\begin{itemize}
+	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_simple}}} : Working trace generation using simple generative regions.
+	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_complex}}} : Working trace generation using complex generative regions.
+	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_semantic[1-4]}}} : Execution returns syntaxic and semantic errors handled by the data\_generation program\footnote{{\fontfamily{qcr}\selectfont{make test\_semantic4}} is currently not working. In theory it should return an error, yet it generates traces.}.
+\end{itemize}
+
+
+Each section of the project can be executed independently with the same command line structure: {\fontfamily{qcr}\selectfont{\textbf{./main [inputFile] [outputFile]}}}. Input file is either the parameters file for the data\_generation program, the traces to align for the alignment program, or the aligned traces for the quality\_analysis program. Output file is the path where the results should be written.\\
+
+A Python3 script is also at disposal for easy and efficient complete execution of the project. Use the command: {\fontfamily{qcr}\selectfont{\textbf{python3 pipeline.py [pathToDatasetDirectory]}}}. The pipeline will handle any necessary compilation, execute the program accordingly to previously explained process and create the results directories if necessary.
+
+
+\section{Traces generation}
 
 The first section of the project aims to generate sequences called traces which are composed of tops and events. Events can be anchors, meaning they are shared by all generated traces and only exist once for each trace, or simple events that depending on the generation parameters, either exist in a trace or not, and could in some cases have repetitions. For easier further analysis of the traces, tops are represented by a dot (``."), events always start by a full case ``E" for anchors and lower case ``e" for other events.\\
 
 In order to generate traces, the program relies on parameters files providing a RegEx-like\footnote{Regular Expression} sequence, the number of traces to generate and the maximal size of the traces to generate.
 
-\begin{lstlisting}{python}
+\begin{lstlisting}[caption={Parameter file structure}]
 # GENERATION PARAMETERS
-expression=(2-3)E1(10-12)E9(1-4)E3
+expression=(2-3)E1<(4-8)e2X10|E2%25>E2(2-4)E3<(2-5)e1%40>
 number_of_traces=20
 maximum_length=100
 \end{lstlisting}
@@ -113,19 +136,31 @@ The expression is separated in 3 sections types :
 	\end{center}
 \end{table}
 
-\subsection{Compilation and execution}
+Traces are generated and written in a single file, with on expression per line as seen below.
 
-Compile the program using Makefile command:
-\begin{itemize}
-	\item {\fontfamily{qcr}\selectfont{\textbf{make data\_generation}}}
-\end{itemize}
+\begin{lstlisting}[caption={Traces generated from expression (2-3)E1$<$(4-8)e2X10$|$E2\%25$>$E2(2-4)E3$<$(2-5)e1\%40$>$}]
+. . . . E1 . e2 . e2 E2 . . . . . E3 . . . . .
+. . E1 . . e2 e2 . e2 . . E2 . . E3 e1 . e1 e1 e1
+. . E1 . . . . . . . E2 . . . . . E3 . e1 e1
+. . . . E1 e2 . e2 . . . . E2 . . E3 . . . . . .
+. . . . E1 e2 . e2 . E2 . . . . . E3 . . .
+. . . E1 . . . . . . . . . . . E2 . . . . . E3 . .
+. . . E1 . . . e2 . . e2 . . E2 . . . . E3 . . . . .
+. . . . E1 . . e2 e2 . . . . . E2 . . . E3 . e1
+. . E1 . e2 . . . e2 E2 . . E3 . . . e1
+. . E1 . . . . . . . . E2 . . E3 . e1 .
+. . . . E1 e2 . . . . . . e2 . . E2 . . E3 . . . . .
+. . E1 . . . . . E2 . . . . . E3 . e1
+. . . E1 . . . . . . . . E2 . . . . . E3 . . .
+. . E1 e2 e2 . . . . . . E2 . . E3 . .
+. . E1 . . . . . . E2 . . . . E3 . e1 . e1 e1 e1
+. . . . E1 . . . . . . . E2 . . . . . E3 . e1 e1
+. . . . E1 e2 . . . . . E2 . . . . . E3 . . .
+. . . E1 . . . . . . e2 E2 . . E3 . . . .
+. . . E1 e2 . e2 e2 E2 . . . . . E3 . . .
+. . . E1 . . e2 e2 e2 . . . E2 . . E3 . .
+\end{lstlisting}
 
-The program runs syntaxic and semantic checks on the expression to avoid errors and unpredictable behavior during traces generation. Working examples can be executed with the commands:
-\begin{itemize}
-	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_simple}}} -- shows working trace generations with simple generative region.
-	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_complex}}} -- shows working trace generations with complex generative region.
-	\item {\fontfamily{qcr}\selectfont{\textbf{make test\_semantic[1-4]}}} -- shows syntaxic/semantic errors\footnote{{\fontfamily{qcr}\selectfont{make test\_semantic4}} is currently not working. In theory it should return an error, yet it generates traces.}.
-\end{itemize}
 
 \section{Multiple Sequence Alignment (MSA)}
 
@@ -135,25 +170,29 @@ To perform the MSA, the program relies on two main methods being (i) pairwise al
 \begin{itemize}
 \item[\textbf{Step 1}] At first, all the traces are stored into a data type that can either contain one or more traces. This way, when a pair of traces will be aggregated, the algorithm won't have to rely on different methods and functions depending on the progress of the MSA. All functions and methods are programmed to process two single traces as well as batches of traces.
 
-\item[\textbf{Step 2}] Next, every pair is aligned which allows to get the dissimilarity score. The pair with the lowest dissimilarity score is then selected, modified with considerations to the alignment results. At this point the traces might include gaps represented by hyphens (``-''). The updated traces are then aggregated into one batch of traces.
+\item[\textbf{Step 2}] Next, every pair is aligned which allows to get the dissimilarity score. The pair with the lowest dissimilarity score is then selected and modified with considerations to the alignment results. At this point the traces might include gaps represented by hyphens (``-''). The updated traces are then aggregated into one batch of traces.
 
-\item[\textbf{Step 3}] The dissimilarity matrix\footnote{Represents a lower triangular matrix for optimization purpose. Dissim(T1, T2) $\equiv$ Dissim(T2, T1)} is updated by removing the pairs and adding the new batch of traces. The dissimilarity score for the new batch is then calculated with every other traces and/or batches. This method allows the algorithm to avoid recalculating every dissimilarity score by keeping unmodified data and only calculating scores for new batches.
+\item[\textbf{Step 3}] The dissimilarity matrix\footnote{Represented by a lower triangular matrix for optimization purpose. Dissim(T1, T2) $\equiv$ Dissim(T2, T1)} is updated by removing the pairs and adding the new batch of traces. The dissimilarity score for the new batch is then calculated with every other traces and/or batches. This method allows the algorithm to avoid recalculating every dissimilarity score by keeping unmodified data and only calculating scores for new batches.
 \end{itemize}
 
 \textbf{Steps 2} and \textbf{3} are repeated until all traces are aggregated into one batch.
 
-\subsection{Compilation and execution}
-
-Compile the program using Makefile command:
-\begin{itemize}
-	\item {\fontfamily{qcr}\selectfont{\textbf{make alignment}}}
-\end{itemize}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{img/matrix_aggregation.png}
+	\caption{Blabla}
+	\label{img:matrix}
+\end{figure}
 
 \section{MSA quality assessment}
 
 \subsection{Scoring functions}
 
+\subsection{Quality of the method}
 
+\section{Prospects}
 
+\section*{Supplementary figures}
+\addcontentsline{toc}{section}{Supplementary figures}
 
 \end{document}
