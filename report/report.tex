@@ -18,7 +18,7 @@
 {\endminipage\par\medskip}
 
 % Code/Algorithm packages :
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{listings}
 \lstset{
 %	linewidth=0.8\columnwidth,
@@ -55,7 +55,6 @@
 \usepackage[hidelinks]{hyperref}
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagestyle{fancy}
@@ -63,6 +62,10 @@
 \fancyhead[C]{\footnotesize{\textsc{Advanced Algorithmics and Programming -- Models Methods and Programming}}}
 \fancyhead[L]{\includegraphics[height=1.5em]{img/NU_logo.png}}
 \fancyhead[R]{\footnotesize{\textbf{M2BB}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{document}
 	
@@ -114,6 +117,9 @@ Use the command: {\fontfamily{qcr}\selectfont{\textbf{python3 pipeline.py [pathT
 The pipeline will handle any necessary compilation, execute the program accordingly to previously explained process and create the results directories if necessary.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \section{Traces generation}
 
 The first section of the project aims to generate sequences called traces which are composed of tops and events.
@@ -139,13 +145,13 @@ The expression is separated in 3 sections types :
 \begin{table}[H]
 	\begin{center}
 		\caption{Generative regions format}
-		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\begin{tabular}{|c|ccccccccccccc|}
 			\hline
 			\textbf{Expression} & $<$ & ( & min & - & max & ) & + & event & X & val & $|$ & ... & $>$ \\
 			\hline
-			\textbf{Required for simple generation} && $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &&&&&&& \\
+			\textbf{Required for simple generation} && \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} &&&&&&& \\
 			\hline
-			\textbf{Required for complex generation} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ && $\times$ &&&&& $\times$ \\
+			\textbf{Required for complex generation} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} && \cellcolor{gray} &&&&& \cellcolor{gray} \\
 			\hline
 		\end{tabular}
 	\end{center}
@@ -177,6 +183,9 @@ Traces are generated and written in a single file, with on expression per line a
 \end{lstlisting}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \section{Multiple Sequence Alignment (MSA)}
 
 
@@ -201,11 +210,35 @@ This method allows the algorithm to avoid recalculating every dissimilarity scor
 \textbf{Steps 2} and \textbf{3} are repeated until all traces are aggregated into one batch.
 
 \begin{figure}[H]
-	\centering
-	\includegraphics[width=1\linewidth]{img/matrix_aggregation.png}
-	\caption{Blabla}
-	\label{img:matrix}
+	\begin{subfigure}[t]{0.33\linewidth}
+		\centering
+		\includegraphics[width=0.8\linewidth]{img/matrix1.png}
+		\caption{}
+		\label{sub:matrix1}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.33\linewidth}
+		\centering
+		\includegraphics[width=0.6\linewidth]{img/matrix2.png}
+		\caption{}
+		\label{sub:matrix2}	
+	\end{subfigure}
+	\begin{subfigure}[t]{0.33\linewidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{img/matrix3.png}
+		\caption{}
+		\label{sub:matrix3}
+	\end{subfigure}
+	\caption{Dissimilarity matrix update}{
+		\emph{\color{blue}{(a)}} Selection of minimum dissimilarity (red cell) and removing the values from the corresponding traces (pink cells).
+		\emph{\color{blue}{(b)}} Resulting matrix after step \emph{\color{blue}{a}}.
+		\emph{\color{blue}{(c)}} Adding aggregated traces and performing dissimilarity calculations for the new cells.
+	}
+	\label{fig:matrix}
 \end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \section{MSA quality assessment}
 
@@ -215,17 +248,133 @@ This method allows the algorithm to avoid recalculating every dissimilarity scor
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \section{Prospects}
 
 As seen by the various results presented, the alignment is of relatively good quality considering the questionable methods used in the algorithm.
+
 The main concern is that the values for indel\footnote{Insertions and deletions} and substitutions are fixed \emph{a priori} while these weights could be carefully chosen based on the inputs.
 For example, with batches of traces showing large difference between lengths, the number of gaps introduced will accordingly be higher than in an ideal case.
-Therefor, to obtain an overall greater alignment quality, lowering the cost of gaps in comparison to the cost of mismatches on events should.
+Therefor, lowering the cost of gaps in comparison to the cost of mismatches on events should allow for wider gaps and align tops and events.
+Another way of solving this problem could be to lower the cost of gap introduction around other gaps, also resulting in wider gaps segments and better alignment of tops and events.
+
+The second concern is that this algorithm aims to align traces which have no actual real life meaning.
+The traces could be the reflection of time series, genes recognition in a sequencing process, or any other situation.
+Adding context around these traces would allow for revisions on the alignment process.
+
+\pagebreak
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section*{Supplementary figures}
-\addcontentsline{toc}{section}{Supplementary figures}
+\section*{Supplementary material}
+\addcontentsline{toc}{section}{Supplementary material}
+
+\noindent\footnotesize{\textbf{Code accessible on GitHub repository:}
+\href{https://github.com/Damien-Garcia-Bioinformatics/aap\_mma\_project}{\color{blue}{https://github.com/Damien-Garcia-Bioinformatics/aap\_mma\_project}}}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{img/terminal_output.png}
+	\caption{Terminal output from python pipeline}
+	\label{fig:output}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.45\linewidth]{img/terminal_tree.png}
+	\caption{Terminal output from python pipeline}
+	\label{fig:tree}
+\end{figure}
+
+\pagebreak
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Dataset 1 scoring results}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			\textbf{file\_name} & \textbf{exec\_time} (ms) & \textbf{score\_e} & \textbf{match\_e} & \textbf{score\_g} & \textbf{proj\_length} & \textbf{general\_score} \\
+			\hline\hline
+			expression1.txt & 13 & 462 & 58 & 194 & 33 & 0.659394 \\
+			\hline
+			expression2.txt & 40 & 812 & 79 & 425 & 62 & 0.623629 \\
+			\hline
+			expression3.txt & 20 & 589 & 55 & 185 & 39 & 0.703333 \\
+			\hline
+			expression4.txt & 12 & 427 & 78 & 188 & 31 & 0.650161 \\
+			\hline
+			expression5.txt & 28 & 726 & 53 & 267 & 50 & 0.680100 \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Dataset 2 scoring results}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			\textbf{file\_name} & \textbf{exec\_time} (ms) & \textbf{score\_e} & \textbf{match\_e} & \textbf{score\_g} & \textbf{proj\_length} & \textbf{general\_score} \\
+			\hline\hline
+			expression1.txt & 19 & 405 & 103 & 202 & 31 & 0.620484 \\
+			\hline
+			expression2.txt & 15 & 399 & 109 & 130 & 27 & 0.689074 \\
+			\hline
+			expression3.txt & 10 & 278 & 77  & 143 & 22 & 0.601136 \\
+			\hline
+			expression4.txt & 27 & 580 & 138 & 154 & 37 & 0.726216 \\
+			\hline
+			expression5.txt & 16 & 451 & 80  & 164 & 31 & 0.681129 \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Dataset 3 scoring results}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			\textbf{file\_name} & \textbf{exec\_time} (ms) & \textbf{score\_e} & \textbf{match\_e} & \textbf{score\_g} & \textbf{proj\_length} & \textbf{general\_score} \\
+			\hline\hline
+			expression1.txt & 104 & 1169 & 180 & 644 & 93  & 0.600269 \\
+			\hline
+			expression2.txt & 215 & 1615 & 401 & 513 & 108 & 0.696667 \\
+			\hline
+			expression3.txt & 275 & 1847 & 487 & 495 & 119 & 0.719244 \\
+			\hline
+			expression4.txt & 17  & 459  & 103 & 126 & 30  & 0.709500 \\
+			\hline
+			expression5.txt & 14  & 459  & 108 & 152 & 31  & 0.690806 \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Dataset 4 scoring results}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			\textbf{file\_name} & \textbf{exec\_time} (ms) & \textbf{score\_e} & \textbf{match\_e} & \textbf{score\_g} & \textbf{proj\_length} & \textbf{general\_score} \\
+			\hline\hline
+			expression1.txt &  &  &  &  &  &  \\
+			\hline
+			expression2.txt &  &  &  &  &  &  \\
+			\hline
+			expression3.txt &  &  &  &  &  &  \\
+			\hline
+			expression4.txt &  &  &  &  &  &  \\
+			\hline
+			expression5.txt &  &  &  &  &  &  \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
 
 \end{document}
