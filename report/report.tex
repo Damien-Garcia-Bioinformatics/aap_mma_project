@@ -62,7 +62,7 @@
 %Advanced Algorithmics and Programming -- Models Methods and Programming}
 \fancyhead[C]{\footnotesize{\textsc{Advanced Algorithmics and Programming -- Models Methods and Programming}}}
 \fancyhead[L]{\includegraphics[height=1.5em]{img/NU_logo.png}}
-\fancyhead[R]{\footnotesize{M2BB}}
+\fancyhead[R]{\footnotesize{\textbf{M2BB}}}
 
 \begin{document}
 	
@@ -193,7 +193,7 @@ The pair with the lowest dissimilarity score is then selected and modified with 
 At this point the traces might include gaps represented by hyphens (``-'').
 The updated traces are then aggregated into one batch of traces.
 
-\item[\textbf{Step 3}] The dissimilarity matrix\footnote{Represented by a lower triangular matrix for optimization purpose. Dissim(T1, T2) $=$ Dissim(T2, T1)} is updated by removing the pairs and adding the new batch of traces.
+\item[\textbf{Step 3}] The dissimilarity matrix\footnote{Represented by a lower triangular matrix for optimization purpose. $Dissim(T1, T2) = Dissim(T2, T1)$} is updated by removing the pairs and adding the new batch of traces.
 The dissimilarity score for the new batch is then calculated with every other traces and/or batches.
 This method allows the algorithm to avoid recalculating every dissimilarity score by keeping unmodified data and only calculating scores for new batches.
 \end{itemize}
@@ -218,8 +218,9 @@ This method allows the algorithm to avoid recalculating every dissimilarity scor
 \section{Prospects}
 
 As seen by the various results presented, the alignment is of relatively good quality considering the questionable methods used in the algorithm.
-The main concern is that the $\sigma$ values are fixed \emph{a priori} while these weights could be carefully chosen based on the inputs.
-For example, if we know that there is a large difference between the sequence lengths, 
+The main concern is that the values for indel\footnote{Insertions and deletions} and substitutions are fixed \emph{a priori} while these weights could be carefully chosen based on the inputs.
+For example, with batches of traces showing large difference between lengths, the number of gaps introduced will accordingly be higher than in an ideal case.
+Therefor, to obtain an overall greater alignment quality, lowering the cost of gaps in comparison to the cost of mismatches on events should.
 
 
 
