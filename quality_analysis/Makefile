@@ -58,10 +58,10 @@ rebuild:
 
 # Generates scores for all files in examples/alignment files
 test_scoring:
-	./$(EXE) ../examples/alignment/ ../examples/scoring/scores.csv
+	./$(EXE) ../datasets/examples/alignment/ ../datasets/examples/scoring/scores.csv
 
 file_scoring_simple:
-	./$(EXE) ../examples/alignment/simple.txt 
+	./$(EXE) ../datasets/examples/alignment/simple.txt 
 
 file_scoring_complex:
-	./$(EXE) ../examples/alignment/complex.txt
+	./$(EXE) ../datasets/examples/alignment/complex.txt

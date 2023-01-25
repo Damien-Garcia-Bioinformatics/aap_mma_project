@@ -62,8 +62,8 @@ rebuild:
 
 # Simple alignment test
 test_simple:
-	./$(EXE) ../examples/traces/simple.txt ../examples/alignment/simple.txt
+	./$(EXE) ../datasets/examples/traces/simple.txt ../datasets/examples/alignment/simple.txt
 
 # Complex alignment test
 test_complex:
-	./$(EXE) ../examples/traces/complex.txt ../examples/alignment/complex.txt
+	./$(EXE) ../datasets/examples/traces/complex.txt ../datasets/examples/alignment/complex.txt

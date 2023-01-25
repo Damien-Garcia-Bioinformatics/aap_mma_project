@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.5.4)  25 JAN 2023 17:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.5.4)  25 JAN 2023 21:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -819,7 +819,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 125--128
 
  []
 
-<img/NU_logo.png, id=77, 462.72874pt x 467.7475pt>
+<img/NU_logo.png, id=79, 462.72874pt x 467.7475pt>
 File: img/NU_logo.png Graphic file (type png)
 <use img/NU_logo.png>
 Package pdftex.def Info: img/NU_logo.png  used on input line 133.
@@ -836,17 +836,17 @@ File: img/NU_logo.png Graphic file (type png)
 Package pdftex.def Info: img/NU_logo.png  used on input line 199.
 (pdftex.def)             Requested size: 17.43277pt x 17.62482pt.
  [3]
-<img/matrix1.png, id=127, 359.3425pt x 372.39125pt>
+<img/matrix1.png, id=129, 359.3425pt x 372.39125pt>
 File: img/matrix1.png Graphic file (type png)
 <use img/matrix1.png>
 Package pdftex.def Info: img/matrix1.png  used on input line 215.
 (pdftex.def)             Requested size: 135.20876pt x 140.12367pt.
-<img/matrix2.png, id=128, 271.0125pt x 290.08376pt>
+<img/matrix2.png, id=130, 271.0125pt x 290.08376pt>
 File: img/matrix2.png Graphic file (type png)
 <use img/matrix2.png>
 Package pdftex.def Info: img/matrix2.png  used on input line 221.
 (pdftex.def)             Requested size: 101.40721pt x 108.54211pt.
-<img/matrix3.png, id=129, 319.1925pt x 334.24875pt>
+<img/matrix3.png, id=131, 319.1925pt x 334.24875pt>
 File: img/matrix3.png Graphic file (type png)
 <use img/matrix3.png>
 Package pdftex.def Info: img/matrix3.png  used on input line 227.
@@ -861,58 +861,109 @@ File: img/NU_logo.png Graphic file (type png)
 Package pdftex.def Info: img/NU_logo.png  used on input line 268.
 (pdftex.def)             Requested size: 17.43277pt x 17.62482pt.
  [5]
-<img/terminal_output.png, id=147, 819.06pt x 750.805pt>
+<img/terminal_output.png, id=149, 819.06pt x 750.805pt>
 File: img/terminal_output.png Graphic file (type png)
 <use img/terminal_output.png>
 Package pdftex.def Info: img/terminal_output.png  used on input line 281.
 (pdftex.def)             Requested size: 384.11221pt x 352.11082pt.
-<img/terminal_tree.png, id=148, 459.7175pt x 437.635pt>
+<img/terminal_tree.png, id=150, 459.7175pt x 437.635pt>
 File: img/terminal_tree.png Graphic file (type png)
 <use img/terminal_tree.png>
 Package pdftex.def Info: img/terminal_tree.png  used on input line 288.
 (pdftex.def)             Requested size: 230.46576pt x 219.39792pt.
 File: img/NU_logo.png Graphic file (type png)
 <use img/NU_logo.png>
-Package pdftex.def Info: img/NU_logo.png  used on input line 294.
+Package pdftex.def Info: img/NU_logo.png  used on input line 295.
 (pdftex.def)             Requested size: 17.43277pt x 17.62482pt.
  [6 <./img/terminal_output.png> <./img/terminal_tree.png>]
-Overfull \hbox (9.33841pt too wide) in paragraph at lines 298--313
+Overfull \hbox (9.33841pt too wide) in paragraph at lines 300--315
  [] 
  []
 
 
-Overfull \hbox (9.33841pt too wide) in paragraph at lines 319--334
+Overfull \hbox (9.33841pt too wide) in paragraph at lines 321--336
  [] 
  []
 
 
-Overfull \hbox (9.33841pt too wide) in paragraph at lines 340--355
+Overfull \hbox (9.33841pt too wide) in paragraph at lines 342--357
  [] 
  []
 
 
-Overfull \hbox (9.33841pt too wide) in paragraph at lines 361--376
+Overfull \hbox (9.33841pt too wide) in paragraph at lines 363--378
  [] 
  []
 
 File: img/NU_logo.png Graphic file (type png)
 <use img/NU_logo.png>
-Package pdftex.def Info: img/NU_logo.png  used on input line 380.
+Package pdftex.def Info: img/NU_logo.png  used on input line 383.
 (pdftex.def)             Requested size: 17.43277pt x 17.62482pt.
 [7]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 380.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 380.
+<plots/lenVStime.jpg, id=163, 462.528pt x 346.896pt>
+File: plots/lenVStime.jpg Graphic file (type jpg)
+<use plots/lenVStime.jpg>
+Package pdftex.def Info: plots/lenVStime.jpg  used on input line 388.
+(pdftex.def)             Requested size: 256.07481pt x 192.06375pt.
+<plots/lenVSgen.jpg, id=164, 462.528pt x 346.896pt>
+File: plots/lenVSgen.jpg Graphic file (type jpg)
+<use plots/lenVSgen.jpg>
+Package pdftex.def Info: plots/lenVSgen.jpg  used on input line 394.
+(pdftex.def)             Requested size: 256.07481pt x 192.06375pt.
+<plots/lenVSse.jpg, id=165, 462.528pt x 346.896pt>
+File: plots/lenVSse.jpg Graphic file (type jpg)
+<use plots/lenVSse.jpg>
+Package pdftex.def Info: plots/lenVSse.jpg  used on input line 400.
+(pdftex.def)             Requested size: 256.07481pt x 192.06375pt.
+<plots/lenVSselen.jpg, id=166, 462.528pt x 346.896pt>
+File: plots/lenVSselen.jpg Graphic file (type jpg)
+<use plots/lenVSselen.jpg>
+Package pdftex.def Info: plots/lenVSselen.jpg  used on input line 406.
+(pdftex.def)             Requested size: 256.07481pt x 192.06375pt.
+<plots/lenVSme.jpg, id=167, 462.528pt x 346.896pt>
+File: plots/lenVSme.jpg Graphic file (type jpg)
+<use plots/lenVSme.jpg>
+Package pdftex.def Info: plots/lenVSme.jpg  used on input line 412.
+(pdftex.def)             Requested size: 256.07481pt x 192.06375pt.
+<plots/lenVSmelen.jpg, id=168, 462.528pt x 346.896pt>
+File: plots/lenVSmelen.jpg Graphic file (type jpg)
+<use plots/lenVSmelen.jpg>
+Package pdftex.def Info: plots/lenVSmelen.jpg  used on input line 418.
+(pdftex.def)             Requested size: 256.07481pt x 192.06375pt.
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 386--422
+[][] []
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 386--422
+[] []
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 386--422
+[] [] 
+ []
+
+File: img/NU_logo.png Graphic file (type png)
+<use img/NU_logo.png>
+Package pdftex.def Info: img/NU_logo.png  used on input line 427.
+(pdftex.def)             Requested size: 17.43277pt x 17.62482pt.
+[8 <./plots/lenVStime.jpg> <./plots/lenVSgen.jpg> <./plots/lenVSse.jpg> <./plot
+s/lenVSselen.jpg> <./plots/lenVSme.jpg> <./plots/lenVSmelen.jpg>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 427.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 427.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 380.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 380.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 427.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 427.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 08782277FDDE4994A522722B576E6B07;477.
  ) 
 Here is how much of TeX's memory you used:
- 19450 strings out of 483154
- 354664 string characters out of 5965024
- 846139 words of memory out of 5000000
- 34056 multiletter control sequences out of 15000+600000
+ 19503 strings out of 483154
+ 355621 string characters out of 5965024
+ 846639 words of memory out of 5000000
+ 34099 multiletter control sequences out of 15000+600000
  540551 words of font info for 51 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  59i,16n,75p,841b,1842s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -932,10 +983,10 @@ live/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/typ
 e1/public/tex-gyre/qcrb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qcrr.
 pfb>
-Output written on report.pdf (7 pages, 316523 bytes).
+Output written on report.pdf (8 pages, 413083 bytes).
 PDF statistics:
- 229 PDF objects out of 1000 (max. 8388607)
- 190 compressed objects within 2 object streams
- 57 named destinations out of 1000 (max. 500000)
- 107 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 241 PDF objects out of 1000 (max. 8388607)
+ 195 compressed objects within 2 object streams
+ 59 named destinations out of 1000 (max. 500000)
+ 137 words of extra memory for PDF output out of 10000 (max. 10000000)
 

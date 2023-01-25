@@ -62,24 +62,24 @@ rebuild:
 
 # Simple generation test
 test_simple:
-	./$(EXE) ../examples/parameters/simple.txt ../examples/traces/simple.txt
+	./$(EXE) ../datasets/examples/parameters/simple.txt ../datasets/examples/traces/simple.txt
 
 # Complex generation test
 test_complex:
-	./$(EXE) ../examples/parameters/complex.txt ../examples/traces/complex.txt
+	./$(EXE) ../datasets/examples/parameters/complex.txt ../datasets/examples/traces/complex.txt
 
 # Semantic error test 1
 test_semantic1:
-	./$(EXE) ../examples/parameters/semanticError1.txt ../examples/traces/semanticError1.txt
+	./$(EXE) ../datasets/examples/parameters/semanticError1.txt ../datasets/examples/traces/semanticError1.txt
 
 # Semantic error test 2
 test_semantic2:
-	./$(EXE) ../examples/parameters/semanticError2.txt ../examples/traces/semanticError2.txt
+	./$(EXE) ../datasets/examples/parameters/semanticError2.txt ../datasets/examples/traces/semanticError2.txt
 
 # Semantic error test 3
 test_semantic3:
-	./$(EXE) ../examples/parameters/semanticError3.txt ../examples/traces/semanticError3.txt
+	./$(EXE) ../datasets/examples/parameters/semanticError3.txt ../datasets/examples/traces/semanticError3.txt
 
 # Semantic error test 4
 test_semantic4:
-	./$(EXE) ../examples/parameters/semanticError4.txt ../examples/traces/semanticError4.txt
+	./$(EXE) ../datasets/examples/parameters/semanticError4.txt ../datasets/examples/traces/semanticError4.txt
