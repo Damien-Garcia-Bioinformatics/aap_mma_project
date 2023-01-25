@@ -1,0 +1,25 @@
+#############################################################################################
+#############              PARAMETERS FILE - Generation of traces              ##############
+#############################################################################################
+#                                                                                           #
+#                                       INFORMATIONS :                                      #
+#                                                                                           #
+# - Modify values and parameters from this file to change how the program will execute.     #
+# - Do not delete parameters, only change the values.                                       #
+# - For more information, use 'help command' or read the README.md file.                    #
+#                                                                                           #
+#############################################################################################
+#                                                                                           #
+#                                         PROJECT :                                         #
+#                                                                                           #
+# - Advanced Algorithmics and Programming & Models, Methods and Programming Project         #
+# - Damien GARCIA, Florian ECHELARD                                                         #
+# - M2BB                                                                                    #
+#                                                                                           #
+#############################################################################################
+
+
+# GENERATION PARAMETERS
+expression=E1(5-9)E2<(6-8)+e3X2>(4-5)E4(2-5)E5<(5-7)+e9X2>
+number_of_traces=20
+maximum_length=100
