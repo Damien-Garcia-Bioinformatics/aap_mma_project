@@ -4,11 +4,11 @@ The project consists in implementing a modified version of pairwise alignement o
 
 
 # Objectives
-[x] Implementation of Multiple Sequence Alignment algorithm (MSA).
-[x] Construction of tree and MSA in parallele to facilitate access of data (UPGMA).
-[x] Makefile for compilation.
-[x] Python script (pipeline) to execute sequence of algorithms.
-[x] 20 datasets containing each 20 sequences.
+- [x] Implementation of Multiple Sequence Alignment algorithm (MSA).
+- [x] Construction of tree and MSA in parallele to facilitate access of data (UPGMA).
+- [x] Makefile for compilation.
+- [x] Python script (pipeline) to execute sequence of algorithms.
+- [x] 20 datasets containing each 20 sequences.
 
 
 # Compilation
