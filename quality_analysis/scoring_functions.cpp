@@ -22,6 +22,7 @@
 
 /* ------------------------------ MAP-POSITION ------------------------------ */
 
+
 // Function that returns the elements at a stated position
 elemAtPos map_position(const vectors &msa, size_t pos) {
     std::map<std::string,size_t> elements ;
@@ -37,6 +38,7 @@ elemAtPos map_position(const vectors &msa, size_t pos) {
 
 
 /* --------------------------------- SCORE-E -------------------------------- */
+
 
 // Function that returns the event score
 size_t score_e(const vectors &msa) {
@@ -56,6 +58,7 @@ size_t score_e(const vectors &msa) {
 
 /* --------------------------------- MATCH-E -------------------------------- */
 
+
 // Function that returns the event matching score
 size_t match_e(const vectors &msa) {
     size_t score {0} ;
@@ -74,6 +77,7 @@ size_t match_e(const vectors &msa) {
 
 /* --------------------------------- SCORE-G -------------------------------- */
 
+
 // Function that returns the gap score
 size_t score_g(const vectors &msa) {
     size_t score {0} ;
@@ -91,6 +95,7 @@ size_t score_g(const vectors &msa) {
 
 /* ------------------------------- PROJ-LENGTH ------------------------------ */
 
+
 // Function that returns the length of the projection of an alignment
 size_t proj_length(const vectors &msa) {
     return (msa[0].size()) ;
@@ -98,6 +103,7 @@ size_t proj_length(const vectors &msa) {
 
 
 /* ------------------------------ GENERAL-SCORE ----------------------------- */
+
 
 // Function that returns the general score using all precedents
 float general_score(const vectors &msa) {
@@ -110,6 +116,7 @@ float general_score(const vectors &msa) {
 
 
 /* ----------------------------- MEASURE-SCORES ----------------------------- */
+
 
 // Function returning the structure holding all scores
 scores measure_scores(const std::string &path, const vectors &msa) {

@@ -8,6 +8,9 @@
 \usepackage[bottom]{footmisc}
 \usepackage{fancyhdr}
 
+\usepackage{scrextend} % For labeling
+\setkomafont{labelinglabel}{\bfseries}
+
 % Figures :
 \usepackage{caption}
 \usepackage{subcaption}
@@ -192,22 +195,22 @@ Traces are generated and written in a single file, with on expression per line a
 To perform the MSA, the program relies on two main methods being (i) pairwise alignment algorithm and (ii) Unweighted Pair Group Method with Arithmetic mean (UPGMA) algorithm.
 The decision guiding the order in which traces will be aggregated by UPGMA algorithm is by measuring the dissimilarity between each pair of traces. This measure is inherently linked to the pairwise alignment process.
 
-\begin{itemize}
-\item[\textbf{Step 1}] At first, all the traces are stored into a data type that can either contain one or more traces.
+\begin{labeling}{...........}
+\item[Step 1] At first, all the traces are stored into a data type that can either contain one or more traces.
 This way, when a pair of traces will be aggregated, the algorithm won't have to rely on different methods and functions depending on the progress of the MSA.
 All functions and methods are programmed to process two single traces as well as batches of traces.
 
-\item[\textbf{Step 2}] Next, every pair is aligned which allows to get the dissimilarity score.
+\item[Step 2] Next, every pair is aligned which allows to get the dissimilarity score.
 The pair with the lowest dissimilarity score is then selected and modified with considerations to the alignment results.
 At this point the traces might include gaps represented by hyphens (``-'').
 The updated traces are then aggregated into one batch of traces.
 
-\item[\textbf{Step 3}] The dissimilarity matrix\footnote{Represented by a lower triangular matrix for optimization purpose. $Dissim(T1, T2) = Dissim(T2, T1)$} is updated by removing the pairs and adding the new batch of traces.
+\item[Step 3] The dissimilarity matrix\footnote{Represented by a lower triangular matrix for optimization purpose. $Dissim(T1, T2) = Dissim(T2, T1)$} is updated by removing the pairs and adding the new batch of traces.
 The dissimilarity score for the new batch is then calculated with every other traces and/or batches.
 This method allows the algorithm to avoid recalculating every dissimilarity score by keeping unmodified data and only calculating scores for new batches.
-\end{itemize}
+\end{labeling}
 
-\textbf{Steps 2} and \textbf{3} are repeated until all traces are aggregated into one batch.
+\noindent\textbf{Steps 2} and \textbf{3} are repeated until all traces are aggregated into one batch.
 
 \begin{figure}[H]
 	\begin{subfigure}[t]{0.33\linewidth}
@@ -242,9 +245,14 @@ This method allows the algorithm to avoid recalculating every dissimilarity scor
 
 \section{MSA quality assessment}
 
-\subsection{Scoring functions}
 
-\subsection{Quality of the method}
+\begin{itemize}
+	\item \textbf{score\_e} : This is the description
+	\item \textbf{match\_e} : This is the description
+	\item \textbf{score\_g} : Counts the gaps in the msa.
+	\item \textbf{proj\_length} : Length of the traces on the msa (with gaps).
+	\item \textbf{general\_score} : This is the description
+\end{itemize}
 
 
 
@@ -286,7 +294,7 @@ Adding context around these traces would allow for revisions on the alignment pr
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.45\linewidth]{img/terminal_tree.png}
-	\caption{Terminal output from python pipeline}
+	\caption{Datasets directory structure}
 	\label{fig:tree}
 \end{figure}
 
