@@ -1,6 +1,6 @@
 \babel@toc {english}{}
 \contentsline {table}{\numberline {1}{\ignorespaces Generative regions format\relax }}{3}{table.caption.4}%
-\contentsline {table}{\numberline {2}{\ignorespaces Dataset 1 scoring results\relax }}{7}{table.caption.9}%
-\contentsline {table}{\numberline {3}{\ignorespaces Dataset 2 scoring results\relax }}{7}{table.caption.10}%
-\contentsline {table}{\numberline {4}{\ignorespaces Dataset 3 scoring results\relax }}{7}{table.caption.11}%
-\contentsline {table}{\numberline {5}{\ignorespaces Dataset 4 scoring results\relax }}{7}{table.caption.12}%
+\contentsline {table}{\numberline {2}{\ignorespaces Dataset 1 scoring results: based on expressions containing simple generative regions.\relax }}{7}{table.caption.9}%
+\contentsline {table}{\numberline {3}{\ignorespaces Dataset 2 scoring results: based on expressions containing complex generative regions.\relax }}{7}{table.caption.10}%
+\contentsline {table}{\numberline {4}{\ignorespaces Dataset 3 scoring results: based on expression with high length variability.\relax }}{7}{table.caption.11}%
+\contentsline {table}{\numberline {5}{\ignorespaces Dataset 4 scoring results: based on extremely variable expressions containing both simple and complex generative regions and multitude of events\relax }}{7}{table.caption.12}%
