@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.5.4)  26 JAN 2023 16:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.5.4)  26 JAN 2023 22:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -866,135 +866,111 @@ File: img/matrix3.png Graphic file (type png)
 <use img/matrix3.png>
 Package pdftex.def Info: img/matrix3.png  used on input line 230.
 (pdftex.def)             Requested size: 118.30669pt x 123.88431pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 260--264
-
- []
-
 File: img/NU_logo.png Graphic file (type png)
 <use img/NU_logo.png>
 Package pdftex.def Info: img/NU_logo.png  used on input line 264.
 (pdftex.def)             Requested size: 17.43277pt x 17.62482pt.
-[4 <./img/matrix1.png> <./img/matrix2.png> <./img/matrix3.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 265--269
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 270--275
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 287--288
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 289--293
-
- []
-
+ [4 <./img/matrix1.png> <./img/matrix2.png> <./img/matrix3.png>]
 File: img/NU_logo.png Graphic file (type png)
 <use img/NU_logo.png>
-Package pdftex.def Info: img/NU_logo.png  used on input line 299.
+Package pdftex.def Info: img/NU_logo.png  used on input line 302.
 (pdftex.def)             Requested size: 17.43277pt x 17.62482pt.
-[5]
+ [5]
 <img/terminal_output.png, id=150, 819.06pt x 750.805pt>
 File: img/terminal_output.png Graphic file (type png)
 <use img/terminal_output.png>
-Package pdftex.def Info: img/terminal_output.png  used on input line 312.
+Package pdftex.def Info: img/terminal_output.png  used on input line 315.
 (pdftex.def)             Requested size: 384.11221pt x 352.11082pt.
 <img/terminal_tree.png, id=151, 459.7175pt x 437.635pt>
 File: img/terminal_tree.png Graphic file (type png)
 <use img/terminal_tree.png>
-Package pdftex.def Info: img/terminal_tree.png  used on input line 319.
+Package pdftex.def Info: img/terminal_tree.png  used on input line 322.
 (pdftex.def)             Requested size: 230.46576pt x 219.39792pt.
 File: img/NU_logo.png Graphic file (type png)
 <use img/NU_logo.png>
-Package pdftex.def Info: img/NU_logo.png  used on input line 326.
+Package pdftex.def Info: img/NU_logo.png  used on input line 329.
 (pdftex.def)             Requested size: 17.43277pt x 17.62482pt.
  [6 <./img/terminal_output.png> <./img/terminal_tree.png>]
-Overfull \hbox (9.33841pt too wide) in paragraph at lines 332--347
+Overfull \hbox (9.33841pt too wide) in paragraph at lines 335--350
  [] 
  []
 
 
-Overfull \hbox (9.33841pt too wide) in paragraph at lines 354--369
+Overfull \hbox (9.33841pt too wide) in paragraph at lines 357--372
  [] 
  []
 
 
-Overfull \hbox (9.33841pt too wide) in paragraph at lines 376--391
+Overfull \hbox (9.33841pt too wide) in paragraph at lines 379--394
  [] 
  []
 
 
-Overfull \hbox (9.33841pt too wide) in paragraph at lines 398--413
+Overfull \hbox (9.33841pt too wide) in paragraph at lines 401--416
  [] 
  []
 
 File: img/NU_logo.png Graphic file (type png)
 <use img/NU_logo.png>
-Package pdftex.def Info: img/NU_logo.png  used on input line 418.
+Package pdftex.def Info: img/NU_logo.png  used on input line 421.
 (pdftex.def)             Requested size: 17.43277pt x 17.62482pt.
 [7]
 <plots/lenVStime.jpg, id=164, 462.528pt x 346.896pt>
 File: plots/lenVStime.jpg Graphic file (type jpg)
 <use plots/lenVStime.jpg>
-Package pdftex.def Info: plots/lenVStime.jpg  used on input line 423.
+Package pdftex.def Info: plots/lenVStime.jpg  used on input line 426.
 (pdftex.def)             Requested size: 256.07481pt x 192.06375pt.
 <plots/lenVSgen.jpg, id=165, 462.528pt x 346.896pt>
 File: plots/lenVSgen.jpg Graphic file (type jpg)
 <use plots/lenVSgen.jpg>
-Package pdftex.def Info: plots/lenVSgen.jpg  used on input line 429.
+Package pdftex.def Info: plots/lenVSgen.jpg  used on input line 432.
 (pdftex.def)             Requested size: 256.07481pt x 192.06375pt.
 <plots/lenVSse.jpg, id=166, 462.528pt x 346.896pt>
 File: plots/lenVSse.jpg Graphic file (type jpg)
 <use plots/lenVSse.jpg>
-Package pdftex.def Info: plots/lenVSse.jpg  used on input line 435.
+Package pdftex.def Info: plots/lenVSse.jpg  used on input line 438.
 (pdftex.def)             Requested size: 256.07481pt x 192.06375pt.
 <plots/lenVSme.jpg, id=167, 462.528pt x 346.896pt>
 File: plots/lenVSme.jpg Graphic file (type jpg)
 <use plots/lenVSme.jpg>
-Package pdftex.def Info: plots/lenVSme.jpg  used on input line 441.
+Package pdftex.def Info: plots/lenVSme.jpg  used on input line 444.
 (pdftex.def)             Requested size: 256.07481pt x 192.06375pt.
 <plots/lenVSselen.jpg, id=168, 462.528pt x 346.896pt>
 File: plots/lenVSselen.jpg Graphic file (type jpg)
 <use plots/lenVSselen.jpg>
-Package pdftex.def Info: plots/lenVSselen.jpg  used on input line 447.
+Package pdftex.def Info: plots/lenVSselen.jpg  used on input line 450.
 (pdftex.def)             Requested size: 256.07481pt x 192.06375pt.
 <plots/lenVSmelen.jpg, id=169, 462.528pt x 346.896pt>
 File: plots/lenVSmelen.jpg Graphic file (type jpg)
 <use plots/lenVSmelen.jpg>
-Package pdftex.def Info: plots/lenVSmelen.jpg  used on input line 453.
+Package pdftex.def Info: plots/lenVSmelen.jpg  used on input line 456.
 (pdftex.def)             Requested size: 256.07481pt x 192.06375pt.
 
-Overfull \hbox (2.61108pt too wide) in paragraph at lines 421--457
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 424--460
 [][] []
  []
 
 
-Overfull \hbox (2.61108pt too wide) in paragraph at lines 421--457
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 424--460
 [] []
  []
 
 
-Overfull \hbox (2.61108pt too wide) in paragraph at lines 421--457
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 424--460
 [] [] 
  []
 
 File: img/NU_logo.png Graphic file (type png)
 <use img/NU_logo.png>
-Package pdftex.def Info: img/NU_logo.png  used on input line 462.
+Package pdftex.def Info: img/NU_logo.png  used on input line 465.
 (pdftex.def)             Requested size: 17.43277pt x 17.62482pt.
 [8 <./plots/lenVStime.jpg> <./plots/lenVSgen.jpg> <./plots/lenVSse.jpg> <./plot
 s/lenVSme.jpg> <./plots/lenVSselen.jpg> <./plots/lenVSmelen.jpg>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 462.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 462.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 465.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 465.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 462.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 462.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 465.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 465.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 957152AED328CE5BD121BC2157E8DAF0;341.
  ) 
@@ -1023,7 +999,7 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/public/tex-
 gyre/qcrb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qcrr.pfb>
-Output written on report.pdf (8 pages, 440823 bytes).
+Output written on report.pdf (8 pages, 441018 bytes).
 PDF statistics:
  248 PDF objects out of 1000 (max. 8388607)
  200 compressed objects within 2 object streams

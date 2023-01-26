@@ -1,6 +1,6 @@
 file_name;exec_time;score_e;match_e;score_g;proj_length;general_score
-expression2.txt;44;779;186;383;59;0.62661
-expression3.txt;27;628;152;206;42;0.697381
-expression1.txt;58;933;176;386;67;0.655448
-expression5.txt;48;885;157;176;54;0.753796
-expression4.txt;27;626;142;258;45;0.654667
+expression2.txt;56;816;207;228;53;0.71434
+expression3.txt;29;616;160;238;43;0.672326
+expression1.txt;50;941;103;264;61;0.71582
+expression5.txt;59;924;164;240;59;0.725085
+expression4.txt;30;656;134;245;46;0.66837

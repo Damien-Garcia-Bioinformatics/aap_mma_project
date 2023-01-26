@@ -125,7 +125,7 @@ The pipeline will handle any necessary compilation, execute the program accordin
 
 \section{Traces generation}
 
-The first section of the project aims to generate sequences called traces which are composed of tops and events.
+The first section of the project aims at generating sequences called traces which are composed of tops and events.
 Events can be anchors, meaning they are shared by all generated traces and only exist once for each trace, or simple events that depending on the generation parameters, either exist in a trace or not, and could in some cases have repetitions.
 For easier further analysis of the traces, tops are represented by a dot (``."), events always start by a full case ``E" for anchors and lower case ``e" for other events.\\
 
@@ -192,17 +192,17 @@ Traces are generated and written in a single file, with on expression per line a
 \section{Multiple Sequence Alignment (MSA)}
 
 
-To perform the MSA, the program relies on two main methods being (i) pairwise alignment algorithm and (ii) Unweighted Pair Group Method with Arithmetic mean (UPGMA) algorithm.
+To perform the MSA, the program relies on two main methods namely (i) pairwise alignment algorithm and (ii) Unweighted Pair Group Method with Arithmetic mean (UPGMA) algorithm.
 The decision guiding the order in which traces will be aggregated by UPGMA algorithm is by measuring the dissimilarity between each pair of traces. This measure is inherently linked to the pairwise alignment process.
 
 \begin{labeling}{...........}
-\item[Step 1] At first, all the traces are stored into a data type that can either contain one or more traces.
+\item[Step 1] At first, all the traces are stored into a data type that can contain one or more traces.
 This way, when a pair of traces will be aggregated, the algorithm won't have to rely on different methods and functions depending on the progress of the MSA.
 All functions and methods are programmed to process two single traces as well as batches of traces.
 
 \item[Step 2] Next, every pair is aligned which allows to get the dissimilarity score.
-The pair with the lowest dissimilarity score is then selected and modified with considerations to the alignment results.
-At this point the traces might include gaps represented by hyphens (``-'').
+The pair with the lowest dissimilarity score is then selected and modified considering the alignment results.
+At this point the traces probably include gaps represented by hyphens (``-'').
 The updated traces are then aggregated into one batch of traces.
 
 \item[Step 3] The dissimilarity matrix\footnote{Represented by a lower triangular matrix for optimization purpose. $Dissim(T1, T2) = Dissim(T2, T1)$} is updated by removing the pairs and adding the new batch of traces.
@@ -232,14 +232,14 @@ This method allows the algorithm to avoid recalculating every dissimilarity scor
 		\label{sub:matrix3}
 	\end{subfigure}
 	\caption{Dissimilarity matrix update}{
-		\emph{\color{blue}{(a)}} Selection of minimum dissimilarity (red cell) and removing the values from the corresponding traces (pink cells).
+		\emph{\color{blue}{(a)}} Selecting minimum dissimilarity (red cell) and removing the values from the corresponding traces (pink cells).
 		\emph{\color{blue}{(b)}} Resulting matrix after step \emph{\color{blue}{a}}.
 		\emph{\color{blue}{(c)}} Adding aggregated traces and performing dissimilarity calculations for the new cells.
 	}
 	\label{fig:matrix}
 \end{figure}
 
-At the end of program execution, the result is shown in a formatted console output to check the alignment {\color{blue}{(Sup.Fig. \ref{fig:output})}}. The result is also written in the output file at the path provided at program execution.
+At the end of program execution, the result is shown in a formatted console output to check the alignment {\color{blue}{(Sup.Fig. \ref{fig:output})}}. The result is also returned to the output file at the path provided at program execution.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -258,40 +258,43 @@ At the end of program execution, the result is shown in a formatted console outp
 
 
 In order to evaluate the quality of the Multiple Sequence Alignment, we created scoring functions and generated plots {\color{blue}{(Sup.Fig. \ref{fig:graphs}})} based on these functions.
-The first notable remark is that the program execution time seem to be proportional to the square of traces lengths {\color{blue}{(Sup.Fig. \ref{sub:graph1}})}.
-This result was expected considering that the algorithm implemented is a variation of the pairwise alignment of sequences which has a complexity of $O(nm)$.
-\emph{n} and \emph{m} being of relative similar length, the complexity could be considered quadratic $O(n^2)$.\\
+The first notable remark is that the program execution time seems to be proportional to the square of traces lengths {\color{blue}{(Sup.Fig. \ref{sub:graph1}})}.
+This result was expected, considering that the algorithm implemented is a variation of the pairwise alignment of sequences which has a complexity of $O(nm)$.
+\emph{n} and \emph{m} being of relative similar length, the complexity could be considered quadratic $O(n^2)$.
 
-The quantity of top against top and event against event matches seem to be linearly proportional to the traces length {\color{blue}{(Sup.Fig. \ref{sub:graph3}})}.
+The quantity of top against top and event against event matches seems to be linearly proportional to the traces length {\color{blue}{(Sup.Fig. \ref{sub:graph3}})}.
 This result wasn't as much expected but hoped for.
 One interpretation is that the augmentation in length does not seem to impact the overall alignment by introducing gaps in the traces.
-Another way of interpreting this is that the cost of gap introduction in traces seem to be relatively well chosen, maintaining tops and events aligned respectively with other tops and events.\\
+Another way of interpreting this is that the cost of gap introduction in traces seems to be relatively well chosen, maintaining tops and events aligned respectively with other tops and events.
 
 Concentrating only on event matches is not as straightforward {\color{blue}{(Sup.Fig. \ref{sub:graph4})}}.
-The limited dataset produced for analysis doesn't exposed a clear statistical trend in the evolution of event matches.
+The limited dataset produced for analysis doesn't denote a clear statistical trend in the evolution of event matches.
 Checking the aligned traces one by one exposes another behavior of the algorithm:
 when the generated traces have significant length variations between them, the cost of introducing many gaps becomes higher than creating mismatches {\color{blue}{(Sup.Tab. \ref{tab:dataset3})}}.
-This will by definition, lower the score of the \emph{match\_e} function.\\
+This will by definition, lower the score of the \emph{match\_e} function.
 
 We also created a global score to assess the overall quality of MSA {\color{blue}{(Sup.Fig. \ref{sub:graph2})}}.
-Although variations are low in the datasets generated for quality assessment are low, it seems that the algorithm performs better with traces between 30 and 60 elements.
-Before 60 elements, whatever the inherent complexity of traces, the execution time is kept lower than 50 milliseconds.
-After this threshold, execution time starts to rapidly increase going to $\approx$250 milliseconds for traces over 100 elements {\color{blue}{(Sup.Fig. \ref{sub:graph1})}}. 
+Although variations are low in the datasets generated for quality assessment, it seems that the algorithm performs better with traces between 30 and 60 elements.
+Below 60 elements, whatever the inherent complexity of traces, the execution time is kept lower than 50 milliseconds.
+Above this threshold, execution time starts to rapidly increase going to $\approx$250 milliseconds for traces over 100 elements {\color{blue}{(Sup.Fig. \ref{sub:graph1})}}. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \section{Prospects}
+Overall the project was build as presented in requirements specification, although slight modifications on scoring functions were made to better assess the quality of Multiple Sequence Alignment.
+These modifications allowed us to understand the strength and weaknesses of the algorithm and fit costs of mismatches or gap insertions.
 
-As seen by the various results presented, the alignment is of relatively good quality considering the questionable methods used in the algorithm. Multiple optimizations and usage of more precise but time consuming methods could have been implemented.\\
+As seen by the various results presented, the alignment is of comparatively good quality considering the questionable methods used in the algorithm.
+Multiple optimizations and usage of more precise but time consuming methods could have been implemented.
 
 The main concern is that the values for indel\footnote{Insertions and deletions} and substitutions are fixed \emph{a priori} while these weights could be carefully chosen based on the inputs.
 For example, with batches of traces showing large difference between lengths, the number of gaps introduced will accordingly be higher than in an ideal case.
-Therefor, lowering the cost of gaps in comparison to the cost of mismatches on events should allow for wider gaps and align tops and events.
-Another way of solving this problem could be to lower the cost of gap introduction around other gaps, also resulting in wider gaps segments and better alignment of tops and events.\\
+Therefore, lowering the cost of gaps in comparison to the cost of mismatches on events should allow for wider gaps and align tops and events.
+Another way of solving this problem could be to lower the cost of gap introduction around other gaps, also resulting in wider gap segments and better alignment of tops and events.
 
-The second concern is that this algorithm aims to align traces which have no actual real life meaning.
+The second concern is that this algorithm aims at aligning traces which have no actual real life meaning.
 The traces could be the reflection of time series, genes recognition in a sequencing process, or any other situation.
 Adding context around these traces would allow for revisions on the alignment process.
 
