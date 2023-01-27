@@ -37,6 +37,11 @@ A python3 script is also at disposal for easy and efficient complete execution o
 Use the command line ```python3 pipeline.py [pathToDatasetDirectory]```.
 The pipeline will handle necessary compilation, execute the program accordingly to previously explained process and create the results directories if necessary.
 
+# Other files
+The Python3 script "plotGen.py" is used to generate plots from the scores on each csv files.
+The plots are used in the LaTeX report on the directory report/plots.
+
+
 # Authors
 Damien GARCIA,
 Florian ECHELARD,
